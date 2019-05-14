@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS-BLOCK-LAYOUT</title>
+  <style>
+    *{
+      margin: 0;
+    }
+    main{
+      width: 600px;
+      margin: auto;
+    }
+    .top p{
+      margin: auto;
+      width: 600px;
+    }
+    .top{
+      margin: 0;
+      background-color: #000;
+      color: aliceblue;
+    }
+    .text{
+      margin: 15px 0px;
+    }
+    .box11, .box12, .box13{
+      border: 3px solid;
+      width:180px;
+      height: 40px;
+      background-color: pink;
+      text-align: center;
+      box-sizing: border-box;
+      line-height: 34px;
+    }
+    .box11:hover, .box12:hover, .box13:hover{
+      background-color: red;
+    }
+    .box11{
+      margin:15px 30px 15px 0px;
+    }
+    .box12{
+      /* margin:15px 30px 15px 30px; */
+      margin-left: 210px;
+      margin-top: -55px;
+    }
+    .box13{
+      /* margin:15px 0px 15px 30px; */
+      margin-left: 420px;
+      margin-top:-40px;
+    }
+    .link {
+      margin: 10px 0px;
+    }
+    .link div{
+      border:1px dotted;
+      border-top:none;
+      border-left: none;
+      border-right: none;
+    }
+    .link div:last-child{
+      border-bottom: none;
+    }
+    .bottom{
+      text-align: center;
+      background-color: #ee82ee;
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <p>hello world 请调整浏览器窗口查看效果</p>
+  </div>
+  <main>
+    <div class="text"><span>我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 我有600px宽 </span>
+    </div>
+    
+    <div class="box">
+      <div class="box1">
+        <div class="box11">宽180高40(包含边框)</div>
+        <div class="box12">产品</div>
+        <div class="box13">产品</div>
+      </div>
+      <div class="box2">
+        <div class="box11">水平间隙30px</div>
+        <div class="box12">产品</div>
+        <div class="box13">产品</div>
+      </div>
+      <div class="box3">
+        <div class="box11">垂直间隙15px</div>
+        <div class="box12">产品</div>
+        <div class="box13">产品</div>
+      </div>
+      <div class="box4">
+        <div class="box11">边框宽度3px</div>
+        <div class="box12">产品</div>
+        <div class="box13">产品</div>
+      </div>
+    </div>
+
+    <div class="link">
+      <div><span>link</span></div>
+      <div><span>link</span></div>
+      <div><span>link</span></div>
+      <div><span>link</span></div>
+      <div><span>link</span></div>
+    </div>
+  </main>
+  <div class="bottom"><span>&copy;版权所有</span><br><span>本页所有布局均使用块元素</span></div>
+</body>
+</html>
