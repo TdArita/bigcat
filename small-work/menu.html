@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>menu</title>
+  <style>
+    *{
+      margin: 0;
+    }
+    li{
+      list-style: none;
+      width: 300px;
+      height: 50px;
+      border: 1px solid;
+    }
+    div{
+      width:300px;
+      height:50px;
+      border:1px solid black;
+    }
+    div ul:nth-child(1){
+      display: none;
+    }
+    div:hover > ul:nth-child(1){
+      display: block;
+      position:relative;
+      left:280px;
+    }
+    ul > li:nth-child(n):hover{
+      background-color: red;
+    }
+    ul > li:nth-child(n):hover > ul  {
+      position: relative;
+      left: 280px;
+      display: block;
+    }
+    ul > li > ul {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div> 打开菜单
+      <ul>
+        <li>
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </li>
+      </ul>
+  </div>
+</body>
+</html>

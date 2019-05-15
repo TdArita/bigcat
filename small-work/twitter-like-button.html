@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin:0;
+    }
+     /* div{
+      margin-left: 100px;
+       background-image: url(./img/twitter-icons.png);
+      position: fixed;
+      left: 100px;
+      top: 100px;
+      border: 1px solid black;
+       width: 100px;
+      height:100px;   
+      overflow: hidden;
+      background-repeat: no-repeat; 
+      transition: 1s steps(29); 
+      background-color: #000;  
+    } */
+
+    a{
+      /* background-image: url(./img/twitter-icons-29.png); */
+      left: 100px;
+      top: 100px;
+      width: 100px;
+      height: 100px;
+      display: block;
+      position: fixed;
+      overflow: hidden;
+      border:1px solid black;
+      transition: none;
+    }
+    .icons{
+      transition:  1s steps(29);
+      z-index: 1;
+    }
+
+    /* a:focus::before {
+      content: '';
+      position: absolute;
+      background-image: url(./img/twitter-icons-29.png);
+      width:100px;
+      height: 100px;
+    } */
+    .icon29{
+      position: relative;
+      top:-104px;
+      z-index: 0;
+      display: none;
+    }
+    a:hover > .icon29{
+      display: block;
+    } 
+
+    a:hover .icons{
+      margin-left:-2900px; 
+    }
+  </style>
+</head>
+<body>
+  <a href="#" onclick="add()"><img class="icons" src="./img/twitter-icons.png" alt=""><img class="icon29" id="icon" src="./img/twitter-icons-29.png" ></a>
+  <script>
+    function add(){
+      if(document.getElementById('icon').style.display == 'block'){
+        document.getElementById('icon').style.display = 'none'
+      }else{
+        document.getElementById('icon').style.display = 'block'
+      }
+    }
+  </script>
+</body>
+</html>
