@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin:0;
+    }
+    input{
+      display: none;
+    }
+    input:checked + label img{
+      margin-left: -2800px;transition:  0.8s steps(28);
+    }
+    label{
+      width: 100px;
+      height: 100px;
+    }
+    .a{
+      top: 100px; 
+      margin: auto;
+      width: 100px;
+      height: 100px;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      transition: none;
+      cursor: pointer;
+      box-shadow: 0px 1px 128px -3px rgba(10,81,107,1);
+    }
+  </style>
+</head>
+<body>
+  <input  type="checkbox" name="" id="id1">
+  <label for="id1"><div class="a"><img class="icons" src="./img/twitter-icons.png" alt=""></div></label>
+</body>
+</html>
