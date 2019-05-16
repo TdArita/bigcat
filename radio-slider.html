@@ -20,6 +20,7 @@
       width: 1226px;
       opacity: 0;
       transition: 0.7s;
+      cursor: pointer;
     }
     input:checked  +  img {
       opacity: 1;
@@ -37,6 +38,7 @@
       background-color: rgba(0, 0, 0, 0.2);
       border-radius: 50%;
       cursor: pointer;
+      user-select: none;
     }
     input:nth-child(n) .slide .label label:nth-child(n){
       background-color: rgba(0, 0, 0, 0.8);
@@ -55,11 +57,15 @@
       right: 0;
       top: 40%;
       cursor: pointer;
+      transition: 0.5s;
     }
     .rightArr span{
       font-size: 2em;
       color: rgba(0, 0, 0, 0.4);
       user-select: none;
+    }
+    .rightArr:hover, .leftArr:hover{
+      background-color: rgba(0, 0, 0, 0.4);
     }
     .leftArr{
       position: absolute;
@@ -73,6 +79,7 @@
       top: 40%;
       cursor: pointer;
       user-select: none;
+      transition: 0.5s;
     }
     .leftArr span{
       font-size: 2em;
