@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>oald-layout</title>
+  <style>
+    *{margin: 0;padding: 0;}
+    html,body{height: 100%;}
+    div{height: 100%;font-size: 0;}
+    span{
+      display: inline-block;
+      box-sizing: border-box;
+      border: 1px solid white;
+      height: 100%;
+      vertical-align: top;
+      /* margin-bottom: -0.5px; */
+      font-size: 16px;
+      word-wrap: break-word;
+    }
+    span.left{
+      width: 20%;
+      background-color: rgb(216, 203, 16);
+    }
+    span.middle1{
+      background-color: rgb(3, 160, 108);
+      width: 20%;
+    }
+    span.middle2{
+      background-color: rgb(255, 255, 255);
+      width: 40%;
+      height: 100%;
+    }
+    span.right{
+      background-color: rgb(172, 36, 126);
+      width: 20%;
+    }
+    span.middle2-top{
+      background-color: rgb(31, 7, 170);
+      height: 50%;
+      width:100%;
+      overflow-y: scroll;
+      background-origin: none;
+    }
+    span.middle2-bottom{
+      background-color: rgb(12, 80, 182);
+      height: 50%;
+      width:100%;
+      overflow-y: scroll;
+    }
+    span.scrollTop{
+      border: none;
+      /* height: 180%; */
+      font-size: 50px;
+      width: 100%;
+    }
+    span.scrollBottom{
+      border: none;
+      /* height: 180%; */
+      font-size: 50px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <span class="left">1</span>
+    <span class="middle1">2</span>
+    <span class="middle2">
+      <span class="middle2-top">
+        <span class="scrollTop">//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果</span>
+      </span>
+      <span class="middle2-bottom">
+        <span class="scrollBottom">//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果//这是一段示例文本，用来展示inline-block中的滚动条效果</span>
+      </span>
+    </span>
+    <span class="right">4</span>
+  </div>
+</body>
+</html>
