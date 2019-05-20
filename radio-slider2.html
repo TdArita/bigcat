@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>radio-slider</title>
+  <style>
+  *{margin: 0;padding: 0;}
+    .slide{
+      top:100px;
+      width: 1226px;
+      height:460px;
+      margin: auto;
+      position: relative;
+    }
+    img{
+      position: absolute;
+      width: 1226px;
+      opacity: 0;
+      transition: 0.7s;
+      cursor: pointer;
+    }
+    input:checked  +  img {
+      opacity: 1;
+    }
+    .slide .label1{
+      position: absolute;
+      top:90% ;
+      left:50%;
+      z-index: 1;
+    }
+    .slide .label1 label {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+    }
+    .slide .label1 label:hover{
+      background-color: #fff;
+      transition: 0.2s;
+    }
+
+    .slide input:nth-of-type(1):checked ~ .label1 > label:nth-child(1),
+    .slide input:nth-of-type(2):checked ~ .label1 > label:nth-child(2),
+    .slide input:nth-of-type(3):checked ~ .label1 > label:nth-child(3),
+    .slide input:nth-of-type(4):checked ~ .label1 > label:nth-child(4),
+    .slide input:nth-of-type(5):checked ~ .label1 > label:nth-child(5)
+    {
+      background-color: #fff;
+    }
+    .left {
+      display: block;
+      position: absolute;
+      width: 50px;
+      height: 80px;
+      background-color: rgba(0, 0, 0, 0.2);
+      text-align: center;
+      line-height: 78px;
+      left: 0;
+      top: 40%;
+      user-select: none;
+      transition: 0.5s;
+    }
+    .left label{
+      width: 50px;
+      height: 80px;
+      font-size: 2em;
+      color: rgba(0, 0, 0, 0.4);
+      display: none;
+      cursor: pointer;
+    }
+    .slide input:nth-of-type(1):checked ~ .left > label:nth-child(5){
+      display: block;
+    }
+    .slide input:nth-of-type(2):checked ~ .left > label:nth-child(1){
+      display: block;
+    }
+    .slide input:nth-of-type(3):checked ~ .left > label:nth-child(2){
+      display: block;
+    }
+    .slide input:nth-of-type(4):checked ~ .left > label:nth-child(3){
+      display: block;
+    }
+    .slide input:nth-of-type(5):checked ~ .left > label:nth-child(4){
+      display: block;
+    }
+    .right {
+      display: block;
+      position: absolute;
+      width: 50px;
+      height: 80px;
+      background-color: rgba(0, 0, 0, 0.2);
+      text-align: center;
+      line-height: 78px;
+      right: 0;
+      top: 40%;
+      user-select: none;
+      transition: 0.5s;
+    }
+    .right label{
+      width: 50px;
+      height: 80px;
+      font-size: 2em;
+      color: rgba(0, 0, 0, 0.4);
+      display: none;
+      cursor: pointer;
+    }
+    .slide input:nth-of-type(1):checked ~ .right > label:nth-child(2){
+      display: block;
+    }
+    .slide input:nth-of-type(2):checked ~ .right > label:nth-child(3){
+      display: block;
+    }
+    .slide input:nth-of-type(3):checked ~ .right > label:nth-child(4){
+      display: block;
+    }
+    .slide input:nth-of-type(4):checked ~ .right > label:nth-child(5){
+      display: block;
+    }
+    .slide input:nth-of-type(5):checked ~ .right > label:nth-child(1){
+      display: block;
+    }
+    input{
+      display: none;
+    }
+    .right:hover, .left:hover{
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <input checked type="radio" name="img" id="rd1">
+    <img  src="https://i1.mifile.cn/a4/xmad_15566146318197_mAghl.jpg" alt="">
+    <input type="radio" name="img" id="rd2">
+    <img src="https://i1.mifile.cn/a4/xmad_15529884424562_HKYaG.jpg" alt="">
+    <input type="radio" name="img" id="rd3">
+    <img src="https://i1.mifile.cn/a4/xmad_15579184778872_ECdvK.jpg" alt="">
+    <input type="radio" name="img" id="rd4">
+    <img src="https://i1.mifile.cn/a4/xmad_15548066591437_Stxlj.jpg" alt="">
+    <input type="radio" name="img" id="rd5">
+    <img src="https://i1.mifile.cn/a4/xmad_15476942061027_STEvM.jpg" alt="">
+    <div class="label1">
+      <label for="rd1"></label>
+      <label for="rd2"></label>
+      <label for="rd3"></label>
+      <label for="rd4"></label>
+      <label for="rd5"></label>
+    </div>
+    <div class="left">
+      <label for="rd1">&lt;</label>
+      <label for="rd2">&lt;</label>
+      <label for="rd3">&lt;</label>
+      <label for="rd4">&lt;</label>
+      <label for="rd5">&lt;</label>
+    </div>
+    <div class="right">
+      <label for="rd1">&gt;</label>
+      <label for="rd2">&gt;</label>
+      <label for="rd3">&gt;</label>
+      <label for="rd4">&gt;</label>
+      <label for="rd5">&gt;</label>
+    </div>
+  </div>
+</body>
+</html>
