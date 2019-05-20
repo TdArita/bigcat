@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>div-img-contain</title>
+  <style>
+    *{margin: 0;padding: 0;}
+    .center{width: 200px;margin: auto;margin-top: 50px;}
+    .vertical, .horizen, .middle{border: 1px solid;width:200px;height:200px;line-height: 200px;}
+    .vertical  img{max-width: 100%;vertical-align: middle;}
+    .horizen{text-align: center;}
+    .horizen img{max-height: 100%;}
+    .middle{position: relative;}
+    .middle img{position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;height: 100px;width: 100px;}
+  </style>
+</head>
+<body>
+  <div class="center">
+    <div class="vertical"><img src="./img/day9box.png" alt=""></div>
+    <div class="horizen"><img src="./img/html-basic2.jpg" alt=""></div>
+    <div class="middle"><img src="./img/twitter-icons-29.png" alt=""></div>
+  </div>
+</body>
+</html>
