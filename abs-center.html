@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>abs-center</title>
+  <style>
+    *{margin: 0;padding: 0;}
+    div{width: 300px;height: 300px;border: 1px solid red;box-sizing: border-box;}
+    table{width: 300px;height: 300px;border: 1px solid red;box-sizing: border-box;}
+    .absCenter{width: 400px;margin: auto;height: auto;padding-left: 50px;border:none;}
+    .fst{position: relative;}
+    .fst img{position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;}
+    .scd{line-height: 300px;text-align: center;}
+    .scd img{vertical-align: middle;}
+    table td{text-align: center;}
+  </style>
+</head>
+<body>
+  <div class="absCenter">
+    <div class="fst">
+      <img src="./img/abs-center.jpg" alt="">
+    </div>
+    <div class="scd">
+      <img src="./img/abs-center.jpg" alt="">
+    </div>
+    <table>
+      <td>
+        <img src="./img/abs-center.jpg" alt="">
+      </td>
+    </table>
+</div>
+</body>
+</html>
