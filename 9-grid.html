@@ -4,15 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>9-Grid</title>
   <style>
-    table{width: 300px;height: 300px;border: 3px solid ;border-collapse: collapse;box-sizing: border-box;margin: auto;margin-top: 100px;}
+    *{margin: 0;padding: 0;}
+    table{width: 300px;height: 300px;border: 3px solid ;border-collapse: collapse;box-sizing: border-box;margin: auto;margin-bottom: 100px;}
     table td{text-align: center;}
     td:hover{border: 3px solid red;}
     tr{border: 3px solid ;}
+    h1{text-align: center;margin-bottom: 10px;}
+    .float{margin: auto;margin-bottom: 50px;width: 300px;height: 300px;}
+    .cell{width: 100px;height: 100px;border: 3px solid;box-sizing: border-box;margin-right: -3px;margin-top: -3px;float: left;text-align: center;line-height: 100px;}
+    .cell:hover{border: 3px solid red;position: relative;}
+
+    .inline{margin: auto;margin-bottom: 50px;width: 300px;height: 300px;}
+    .inline span{width: 100px;height: 100px;border: 3px solid;box-sizing: border-box;margin-right: -3px;margin-top: -3px;float: left;text-align: center;line-height: 100px;}
+    .inline span:hover{border: 3px solid red;position: relative;    }
   </style>
 </head>
 <body>
+  <h1>1、表</h1>
   <table>
     <col style="border: 3px solid ;">
     <col style="border: 3px solid ;">
@@ -33,5 +43,31 @@
       <td>9</td>
     </tr>
   </table>
+
+  <h1>2、浮动</h1>
+  <div class="float">
+    <div class="cell">1</div>
+    <div class="cell">2</div>
+    <div class="cell">3</div>
+    <div class="cell">4</div>
+    <div class="cell">5</div>
+    <div class="cell">6</div>
+    <div class="cell">7</div>
+    <div class="cell">8</div>
+    <div class="cell">9</div>
+  </div>
+
+  <h1>3、行内</h1>
+  <div class="inline">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+    <span>6</span>
+    <span>7</span>
+    <span>8</span>
+    <span>9</span>
+  </div>
 </body>
 </html>
