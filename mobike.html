@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,body{width: 100%;}
+    *{margin: 0;}
+    .top img{width: 100%;}
+    .pic4{
+      font-size: 0;
+    }
+    .pic4 img{
+      display: inline-block;
+      height: 260px;
+      width: 25%;
+      overflow: hidden;
+    }
+    .logos > div{
+      width: 1050px;
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .logos > div > div{
+      display: inline-block;
+      width: 33%;
+    }
+    .logos > div > div img{
+      width: 50px;
+    }
+    .logos > div > div div{
+      display: inline-block;
+    }
+    .intro{
+      width: 1050px;
+      margin: auto;
+      margin-top: 20px;
+    }
+    .intro-left{
+      width: 285px;
+      display: inline-block;
+    }
+    .intro-left img{width: 200px;}
+    .intro-right{width: 60vw;display: inline-block;float: right;min-width: 400px; max-width: 60%;}
+    table{
+      float:right;
+      width: 80%;
+      /* display: inline-block; */
+    }
+    @media (max-width: 1080px) {
+      .pic4 img{
+        width:50%;
+      }
+      .logos > div{
+        width: 100%;
+      }
+      .intro{
+        width: 100%;
+      }
+    }
+    @media (max-width: 728px) {
+      .intro-right{
+        float: left;
+      }
+      table{
+        float: left;
+      }
+    }
+    @media (max-width: 640px) {
+      .pic4 img{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <img src="https://mobike.com/cn/assets/themes/moby/img/landing/hero-bg-4.jpg" alt="">
+  </div>
+  <div class="pic4" >
+    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-01.jpg" alt="">
+    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-02.jpg" alt="">
+    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-03.jpg" alt="">
+    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-04.jpg" alt="">
+  </div>
+
+  <div class="logos">
+    <div>
+      <div class="wechat">
+        <div class="icon-wechat"><img src="https://mobike.com/cn/assets/themes/moby/img/icon-wechat.png" alt=""></div>
+        <div class="text-wechat"><h4>微信小程序</h4><p>直接用车</p></div>
+      </div>
+      <div class="redPaper">
+        <div class="icon-wechat"><img src="https://mobike.com/cn/assets/themes/moby/img/icon-wechat.png" alt=""></div>
+        <div class="text-wechat"><h4>微信小程序</h4><p>直接用车</p></div>
+      </div>
+      <div class="score">
+        <div class="icon-wechat"><img src="https://mobike.com/cn/assets/themes/moby/img/icon-wechat.png" alt=""></div>
+        <div class="text-wechat"><h4>微信小程序</h4><p>直接用车</p></div>
+        </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="intro">
+    <div class="intro-left">
+      <a href="https://mobike.com/"><img src="https://mobike.com/cn/assets/themes/moby/img/logo-text.svg" alt=""></a>
+      <span><br> Beijing Mobike Technology Co., Ltd <br>
+          客服电话 400-811-7799 <br>
+          北京摩拜科技有限公司</span>
+    </div>
+
+    <div class="intro-right">
+      <table>
+        <thead>
+          <th>产品</th>
+          <th>生活</th>
+          <th>关于</th>
+          <th>社交网络</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>经典版</td>
+            <td>轻骑</td>
+            <td>智能锁</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>城市</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>关于Mobike</td>
+            <td>加入我们</td>
+            <td>联系我们</td>
+            <td>服务协议</td>
+          </tr>
+          <tr>
+            <td>微博</td>
+            <td>微信</td>
+            <td>知乎专栏</td>
+            <td>Facebook</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
