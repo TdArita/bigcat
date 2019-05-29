@@ -8,15 +8,30 @@
   <style>
     html,body{width: 100%;}
     *{margin: 0;}
-    .top img{width: 100%;}
+    .top{
+      width: 100%;
+      background-image: url(https://mobike.com/cn/assets/themes/moby/img/landing/hero-bg-4.jpg);
+      height: 600px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin-bottom: 10px;
+    }
     .pic4{
       font-size: 0;
+      margin-left: -4px;
+      margin-right: -4px;
+    }
+    .pic-bfc{
+      overflow: hidden;
     }
     .pic4 img{
       display: inline-block;
+      box-sizing: border-box;
+      border: 1px solid white;
       height: 260px;
       width: 25%;
       overflow: hidden;
+      object-fit:cover;
     }
     .logos > div{
       width: 1050px;
@@ -49,9 +64,11 @@
     table{
       float:right;
       width: 80%;
-      /* display: inline-block; */
     }
     @media (max-width: 1080px) {
+      .top{
+        height: 500px;
+      }
       .pic4 img{
         width:50%;
       }
@@ -78,15 +95,15 @@
   </style>
 </head>
 <body>
-  <div class="top">
-    <img src="https://mobike.com/cn/assets/themes/moby/img/landing/hero-bg-4.jpg" alt="">
-  </div>
-  <div class="pic4" >
-    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-01.jpg" alt="">
-    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-02.jpg" alt="">
-    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-03.jpg" alt="">
-    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-04.jpg" alt="">
-  </div>
+  <div class="top"></div>
+  <div class="pic-bfc">
+    <div class="pic4" >
+      <img src="https://mobike.com/cn/assets/themes/moby/img/promo-01.jpg" alt="">
+      <img src="https://mobike.com/cn/assets/themes/moby/img/promo-02.jpg" alt="">
+      <img src="https://mobike.com/cn/assets/themes/moby/img/promo-03.jpg" alt="">
+      <img src="https://mobike.com/cn/assets/themes/moby/img/promo-04.jpg" alt="">
+    </div>
+</div>
 
   <div class="logos">
     <div>
