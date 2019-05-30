@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>oald-layout-flex</title>
+  <style>
+    *{margin: 0;}
+    html,body{width: 100%;height: 100%;}
+    .flex{
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      height: 100%;
+    }
+    span{}
+    .flex > span:nth-child(1){width: 20%; background-color:red;}
+    .flex > span:nth-child(2){width: 10%; flex-grow: 1; background-color: #fff;display: flex;flex-direction: column;}
+    .top{flex-basis: 50px;background-color: blue;}
+    .bottom{flex-grow: 1;background-color: pink;}
+    span:nth-child(3){width: 20%; background-color: black; color: white;}
+    span:nth-child(4){width: 20%; background-color: yellow;}
+  </style>
+</head>
+<body>
+  <div class="flex">
+    <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto accusantium temporibus fugit suscipit delectus accusamus consequuntur eum atque aperiam, beatae a minus enim nisi tempore distinctio reiciendis dolor non molestias?
+    </span>
+    <span>
+      <span class="top">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, delectus eveniet? Necessitatibus labore assumenda laudantium eius eos fugiat in sint nam velit tempore dolores voluptate, sed consequuntur incidunt id molestias.</span>
+      <span class="bottom">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores similique quaerat atque sint excepturi quidem sapiente magni dolorem dolor enim nisi neque eaque iure, ut, doloribus consequuntur explicabo voluptas earum!</span>
+    </span>
+    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque dignissimos veniam cum quibusdam! Aut architecto quos excepturi neque eius, animi distinctio! Iusto sit unde blanditiis nemo cum nihil commodi impedit?</span>
+    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, neque quia ex numquam distinctio magni ea! Repellendus aspernatur natus, totam delectus dolores numquam deserunt dolore, optio reiciendis facilis molestias ratione?</span>
+  </div>
+</body>
+</html>

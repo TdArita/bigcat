@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mobike-flex</title>
+  <style>
+    *{margin: 0;}
+    .flex{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      margin:auto;
+    }
+    span{
+      display: inline-block;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 260px;
+      width: calc(25% - 1.5px);
+    }
+    span:nth-child(1){background-image: url(https://mobike.com/cn/assets/themes/moby/img/promo-01.jpg);}
+    span:nth-child(2){background-image: url(https://mobike.com/cn/assets/themes/moby/img/promo-02.jpg);}
+    span:nth-child(3){background-image: url(https://mobike.com/cn/assets/themes/moby/img/promo-03.jpg);}
+    span:nth-child(4){background-image: url(https://mobike.com/cn/assets/themes/moby/img/promo-04.jpg);}
+    @media (max-width:1000px){
+      .flex{
+        flex-wrap: wrap;
+        height: 524px;
+      }
+      span{
+        width: calc(50% - 1px);
+      }
+    }
+    @media (max-width:600px){
+      .flex{
+        flex-wrap: wrap;
+        height: 1046px;
+      }
+      span{
+        width:100%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="flex">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</body>
+</html>
