@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>transform-3D</title>
+  <style>
+    *{margin: 0;}
+    .cube{
+      font-size: 0;
+      width: 400px;
+      height: 400px;
+      margin-top: 200px;
+      margin-left: 200px;
+      /* perspective: 8000px; */
+      position: relative;
+      transform-style: preserve-3d;
+      transition: 2s;
+    }
+    .cube:hover{
+      transform: rotate3d(1, 1, 0.5, 1.142turn)
+    }
+    .cube > div{
+      position: absolute;
+      box-sizing: border-box;
+      border: 1px solid;
+      width:200px;
+      height: 200px;
+      background-color: blue;
+      transition: 1s;
+      opacity: 0.2;
+      padding: 10px;
+    }
+    .top{
+      transform-origin: top;
+      transform:  rotateX(90deg);
+    }
+    .bottom{
+      transform-origin: bottom;
+      transform:rotateX(-90deg);
+    }
+    .left{
+      transform-origin: left;
+      transform: rotateY(-90deg)
+    }
+    .right{
+      transform-origin: right;
+      transform: rotateY(90deg)
+    }
+    .forward{
+      transform: translateZ(200px)
+    }
+    </style>
+</head>
+<body>
+  <div class="cube">
+    <div class="top" style="background-color: tomato"></div>
+    <div class="bottom" style="background-color: teal"></div>
+    <div class="left" style="background-color: violet"></div>
+    <div class="right" style="background-color: yellowgreen"></div>
+    <div class="forward" style="background-color: brown"></div>
+    <div class="backward" style="background-color: black"></div>
+  </div>
+</body>
+</html>
