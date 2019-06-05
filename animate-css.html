@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>animate-css</title>
+  <style>
+    .main{
+      width:300px;
+      margin:auto;
+    }
+    .ani{
+      background-image: linear-gradient(to right, red, green);
+      -webkit-background-clip: text;
+      margin-top: 100px;
+      text-align: center;
+    }
+    .ani-word{
+      color: rgba(0, 0, 0, 0.5)
+    }
+    [ani*="bounce"]:hover > .ani{
+      animation: bounce .6s linear;
+    }
+    @keyframes bounce{
+      0%{
+        transform: translateY(-20px);
+      }
+      20%{
+        transform: translateY(0px);
+      }
+      40%{
+        transform: translateY(-10px);
+      }
+      60%{
+        transform: translateY(0px);
+      }
+      80%{
+        transform: translateY(-5px);
+      }
+      100%{
+        transform: translateY(0px);
+      }
+    }
+    [ani*="flash"]:hover > .ani{
+      animation: flash .6s linear;
+    }
+    @keyframes flash{
+      0%{
+        opacity: 1;
+      }
+      50%{
+        opacity: 0;
+      }
+      51%{
+        opacity: 1;
+      }
+      100%{
+        opacity: 0;
+      }
+    }
+    [ani*="pulse"]:hover > .ani{
+      animation: pulse .6s ease-in-out;
+    }
+    @keyframes pulse{
+      50%{
+        transform: scale(1.1);
+      }
+    }
+    [ani*="rubberBand"]:hover > .ani{
+      animation: rubberBand 1s ease-out;
+    }
+    @keyframes rubberBand{
+      10%{
+        transform: scale(1.2,0.8);
+      }
+      30%{
+        transform: scale(1.2,0.8);
+      }
+      40%{
+        transform: scale(0.85,1.15);
+      }
+      60%{
+        transform: scale(1.1,0.9);
+      }
+      80%{
+        transform: scale(0.95,1.05);
+      }
+    }
+    [ani*="shake"]:hover > .ani {
+      animation: shake 1s ease-in-out;
+    }
+    @keyframes shake{
+      10%{
+        transform: translateX(-10px);
+      }
+      20%{
+        transform: translateX(9px);
+      }
+      30%{
+        transform: translateX(-8px);
+      }
+      40%{
+        transform: translateX(7px);
+      }
+      50%{
+        transform: translateX(-6px);
+      }
+      60%{
+        transform: translateX(5px);
+      }
+      70%{
+        transform: translateX(-4px);
+      }
+      80%{
+        transform: translateX(3px);
+      }
+      90%{
+        transform: translateX(-2px);
+      }
+      100%{
+        transform: translateX(0px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main" ani="bounce">
+    <div class="ani"><span class="ani-word" >hover to bounce</span></div>
+  </div>
+  <div class="main" ani="flash">
+      <div class="ani"><span class="ani-word" >hover to flash</span></div>
+  </div>
+  <div class="main" ani="pulse">
+      <div class="ani"><span class="ani-word" >hover to pulse</span></div>
+  </div>
+  <div class="main" ani="rubberBand">
+      <div class="ani"><span class="ani-word" >hover to rubberBand</span></div>
+  </div>
+  <div class="main" ani="shake">
+      <div class="ani"><span class="ani-word" >hover to shake</span></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>clock</title>
+  <style>
+    *{margin: 0;}
+    .container{
+      margin: auto;
+      margin-top: 100px;
+      width: 300px;
+      height: 300px;
+      border-radius: 150px;
+      background-color: whitesmoke;
+      text-align: center;
+      position: relative;
+      background-image: url(http://monkeynastixonline.co.za/fzone/assets/images/clock/clock.png);
+      background-repeat: no-repeat;
+      background-size:contain;
+    }
+    span{display: inline-block;}
+    .second{
+      position: absolute;
+      width:6px;
+      height: 150px;
+      bottom: calc(50% - 20px);
+      background-color: wheat;
+      transform-origin: 3px 130px;
+      animation: secondRotate 60s infinite linear;
+      animation-timing-function: steps(60,end)
+    }
+    @keyframes secondRotate{
+      100%{transform: rotate(360deg);}
+    }
+    .minute{
+      position: absolute;
+      bottom: 50%;
+      width:5px;
+      height: 120px;
+      background-color: tomato;
+      transform-origin: bottom;
+      animation: minuteRotate 3600s infinite linear;
+    }
+    @keyframes minuteRotate{
+      100%{transform: rotate(360deg);}
+    }
+    .hour{
+      position: absolute;
+      bottom: 50%;
+      width:5px;
+      height: 80px;
+      background-color: sienna;
+      transform-origin: bottom;
+      animation: houreRotate 3600s infinite linear;
+    }
+    @keyframes hourRotate{
+      100%{transform: rotate(360deg);}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="second"></span>
+    <span class="minute"></span>
+    <span class="hour"></span>
+  </div>
+</body>
+</html>
