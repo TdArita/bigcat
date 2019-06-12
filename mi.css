@@ -8,7 +8,7 @@ body{font:14px/3.5 "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino 
     overflow: hidden;}
 a{text-decoration: none;}
 .contain{width: 1226px;margin: auto;}
-.nav a{color: #b0b0b0;}
+.nav a{color: #b0b0b0;display: inline-block;}
 .nav a:hover{color: #fff;}
 .nav{
   height: 40px;
@@ -34,7 +34,7 @@ a{text-decoration: none;}
   border-right: 12px solid transparent;
   border-bottom: 12px solid white;
   left: 15px;
-  top: 16px;
+  bottom: 0;
   transition: 1s;
 }
 .app-img:hover::after{
@@ -42,7 +42,7 @@ a{text-decoration: none;}
   background-image: url(./img/miApp-download.png);
   position: absolute;
   left: -20px;
-  top:30px;
+  top:100%;
   width: 100px;
   height: 100px;
   background-repeat: no-repeat;
@@ -236,9 +236,22 @@ label[for="search"] .icon{
 
     .slideNav > ul > li >ul{
       position: absolute;
+      top: -20px;
       padding: 0;
       width: 983px;
-      height: 420px;
+      height: 460px;
       background-color: rgba(0, 0, 0, 0.5);
       left:100%;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .slideNav > ul > li >ul li{
+      margin-left: 25px;
+      height: 14%;
+      width: 20%;
+      background-color: #fff;
+      border: 1px solid black;
     }
