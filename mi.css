@@ -6,7 +6,8 @@ body{font:14px/3.5 "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino 
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;}
-a{text-decoration: none;}
+a{text-decoration: none; transition: 0.1s;}
+a:hover{color:#ff6700;}
 .contain{width: 1226px;margin: auto;}
 .nav a{color: #b0b0b0;display: inline-block;}
 .nav a:hover{color: #fff;}
@@ -160,7 +161,7 @@ label[for="search"] .icon{
 /* 上面是黑色导航栏下方的产品列表 */
 
 .slide{width: 1226px;height:460px;margin: auto;position: relative;}
-    img{position: absolute;width: 1226px;opacity: 0;transition: 0.7s;cursor: pointer;}
+    .slide img{position: absolute;width: 1226px;opacity: 0;transition: 0.7s;cursor: pointer;}
     input:checked  +  img {opacity: 1;}
     .slide .label1{position: absolute;top:90% ;left:50%;z-index: 1;}
     .slide .label1 label {display: inline-block;width: 20px;height: 20px;background-color: rgba(0, 0, 0, 0.2);border-radius: 50%;cursor: pointer;user-select: none;}
@@ -235,23 +236,72 @@ label[for="search"] .icon{
     }
 
     .slideNav > ul > li >ul{
+      visibility: hidden;
       position: absolute;
       top: -20px;
       padding: 0;
       width: 983px;
       height: 460px;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: white;
       left:100%;
       z-index: 1;
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
       justify-content: space-around;
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+      transition: 0s;
+    }
+    .slideNav > ul > li:hover >ul{
+      visibility: visible;
     }
     .slideNav > ul > li >ul li{
       margin-left: 25px;
       height: 14%;
       width: 20%;
       background-color: #fff;
-      border: 1px solid black;
+      border: 1px solid white;
+    }
+    .slideNav > ul > li >ul li a{
+      width: 100%;
+      padding: 10px;
+      display: inline-block;
+      line-height: 40px;
+      transition: 0s;
+    }
+    .slideNav > ul > li >ul li img{
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      padding-right: 5px;
+    }
+    .slideNav > ul > li >ul li span{
+      line-height: 40px;
+    }
+    .slideNav > ul > li:nth-of-type(2) >ul{
+      top: -62px;
+    }
+    .slideNav > ul > li:nth-of-type(3) >ul{
+      top: -104px;
+    }
+    .slideNav > ul > li:nth-of-type(4) >ul{
+      top: -146px;
+    }
+    .slideNav > ul > li:nth-of-type(5) >ul{
+      top: -188px;
+    }
+    .slideNav > ul > li:nth-of-type(6) >ul{
+      top: -230px;
+    }
+    .slideNav > ul > li:nth-of-type(7) >ul{
+      top: -272px;
+    }
+    .slideNav > ul > li:nth-of-type(8) >ul{
+      top: -314px;
+    }
+    .slideNav > ul > li:nth-of-type(9) >ul{
+      top: -356px;
+    }
+    .slideNav > ul > li:nth-of-type(10) >ul{
+      top: -398px;
     }
