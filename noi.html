@@ -61,9 +61,16 @@ var x = Number(prompt('x'))
 console.log(+(a * x * x * x + b * x * x + c * x + d).toFixed(7))
 </script>
 
-<script type="application/javascript" id="ch0103/08">
+<script type="xapplication/javascript" id="ch0103/08">
   var a = Number(prompt('a'))
-  var b = Number(prompt('b'))
-  console.log(+(a / b * 100).toFixed(3) + "%")
-  </script>
+  console.log(+(5 * (a - 32) / 9).toFixed(5))
+</script>
+
+<script type="application/javascript" id="ch0103/09">
+  var r = Number(prompt('r'))
+  var diameter = +(2 * r).toFixed(4)
+  var perimeter = +(2 * r * Math.PI).toFixed(4)
+  var area = (Math.PI * r * r).toFixed(4)-0
+  console.log(diameter + " " + perimeter + " " + area)
+</script>
 
