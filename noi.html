@@ -91,3 +91,10 @@ console.log(+(a * x * x * x + b * x * x + c * x + d).toFixed(7))
   console.log((4 * 3.14 * r * r * r / 3).toFixed(2))
 </script>
 
+<script type="application/javascript" id="ch0103/13">
+  var a = Number(prompt('a'))
+  var hun = Math.floor(a / 100)
+  var ten = Math.floor((a - hun * 100) / 10)
+  var uni = a - hun * 100 - ten * 10
+  console.log(uni * 100 + ten * 10 + hun);
+</script>
