@@ -91,10 +91,18 @@ console.log(+(a * x * x * x + b * x * x + c * x + d).toFixed(7))
   console.log((4 * 3.14 * r * r * r / 3).toFixed(2))
 </script>
 
-<script type="application/javascript" id="ch0103/13">
+<script type="xapplication/javascript" id="ch0103/13">
   var a = Number(prompt('a'))
   var hun = Math.floor(a / 100)
   var ten = Math.floor((a - hun * 100) / 10)
   var uni = a - hun * 100 - ten * 10
-  console.log(uni * 100 + ten * 10 + hun);
+  console.log(uni * 100 + ten * 10 + hun)
 </script>
+
+<script type="xapplication/javascript" id="ch0103/14">
+  var h = Number(prompt('h'))
+  var r = Number(prompt('r'))
+  var v = Math.PI * r * r * h / 1000
+  console.log(Math.floor(20 / v) + 1)
+</script>
+
