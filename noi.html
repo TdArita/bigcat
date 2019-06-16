@@ -217,6 +217,15 @@ if (a >= 10) {
 
 <script type="xapplication/javascript" id="ch0104/08">
   var x = Number(prompt('x'))
+  if(x % 15 == 0){
+    console.log('YES')
+  }else{
+    console.log('NO');
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/09">
+  var x = Number(prompt('x'))
   if (x % 105 == 0 ) {
     console.log('3 5 7')    
   }else if(x % 15 == 0){
@@ -233,5 +242,81 @@ if (a >= 10) {
     console.log('7')
   }else{
     console.log('n');
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/10">
+  var x = Number(prompt('x'))
+  var y = Number(prompt('y'))
+  if (x >= 60 && y>=60 ) {
+    console.log(0)    
+  }else if(x >= 60 || y >= 60){
+    console.log(1)
+  }else{
+    console.log(0)
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/11">
+  var x = Number(prompt('x'))
+  if (x == 1 || x == 3 || x == 5){
+    console.log('NO')    
+  }else{
+    console.log('YES')
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/12">
+  var x = Number(prompt('x'))
+  if (x / 1.2 > (x / 3 + 50)){
+    console.log('Bike')    
+  }else if (x / 1.2 == (x / 3 + 50)) {
+    console.log('ALL');
+  }else if (x / 1.2 < (x / 3 + 50)) {
+    console.log('Walk');
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/13">
+  var x = Number(prompt('x'))
+  if (x >= 0 && x < 5){
+    console.log(-x + 2.5)    
+  }else if (x >= 5 && x < 10) {
+    console.log(2 - 1.5 * (x - 3 ) * (x - 3))
+  }else if (x >= 10 && x < 20) {
+    console.log(x / 2 - 1.5)
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/14">
+  var x = Number(prompt('x'))
+  var y = prompt('y') == 'y' ? 5 : 0
+  if (x <= 1000){
+    console.log(8 + y)
+  }else{
+    let i = (x - 1000) % 500
+    if (i == 0) {
+      console.log(8 + (x - 1000) *4 / 500  )
+    }else{
+      console.log(8 + (Math.floor((x-1000) / 500) + 1) * 4 + y)
+    }
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/15">
+  var x = Number(prompt('x'))
+  var y = Number(prompt('y'))
+  var z = Number(prompt('z'))
+  console.log(x > y ? (x > z ? x : z) : (y > z ? y : z))
+</script>
+
+<script type="xapplication/javascript" id="ch0104/16">
+  var x = Number(prompt('x'))
+  var y = Number(prompt('y'))
+  var z = Number(prompt('z'))
+  if (x + y > z && x + z > y && y + z > x) {
+    console.log('yes')
+  }else{
+    console.log('no')
   }
 </script>
