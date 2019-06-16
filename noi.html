@@ -320,3 +320,81 @@ if (a >= 10) {
     console.log('no')
   }
 </script>
+
+<script type="xapplication/javascript" id="ch0104/17">
+  var a = Number(prompt('a'))
+  if (a % 4 == 0) {
+    if (a % 100 == 0) {
+      if (a % 400 !== 0 || a % 3200 == 0){
+        console.log('N')
+      }
+    }
+    else {
+      console.log('Y')
+    }
+  }else{
+    console.log('N')
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/18">
+  var x = Number(prompt('x'))
+  var y = Number(prompt('y'))
+  if (Math.abs(x * y) <=1 ) {
+    console.log('yes')
+  }else{
+    console.log('no')
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/19">
+  var x = Number(prompt('x'))
+  var y = Number(prompt('y'))
+  var op = prompt('op')
+  if (op == '+') {
+    console.log(x + y)
+  }else if(op == '-'){
+    console.log(x - y)
+  }else if(op == '*'){
+    console.log(x * y)
+  }else if(op == '/'){
+    if(y == 0){
+      console.log('Divided by zero!')
+    }
+    else {
+      console.log(x / y)
+    }
+  }else{
+    console.log('Invalid operator!')
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/20">
+  var a = Number(prompt('a'))
+  var b = Number(prompt('b'))
+  var c = Number(prompt('c'))
+  var delta = b * b - 4 * a * c
+  if (delta > 0) {
+    console.log('x1=' + (-b + Math.sqrt(delta)) / (2 * a) + ';' + 'x2=' + (-b - Math.sqrt(delta)) / (2 * a) )
+  }else if(delta == 0){
+    console.log('x1=x2=' + (-b) / 2*a )
+  }else if(delta < 0){
+    console.log('x1=' + (-b) / 2*a  + '+' + Math.sqrt(-delta) / (2 * a) + 'i' + ';' + 'x2=' + (-b) / 2*a  + '-' + Math.sqrt(-delta) / (2 * a) + 'i')
+  }
+</script>
+
+<script type="xapplication/javascript" id="ch0104/21">
+  var n = Number(prompt('n'))
+  var x = Number(prompt('x'))
+  var y = Number(prompt('y'))
+  var z = 0
+  if (y <= n * x) {
+    if (y % x !== 0) {
+    z = 1
+    }
+    var mount = n - (Math.floor(y / x) + z)
+    console.log(mount)
+  }else{
+    console.log('输入的值需要满足y <= n * x');
+  }
+</script>
