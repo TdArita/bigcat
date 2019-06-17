@@ -398,3 +398,98 @@ if (a >= 10) {
     console.log('输入的值需要满足y <= n * x');
   }
 </script>
+
+<script type="xapplication/javascript" id="ch0105/01">
+  var n = Number(prompt('n'))
+  var sum = 0
+  for (let i = 0; i < n; i++) {
+    var x = Number(prompt('x'))
+    sum = sum + x
+  }
+  console.log(sum / n)
+</script>
+
+<script type="xapplication/javascript" id="ch0105/02">
+  var sum = 0
+  for (let i = 0; i < 12; i++) {
+    var x = Number(prompt('x'))
+    sum = sum + x
+  }
+  console.log('$' + (sum / 12).toFixed(2))
+</script>
+
+<script type="xapplication/javascript" id="ch0105/03">
+var n = Number(prompt('n'))
+  var sum = 0
+  for (let i = 0; i < n; i++) {
+    var x = Number(prompt('x'))
+    sum = sum + x
+  }
+  console.log((sum / n).toFixed(4))
+</script>
+
+<script type="xapplication/javascript" id="ch0105/04">
+var n = Number(prompt('n'))
+  var sum = 0
+  for (let i = 0; i < n; i++) {
+    var x = Number(prompt('x'))
+    sum = sum + x
+  }
+  console.log(sum + ' ' +  (sum / n).toFixed(5))
+</script>
+
+<script type="xapplication/javascript" id="ch0105/05">
+  var n = Number(prompt('n'))
+    var max = 0
+    for (let i = 0; i < n; i++) {
+      var x = Number(prompt('x'))
+      if(x > max){
+        max = x
+      }
+    }
+    console.log(max)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/06">
+  var n = Number(prompt('n'))
+    var max = 0
+    var min = +Infinity
+    for (let i = 0; i < n; i++) {
+      var x = Number(prompt('x'))
+      if(x > max){
+        max = x
+      }else if(x < min){
+        min = x
+      }
+    }
+    console.log(max - min)
+  </script>
+
+<script type="xapplication/javascript" id="ch0105/07">
+  var n = Number(prompt('n'))
+    var gold = 0
+    var silver = 0
+    var cu = 0
+    var goldAdd = 0
+    var silverAdd = 0
+    var cuAdd = 0
+    for (let i = 0; i < n ; i++) {
+      var gold = Number(prompt('gold'))
+      var silver = Number(prompt('silver'))
+      var cu = Number(prompt('cu'))
+      var goldAdd = goldAdd + gold
+      var silverAdd = silverAdd + silver
+      var cuAdd = cuAdd + cu
+    }
+    console.log(goldAdd + ' ' + silverAdd + ' ' + cuAdd + ' ' + (goldAdd + silverAdd + cuAdd ))
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/08">
+    var n = Number(prompt('n'))
+    var sum = 0
+    for (let i = 0; i < n - 1; i++) {
+      var x = Number(prompt('x'))
+      sum = sum + x
+    }
+    console.log((n - 2) * 180 - sum)
+  </script>
