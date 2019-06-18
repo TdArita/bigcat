@@ -493,3 +493,157 @@ var n = Number(prompt('n'))
     }
     console.log((n - 2) * 180 - sum)
   </script>
+
+  <script type="xapplication/javascript" id="ch0105/09">
+    var m = Number(prompt('m'))
+    var n = Number(prompt('n'))
+    var sum = 0
+    for (let i = 0; i < n - m + 1; i++) {
+      if ( (m + i) % 2 == 1) {
+        sum = sum +  m + i
+      }
+    }
+    console.log(sum)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/10">
+    var m = Number(prompt('m'))
+    var n = Number(prompt('n'))
+    var sum = 0
+    for (let i = 0; i < n - m + 1; i++) {
+      if ( (m + i) % 17 == 0) {
+        sum = sum +  m + i
+      }
+    }
+    console.log(sum)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/11">
+    var n = Number(prompt('n'))
+    var one = 0 
+    var five = 0
+    var ten = 0
+    for (let i = 0; i < n ; i++) {
+      var enter = Number(prompt('enter'))
+      if (enter == 1) {
+        one++
+      }else if(enter == 5){
+        five++
+      }
+      else if(enter == 10){
+        ten++
+      }
+    }
+    console.log(one)
+    console.log(five)
+    console.log(ten)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/12">
+    var n = Number(prompt('n'))
+    var des = Number(prompt('des'))
+    var num = 0
+    for (let i = 0; i < n ; i++) {
+      var x = Number(prompt('x'))
+      if (x == des) {
+        num++
+      }
+    }
+    console.log(num)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/13">
+    var a = Number(prompt('a'))
+    var n = Number(prompt('n'))
+    var invo = 1
+    for (let i = 0; i < n ; i++) {
+      invo = invo * a
+    }
+    console.log(invo)
+  </script>
+
+<script type="xapplication/javascript" id="ch0105/14">
+    var a = Number(prompt('a'))
+    var n = Number(prompt('n'))
+    var invo = a
+    for (let i = 0; i < n ; i++) {
+      invo = invo * 1.001
+    }
+    console.log(invo.toFixed(4))
+  </script>
+
+<script type="xapplication/javascript" id="ch0105/15">
+    var R = Number(prompt('R'))
+    var M = Number(prompt('M'))
+    var Y = Number(prompt('Y'))
+    var invo = M
+    for (let i = 0; i < Y ; i++) {
+      invo = invo * (1 + R / 100)
+    }
+    console.log(Math.floor(invo)) 
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/16">
+    var N = Number(prompt('N'))
+    var K = Number(prompt('K'))
+    var house = 200
+    var money = 0
+    for (let i = 1; i <= 20 ; i++) {
+      money = N * i
+      house = 200*((1 + K / 100)**i)
+      if(money > house){
+        console.log(i)
+        break
+      }
+    }
+    if(i = 20){
+      console.log('Impossible')
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/17">
+    var K = Number(prompt('K'))
+    var before1 = 0
+    var before2 = 0
+    var today = 0
+    for (let i = 1; i <= K ; i++) {
+      if(i <= 2){
+        before1 = 1
+        before2 = 1
+        today = before1 + before2
+      }else{
+        before2 = before1
+        before1 = today
+        today = before1 + before2
+      }
+    }
+    console.log(before1)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/18">
+    var n = Number(prompt('n'))
+    var sample = Number(prompt('sample'))
+    var cure = Number(prompt('cure'))
+    var cureRate = cure *100 / sample
+    var result
+    var final = ''
+    for (let i = 0; i < n-1 ; i++) {
+      var Dsample = Number(prompt('Dsample'))
+      var Dcure = Number(prompt('Dcure'))
+      var DcureRate = Dcure *100 / Dsample
+      var difRate =  DcureRate - cureRate
+      if (difRate < -5){
+        result = 'worse'
+      }else if(difRate > 5){
+        result = 'better'
+      }else{
+        result = 'same'
+      }
+      final = final + ' ' + result
+    }
+    console.log(final)
+  </script>
+
+  * (+ 1 2) 3
+
+  (1 2 +) 3 *
