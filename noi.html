@@ -644,6 +644,265 @@ var n = Number(prompt('n'))
     console.log(final)
   </script>
 
-  * (+ 1 2) 3
 
-  (1 2 +) 3 *
+  <script type="xapplication/javascript" id="ch0105/19">
+    var n = Number(prompt('n'))
+    var allTime = 0
+    for (let i = 0; i < n ; i++) {
+      var x = Number(prompt('x'))
+      var y = Number(prompt('y'))
+      var human = Number(prompt('human'))
+      var time = Math.sqrt(x*x + y*y)*2 / 50 + 1.5 * human
+      allTime = allTime + time
+    }
+    console.log(Math.ceil(allTime))
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/20">
+    var h = Number(prompt('h'))
+    var totalH = 0
+    var height = h
+    for (let i = 1; i <= 10 ; i++) {
+      if(i == 1){
+        totalH = h
+      }
+      else{
+        totalH = totalH + height
+        height = height / 2
+      }
+    }
+    console.log(totalH)
+    console.log(height / 2)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/21">
+    var n = Number(prompt('n'))
+    var m =0
+    if(n%2 !== 0){
+      m = n * 3 + 1
+      console.log(n + '*' + '3' + '+' + '1' + '=' + m)
+    }
+    for (let i = 0; i < Infinity ; i++) {
+      console.log(m + '/' + '2' + '=' + m/2)
+      m = m / 2
+      if (m == 1) {
+        console.log('End')
+        break
+      }
+    }
+  </script>
+
+<script type="xapplication/javascript" id="ch0105/22">
+    var have = 0
+    var all = 0
+    var store = 0
+    var mom = 0
+    var allMom = 0
+    for (let i = 1; i <= 12 ; i++) {
+      var plan = Number(prompt('plan'))
+      var have = 300 + store - plan
+      var store = have % 100
+      var mom = Math.floor(have / 100) * 100
+      var allMom = allMom + mom
+      if (have < 0) {
+        console.log('-' + i)
+        break
+      }
+      if(i == 12){
+        console.log(allMom * 1.2 + store)
+      }
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/23">
+    var m = Number(prompt('m'))
+    var n = Number(prompt('n'))
+    var num = 0
+    var all = m
+    for (var i = 1; i <= n ; i++) {
+      var plan = Number(prompt('plan'))
+      var all = all - plan
+      if (all < 0) {
+        num = n - i
+        console.log(num - 1)
+        break
+      }
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/24">
+    var n = Number(prompt('n'))
+    var num = 0
+    var normal = 0
+    var max = 0
+    for (var i = 0; i < n ; i++) {
+      var a = Number(prompt('a'))
+      var b = Number(prompt('b'))
+      if ((a >= 90 && a <= 140) && (b >= 60 && b <= 90)) {
+        normal = normal + 1
+        max = normal
+      }else{
+        normal = 0
+      }
+      if(i == 3 && normal > 1){
+        console.log(normal)
+      }
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/25">
+    for (var x = 0; x <= 6 ; x++) {
+      for (var y = 0; y <= 6 ; y++){
+        for(var z = 0 ; z <= 6 ; z++){
+          if(x*49 + y*7 + z === z*81 + y*9 + x){
+            if (x*49 + y*7 + z !== 0){
+              console.log(x*49 + y*7 + z)
+              console.log('' + x + y + z)
+              console.log('' + z + y + x)
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/26">
+    var n = Number(prompt('n'))
+    var add = 0
+    for (var i = 0; i < n ; i++) {
+      var num = Number(prompt('num'))
+      var x = num % 10 - Math.floor(num / 1000) % 10 - Math.floor(num / 100) % 10 - Math.floor(num / 10) % 10
+      if (x > 0) {
+        add = add + 1
+      }
+      if(i == n-1 ){
+        console.log(add)
+      }
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/27">
+    var k = Number(prompt('k'))
+    var sn = 0
+    for (let n = 1; n < Infinity ; n++) {
+      an = 1 / n
+      sn = sn + an
+      if(sn > k){
+        console.log(n)
+        break
+      }
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/28">
+    var num = Number(prompt('num'))
+    var resi = 0
+    for (let i = 1; i < 9 ; i++) {
+      var add = 10 ** (i - 1)
+      if(Math.floor(num / add) === 0){
+        break
+      }
+      resi = Math.floor(num / add) % 10
+      console.log(resi + ' ')
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/29">
+    var num = Number(prompt('num'))
+    var n = Math.floor(Math.log10(Math.abs(num)) % 10)
+    var x = Math.random()*10**(n+1)
+    var result
+    if (num >= 0){
+      result = -x
+    }else{
+      result = x
+    }
+    console.log(Math.floor(result))
+    </script>
+
+  <script type="xapplication/javascript" id="ch0105/30">
+    var m = Number(prompt('m'))
+    var n = Math.floor(Math.log10(Math.abs(m)) % 10)
+    var k = Number(prompt('k'))
+    var add = 0
+    if(m>0 && m%19===0){
+      for (let i = 1; i < n ; i++) {
+      var x = Math.floor(m / (10 ** (i - 1) )) % 10
+      if(x == 3){
+        add = add +1
+      }
+    }
+    if(add = k){
+      console.log('Yes')
+    }
+  }else{
+      console.log('NO')
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/31">
+    var n = Number(prompt('n'))
+    var m = Number(prompt('m'))
+    var bulb = 0
+    var light = ''
+    for(var i = 1; i <= n; i++){
+      for(var p =i ; p < m ; p++){
+        bulb = i
+        if(bulb % p === 0){
+          bulb = -bulb
+        }
+      }
+      if (bulb < 0){
+        light = light + i
+        console.log(light)
+      }
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/32">
+    var n = Number(prompt('n'))
+    var x = 1
+    var y = 1
+    var s
+    var m
+    var y
+    var sn = 0
+    for (let i = 0; i < n; i++) {
+     s = x + y
+     m = s / y
+     x = y
+     y = s
+     sn = sn + m 
+    }
+    console.log(sn.toFixed(4))
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/33">
+    var n = Number(prompt('n'))
+    var a
+    var sn = 0
+    for (let i = 1; i < n; i++) {
+      a = 1 / n * (-1)**(i+1)
+      sn = sn + a
+    }
+    console.log(sn.toFixed(4))
+  </script>
+
+<script type="application/javascript" id="ch0105/34">
+    var n = Number(prompt('n'))
+    var an = 1
+    var am
+    var sn = 0
+    for (let a = 1; a <= n; a++) {
+      for (let i = 1; i <= a; i++) {
+        an = an * i
+        if(i == a){
+          am = an
+        }
+      }
+      sn = sn + am
+    }
+    console.log(sn)
+  </script>
+
+
