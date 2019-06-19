@@ -840,23 +840,21 @@ var n = Number(prompt('n'))
     }
   </script>
 
-  <script type="xapplication/javascript" id="ch0105/31">
+  <script type="application/javascript" id="ch0105/31">
     var n = Number(prompt('n'))
     var m = Number(prompt('m'))
     var bulb = 0
-    var light = ''
     for(var i = 1; i <= n; i++){
-      for(var p =i ; p < m ; p++){
-        bulb = i
-        if(bulb % p === 0){
-          bulb = -bulb
-        }
-      }
-      if (bulb < 0){
-        light = light + i
-        console.log(light)
-      }
+      var light = true
+      for(var j =1 ; j <= m ; j++){
+       if(i % j == 0){
+         light = !light
+       }
     }
+    if(light === false){
+      console.log(i)
+    }
+  }
   </script>
 
   <script type="xapplication/javascript" id="ch0105/32">
@@ -897,6 +895,46 @@ var n = Number(prompt('n'))
       for (let i = 1; i <= a; i++) {
         an = an * i
       }
+      sn = sn + an
+    }
+    console.log(sn)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/35">
+    var n = Number(prompt('n'))
+    var an = 1
+    var am = 0
+    var sn = 0
+    for (let a = 1; a <= n; a++) {
+      an = 1
+      for (let i = 1; i <= a; i++) {
+        an = an * i
+        am = 1 / an
+      }
+      sn = sn + am
+    }
+    console.log((sn+1).toFixed(10))
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/36">
+    var x = Number(prompt('x'))
+    var n = Number(prompt('n'))
+    var an = 1
+    var sn = 0
+    for (let a = 0; a < n; a++) {
+      an = x ** a
+      sn = sn + an
+    }
+    console.log(sn)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/37">
+    var x = Number(prompt('x'))
+    var n = Number(prompt('n'))
+    var an = 1
+    var sn = 0
+    for (let a = 0; a < n; a++) {
+      an = x ** a
       sn = sn + an
     }
     console.log(sn)
