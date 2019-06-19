@@ -963,18 +963,98 @@ var n = Number(prompt('n'))
     console.log(sn)
   </script>
 
-  <script type="application/javascript" id="ch0105/40">
+  <script type="xapplication/javascript" id="ch0105/40">
     var n = Number(prompt('n')) 
-    var an = 1
-    var sn = 0
+    var count = 0
     for (let i = 1; i <= n; i++) {
-      if(i % 10 !== 7){
-        if(((i - i%10)%10 !== 7) && (i % 7 !==0)){
-          sn = sn + i * i
+      var exp = Math.floor(Math.log10(i)) + 1
+      for(let j = 1; j <= exp; j++){
+        if(Math.floor((i / 10**(j-1))%10) == 1){
+          count++
         }
       }
     }
-    console.log(sn)
+    console.log(count)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/41">
+    var l = Number(prompt('l')) 
+    var r = Number(prompt('r')) 
+    var count = 0
+    for (let i = l; i <= r; i++) {
+      var exp = Math.floor(Math.log10(r)) + 1
+      for(let j = 1; j <= exp; j++){
+        if(Math.floor((i / 10**(j-1))%10) == 2){
+          count++
+        }
+      }
+    }
+    console.log(count)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/42">
+    //没做
+    var l = Number(prompt('l')) 
+    var r = Number(prompt('r')) 
+    var count = 0
+    for (let i = l; i <= r; i++) {
+      var exp = Math.floor(Math.log10(r)) + 1
+      for(let j = 1; j <= exp; j++){
+        if(Math.floor((i / 10**(j-1))%10) == 2){
+          count++
+        }
+      }
+    }
+    console.log(count)
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/43">
+    var n = Number(prompt('n')) 
+    for (let i = n-1; i > 0; i--) {
+      if(n % i == 0){
+        for (let j = 2; j < i; j++) {
+          if(i % j == 0){
+            break
+          }else{
+            console.log(i)
+            break
+          }
+        }
+        break
+      }
+    }
+  </script>
+
+<script type="xapplication/javascript" id="ch0105/44">
+    var n = Number(prompt('n')) 
+    var count = 0
+    for (let i = 2; i < Infinity; i++) {
+      for (let j = 2; j <= i; j++) {
+        if( (i % j == 0) && (i !== j)){
+          break
+        }else if((i % j == 0) && (i == j)){
+          count++
+        }
+      }
+      if(count == n){
+        console.log(i)
+        break
+      }
+    }
+  </script>
+
+  <script type="xapplication/javascript" id="ch0105/45">
+    var n = Number(prompt('n'))
+    var give = 1
+    var sum = 0
+    for(var i = 0, j = 0; i < n; j++, i++) {
+      if (j == give) {
+        j = 0
+        give++
+      }
+      sum += give
+    }
+    console.log(sum)
   </script>
 
 
