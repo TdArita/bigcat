@@ -840,7 +840,7 @@ var n = Number(prompt('n'))
     }
   </script>
 
-  <script type="application/javascript" id="ch0105/31">
+  <script type="xapplication/javascript" id="ch0105/31">
     var n = Number(prompt('n'))
     var m = Number(prompt('m'))
     var bulb = 0
@@ -859,18 +859,15 @@ var n = Number(prompt('n'))
 
   <script type="xapplication/javascript" id="ch0105/32">
     var n = Number(prompt('n'))
-    var x = 1
-    var y = 1
-    var s
-    var m
-    var y
+    var a = 1
+    var b = 1
+    var an = 0
     var sn = 0
     for (let i = 0; i < n; i++) {
-     s = x + y
-     m = s / y
-     x = y
-     y = s
-     sn = sn + m 
+      b = b + a
+      a = b - a
+      an = b / a
+      sn = sn + an
     }
     console.log(sn.toFixed(4))
   </script>
@@ -936,6 +933,46 @@ var n = Number(prompt('n'))
     for (let a = 0; a < n; a++) {
       an = x ** a
       sn = sn + an
+    }
+    console.log(sn)
+  </script>
+
+  <script type="xxapplication/javascript" id="ch0105/38"> 
+    //未完成
+    var x = Number(prompt('x'))
+    var n = Number(prompt('n')) 
+    var an = 1
+    var sn = 0
+    for (let a = 0; a < n; a++) {
+      an = x ** a
+      sn = sn + an
+    }
+    console.log(sn)
+  </script>
+
+<script type="xapplication/javascript" id="ch0105/39">
+    var n = Number(prompt('n')) 
+    var sn = 0
+    for (let i = 1; i <= n; i++) {
+      if(i % 10 !== 7){
+        if(((i - i%10)%10 !== 7) && (i % 7 !==0)){
+          sn = sn + i * i
+        }
+      }
+    }
+    console.log(sn)
+  </script>
+
+  <script type="application/javascript" id="ch0105/40">
+    var n = Number(prompt('n')) 
+    var an = 1
+    var sn = 0
+    for (let i = 1; i <= n; i++) {
+      if(i % 10 !== 7){
+        if(((i - i%10)%10 !== 7) && (i % 7 !==0)){
+          sn = sn + i * i
+        }
+      }
     }
     console.log(sn)
   </script>
