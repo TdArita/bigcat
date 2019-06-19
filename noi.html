@@ -888,19 +888,16 @@ var n = Number(prompt('n'))
     console.log(sn.toFixed(4))
   </script>
 
-<script type="application/javascript" id="ch0105/34">
+<script type="xapplication/javascript" id="ch0105/34">
     var n = Number(prompt('n'))
     var an = 1
-    var am
     var sn = 0
     for (let a = 1; a <= n; a++) {
+      an = 1
       for (let i = 1; i <= a; i++) {
         an = an * i
-        if(i == a){
-          am = an
-        }
       }
-      sn = sn + am
+      sn = sn + an
     }
     console.log(sn)
   </script>
