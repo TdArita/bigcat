@@ -42,8 +42,78 @@
 </script>
 <script>
   // YOUR CODE GOES BELOW
-  
+  for (let i = 0; i < 400; i++) {
+    dot(i,20,color = 'black')
+  }
 
+  for (let i = 0; i < 200; i++) {
+    let j = i * 2
+    dot(j,40,color = 'black')
+  }
 
+  for (let i = 0; i < 100; i++) {
+    let j = i * 4
+    let k = j + 1
+    dot(j,60,color = 'black')
+    dot(k,60,color = 'black')
+  }
+
+  for (let i = 0; i < 80; i++) {
+    let j = i * 5
+    let k = j + 1
+    let l = k + 1
+    dot(j,80,color = 'black')
+    dot(k,80,color = 'black')
+    dot(l,80,color = 'black')
+  }
+
+  for (let i = 0; i < 400; i++) {
+    let j = i
+    dot(i,j,color = 'black')
+  }
+
+  for (let i = 0; i < 400; i++) {
+    let j = i
+    dot(i,3*j/4,color = 'black')
+  }
+
+  for (let i = 0; i < 50; i++) {
+    let j = i
+    dot(i,0,color = 'black')
+    dot(i,50,color = 'black')
+    dot(0,j,color = 'black')
+    dot(50,j,color = 'black')
+  }
+
+  for (let i = 50; i < 100; i++) {
+    for (let j = 0; j < 50; j++) {
+      dot(i,j,color = 'black')
+    }
+  }
+
+  for (let i = 100; i < 355; i++) {
+    for (let j = 0; j < 255; j++) {
+      dot(i/2+50,j/2,color = 'rgb' + '(' + i + ',' + 0 + ',' + j + ')')
+    }
+  }
+
+for (let sita = 0; sita < 360; sita++) {
+  dot(25+20 * Math.cos(sita),25+20*Math.sin(sita),color='black')
+}
+
+for (let sita = 0; sita < 360; sita++) {
+  dot(25+20 * Math.cos(sita),25+20*Math.sin(sita),color='black')
+}
+
+for (let i = 0; i < 50; i++) {
+  for (let j = 100; j < 150; j++) {
+    if(((i-25)**2 + (j-125)**2 ) < 625)
+    dot(i,j,color = 'black')
+  }
+}
+
+for (let i = 0; i < 400; i++) {
+  dot(i,200+5*Math.sin(i/3),color='red')
+}
 </script>
 </html>
