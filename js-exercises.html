@@ -1,0 +1,37 @@
+<!-- Program Structure -->
+<!-- http://eloquentjavascript.net/code/ -->
+<script type="xapplication/javascript" id="loopATriangle">
+var n = +prompt('n')
+for (let i = 1; i <= n; i++) {
+  var x=''
+  for (let j = 1; j <= i; j++) {
+    x = x + '#'
+  }
+  console.log(x);
+}
+</script>
+
+<script type="xapplication/javascript" id="FizzBuzz">
+for (let n = 1; n <= 100; n++) {
+  if (n%15 !== 0) {
+    if (n%3 == 0) {
+      console.log(n + 'Fizz')
+    }
+    if(n%5 == 0){
+      console.log(n +'Buzz')
+    }
+  }else{
+    console.log(n + 'FizzBuzz')
+  }
+}
+</script>
+
+<script type="xapplication/javascript" id="ChessBoard">
+for (let n = 1; n <= 8; n++) {
+  if (n%2 == 1) {
+    console.log(' '+ '#' + ' '+ '#' + ' '+ '#' + ' '+ '#')
+  }else{
+    console.log('#' + ' '+ '#' + ' '+ '#' + ' '+ '#' + ' ')
+  }
+}
+</script>
