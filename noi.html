@@ -1059,4 +1059,30 @@ var n = Number(prompt('n'))
     console.log(sum)
   </script>
 
+  <script type="xapplication/javascript" id="7">
+  var n = Number(prompt('n'))
+  var exp = Math.floor(Math.log10(n))
+  var m = n
+  var flag = true
+  if(n%7 !== 0){
+    if(n % 10 !== 7){
+      for (let i = 0; i < exp; i++) {
+        m = (m - m%10) / 10
+        if(m%10 == 7){
+          console.log('YES')
+          var flag = false
+          break
+        }
+      }
+    if(flag){
+      console.log('NO')
+    }
+    }else{
+    console.log('YES')
+    }
+  }else{
+    console.log('YES')
+  }
+  </script>
+
 
