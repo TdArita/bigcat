@@ -1,12 +1,16 @@
-<script type="application/javascript" id="507_Perfect Number">
-  var n = +prompt()
+<script type="xapplication/javascript" id="507_Perfect Number">
+function isRelated7(num) {
   var sum = 0
-  for (let i = 1; i < n; i++) {
-    if(n % i == 0){
-      sum += i
+  var sqrt_n = Math.floor(Math.sqrt(num))
+  if(num == 0 || num == 1){
+    return false
+}
+  for (let i = 1; i < sqrt_n +1; i++) {
+    if(num % i == 0){
+      sum = sum + i + num/i
     }
   }
-  if(sum ==n){
-    console.log('YES')
-  }
+  sum = sum - num
+  return sum == num
+}
 </script>

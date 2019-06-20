@@ -1,4 +1,4 @@
-// http://noi.openjudge.cn/
+ <!-- http://noi.openjudge.cn/ -->
 
 <script type="xxx" id="ch0103/01">
   var a = Number(prompt("a"))
@@ -1085,4 +1085,48 @@ var n = Number(prompt('n'))
   }
   </script>
 
+  <script type="xapplication/javascript" id="sort">
+  var a = Number(prompt('a'))
+  var b = Number(prompt('b'))
+  var c = Number(prompt('c'))
+  if(a > b && b > c){
+    console.log(c,b,a)
+  }
+  if(c > b && b > a){
+    console.log(a,b,c)
+  }
+  if(b > a && a > c){
+    console.log(c,a,b)
+  }
+  if(c > a && a > b){
+    console.log(b,a,c)
+  }
+  if(a > c && c > b){
+    console.log(b,c,a)
+  }
+  if(b > c && c > a){
+    console.log(a,c,b)
+  }
+  </script>
 
+  <script type="xapplication/javascript" id="narcissistic">
+  </script>
+
+<script type="xapplication/javascript" id="sqrt">
+function sqrt(n) {
+  var m = n
+  var x = 1
+  for (let i = 1; i < Infinity; i++) {
+    if(i*i < n && (i+1)*(i+1) > n ){
+      for (let j = 0; j < 999; j++) {
+        if((i + x)**2 > m){
+          x = x - x / 2
+        }else if((i + x)**2 < m){
+          x = x + x / 2
+        }
+      }
+      return i + x
+    }
+  }
+}
+</script>
