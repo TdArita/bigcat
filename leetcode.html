@@ -143,6 +143,153 @@ var hammingDistance = function(x, y) {
 
 <script type="application/javascript" id="326. Power of Three">
 var isPowerOfThree = function(n) {
+  if(n <= 0){
+    return false
+  }
+  while(n>1){
+    if(n%3 == 0){
+      n = n / 3
+    }else{
+      return false
+    }
+  }
+  if (n == 1){
+    return true
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="7. Reverse Integer">
+var reverse = function(x) {
+  var num = Math.abs(x)
+  var newNum = 0
+  var length = Math.floor(Math.log10(num))
+  for (let i = 0; i <= length; i++) {
+    last = num % 10
+    num = (num - last) / 10
+    newNum = newNum * 10 + last
+  }
+  if(x>=0 && newNum < 2147483648){
+    return newNum
+  }else if(x<0 && newNum < 2147483648){
+    return -newNum
+  }
+  if(newNum > 2147483648 || newNum < -2147483648){
+    return 0
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="202. Happy Number">
+var isHappy = function(n) {
+  var nextNum = 0
+  var num = n
+  var length = Math.floor(Math.log10(num))
+  do{
+    for (let i = 0; i <= length; i++) {
+      last = num % 10
+      num = (num - last) / 10
+      nextNum = nextNum + last * last
+    }
+    if(nextNum == 4){
+      return false
+    }
+    if(nextNum == 1){
+      return true
+    }
+    return isHappy(nextNum)
+  }while(true)
+};
+</script>
+
+
+<script type="application/javascript" id="69. Sqrt(x)">
+var mySqrt = function(x) {
+  if (x = 0) {
+    return 0 
+  }
+  var left = 1
+  var right = x
+  while(right - left > 1){
+    if((Math.floor((left + right)/2)**2) <= x ){
+      left = Math.floor((left + right)/2)
+    }else if((Math.floor((left + right)/2)**2) >= x){
+      right = Math.floor((left + right)/2)
+    }
+  }
+  return left
+};
+</script>
+
+
+<script type="application/javascript" id="258. Add Digits">
+var addDigits = function(num) {
+  if (num == 0) {
+    return 0
+  }
+  var length = Math.floor(Math.log10(num))
+  var add = 0
+  var last = 0
+  for (let i = 0; i <= length; i++) {
+    last =  num % 10
+    num = (num - last) / 10
+    add = add + last
+  }
+  if(Math.floor(Math.log10(add)) == 0){
+    return add
+  }else{
+    return addDigits(add)
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="504. Base 7">
+var convertToBase7 = function(num) {
+  var Num = Math.abs(num)
+  var length = Math.floor(Math.log(Num) / Math.log(7))
+  var seven = 0
+  var j = 0
+  for (let i = 0; i <= length; i++) {
+    last = Num % 7
+    Num = (Num - last) / 7
+    seven = seven + last*10**j
+    j++
+  }
+  if (num>=0) {
+    return '' + seven
+  }else{
+    return '-' + seven
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="367. Valid Perfect Square">
+var isPerfectSquare = function(x) {
+  if (x == 0 || x == 1) {
+    return true
+  }
+  var left = 1
+  var right = x
+  while(right - left > 1){
+    if((Math.floor((left + right)/2)**2) < x ){
+      left = Math.floor((left + right)/2)
+    }else if((Math.floor((left + right)/2)**2) > x){
+      right = Math.floor((left + right)/2)
+    }else if((Math.floor((left + right)/2)**2) == x){
+      return true
+    }
+  }
+  return false
+};
+</script>
+
+
+<script type="application/javascript" id="9. Palindrome Number">
+var isPalindrome = function(x) {
   
 };
 </script>
