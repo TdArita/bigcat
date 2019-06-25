@@ -1112,11 +1112,14 @@ var n = Number(prompt('n'))
   <script type="xapplication/javascript" id="narcissistic">
   </script>
 
-<script type="xapplication/javascript" id="sqrt">
+<script type="application/javascript" id="sqrt">
 function sqrt(n) {
   var m = n
   var x = 1
   for (let i = 1; i < Infinity; i++) {
+    if(i*i == n){
+      return i
+    }
     if(i*i < n && (i+1)*(i+1) > n ){
       for (let j = 0; j < 999; j++) {
         if((i + x)**2 > m){

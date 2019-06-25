@@ -1,3 +1,33 @@
+https://leetcode.com/problems/perfect-number/
+|充电大喵|(285696737) 16:06:20
+https://leetcode.com/problems/ugly-number/
+|充电大喵|(285696737) 16:06:25
+https://leetcode.com/problems/sqrtx/
+|充电大喵|(285696737) 16:06:31
+https://leetcode.com/problems/valid-perfect-square/
+|充电大喵|(285696737) 16:06:40
+https://leetcode.com/problems/happy-number/
+|充电大喵|(285696737) 16:06:46
+https://leetcode.com/problems/palindrome-number/
+|充电大喵|(285696737) 16:06:57
+https://leetcode.com/problems/powx-n/
+|充电大喵|(285696737) 16:07:01
+https://leetcode.com/problems/power-of-three/
+|充电大喵|(285696737) 16:07:04
+https://leetcode.com/problems/power-of-four/
+|充电大喵|(285696737) 16:07:09
+https://leetcode.com/problems/power-of-two/
+|充电大喵|(285696737) 16:07:16
+https://leetcode.com/problems/hamming-distance/
+|充电大喵|(285696737) 16:07:25
+https://leetcode.com/problems/self-dividing-numbers/
+|充电大喵|(285696737) 16:07:29
+https://leetcode.com/problems/base-7/
+|充电大喵|(285696737) 16:07:43
+https://leetcode.com/problems/add-digits/
+|充电大喵|(285696737) 16:07:49
+https://leetcode.com/problems/reverse-integer/
+
 <script type="xapplication/javascript" id="507_Perfect Number">
 function isRelated7(num) {
   var sum = 0
@@ -13,4 +43,106 @@ function isRelated7(num) {
   sum = sum - num
   return sum == num
 }
+</script>
+
+<script type="xapplication/javascript" id="263-UglyNumber">
+function isUgly(num){
+  if(num == 0){
+    return false
+  }
+  if (num == 1) {
+    return true
+  }
+  do{
+    if(num % 2 == 0){
+      num = num / 2
+    }else if(num % 3 == 0){
+      num = num / 3
+    }else if(num % 5 == 0){
+      num = num / 5
+    }else{
+      return false
+    }
+  }while (!(num == 1 || num == 2 || num == 3 || num == 5))
+  return true
+}
+</script>
+
+<script type="xapplication/javascript" id="50-Pow(x,n)">
+var myPow = function(x, n) {
+  if (x = 1) {
+    return 1
+  }
+  if (x = -1) {
+    if(n % 2 ==0){
+      return 1
+    }else{
+      return -1
+    }
+  }
+  var pow = 1
+  for (let i = 0; i < Math.abs(n); i++) {
+    pow *= x
+  }
+  if(n>0){
+    return pow
+  }else if(n = 0){
+    if (x = 0) {
+      return 0
+    }
+    return 1
+  }else{
+    return 1 / pow
+  }
+}
+</script>
+
+<script type="application/javascript" id="342. Power of Four">
+var isPowerOfFour = function(num) {
+  if((Math.log(num) / Math.log(4)) % 1 ==0 ){
+    return true
+  }else{
+    return false
+  }
+};
+</script>
+
+<script type="application/javascript" id="231. Power of Two">
+var isPowerOfTwo = function(n) {
+  if (n <= 0) {
+    return false
+  }
+  while (n>1) {
+    if(n % 2 == 0){
+      n = n / 2
+    }else{
+      return false
+    }
+  }
+  if(n = 1){
+    return true
+  }
+}
+</script>
+
+
+<script type="application/javascript" id="461. Hamming Distance">
+var hammingDistance = function(x, y) {
+  var count = 0
+  while(x > 0 || y > 0){
+    if(x % 2 != y % 2){
+    count++
+  }
+    x = Math.floor(x / 2)
+    y = Math.floor(y / 2)
+  }
+  return count
+};
+</script>
+
+
+<script type="application/javascript" id="326. Power of Three">
+var isPowerOfThree = function(n) {
+  
+};
 </script>
