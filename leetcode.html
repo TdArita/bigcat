@@ -293,3 +293,148 @@ var isPalindrome = function(x) {
   
 };
 </script>
+
+
+<script type="application/javascript" id="136. Single Number">
+var singleNumber = function(num) {
+  var single = []
+  for (var i = 0; i < num.length; i++) {
+  var flag = true 
+    for (var j = 0; j < single.length; j++) {
+      if(num[i] == single[j]){
+        single.splice(j,1)
+        flag = false
+        break
+      }
+    }
+    if (flag) {
+      single.push(num[i])
+    }
+  }
+  return single[0]
+};
+</script>
+
+
+<script type="application/javascript" id="412. Fizz Buzz">
+var fizzBuzz = function(n) {
+  var result = []
+  for (let i = 1; i <= n; i++) {
+    if(i % 3 == 0 && i % 5 != 0){
+      result[i-1] = 'Fizz'
+    }else if(i % 3 != 0 && i % 5 == 0){
+      result[i-1] = 'Buzz'
+    }else if(i % 15== 0){
+      result[i-1] = 'FizzBuzz'
+    }else{
+      result[i-1] = '' + i
+    }
+  }
+  return result
+};
+</script>
+
+
+<script type="application/javascript" id="字符串0放最右边，前面的按由小到大排列">
+var moveZeroes = function(num) {
+//将0放右边，前面的数字会交换位置  
+  var count = 0
+  var temp = 0
+  var index = num.length - count
+  for (let i = 0; i <num.length ; i++) {
+    if(num[i] == 0){
+      while (num[(num.length - count - 1)] == 0) {
+        count++
+      }
+      if(i >= (num.length - 1 - count)){
+        break
+      }
+      num[i] = num[num.length - count - 1]
+      num[num.length - count - 1] = 0
+      count++
+    }
+  }
+//将字符串非0部分由小到大排列
+  var first = 0
+  while(first < num.length - count){
+    var max = -Infinity
+    for (let i = first; i < num.length - count; i++) {
+    if (max < num[i]) {
+      max = num[i]
+      }
+    }
+    num.unshift(max)
+    first++
+    num.splice(num.indexOf(max,(first - num.length)),1)
+  }
+  return num
+};
+</script>
+
+
+<script type="application/javascript" id="283. Move Zeroes">
+var moveZeroes = function(nums) {
+  var zero = 0
+  for (let i = 0; i < nums.length; i++) {
+    if(nums[i] == 0){
+      nums.splice(i,1)
+      nums.push(0)
+      i = i - 1
+      zero++
+    }
+    if((i + 1) == (nums.length - zero)){
+      return nums
+    }
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="268. Missing Number">
+var missingNumber = function(nums) {
+  var sum = 0
+  var n = nums.length
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i]
+  }
+  return n*(n+1)/2 - sum
+};
+</script>
+
+
+<script type="application/javascript" id="66. Plus One">
+var plusOne = function(digits) {
+  var i = digits.length - 1
+  if (digits[i] == 9) {
+    digits[i] =0
+    if(i == 0){
+        digits.unshift(1)
+        return digits
+    }
+    digits[i - 1]++
+    i--
+    while(digits[i] > 9){
+      digits[i] = 0
+      if(i == 0){
+        digits.unshift(1)
+        return digits
+      }
+      digits[i - 1]++
+      i--
+    }
+  }
+  if(digits[i] < 9){
+    digits[i]++
+    return digits
+  }
+  return digits
+};
+</script>
+
+
+<script type="application/javascript" id="485. Max Consecutive Ones">
+var findMaxConsecutiveOnes = function(nums) {
+  
+};
+</script>
+
