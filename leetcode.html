@@ -434,7 +434,113 @@ var plusOne = function(digits) {
 
 <script type="application/javascript" id="485. Max Consecutive Ones">
 var findMaxConsecutiveOnes = function(nums) {
-  
+  var max = 0
+  var temp = 0
+  for (let i = 0; i < nums.length; i++) {
+    if(nums[i] == 1){
+      temp++
+      temp >= max ? max = temp: true
+      nums.length == 1 ? max = 1 : true
+    }else{
+      temp = 0
+    }
+  }
+  return max
 };
 </script>
 
+<script type="application/javascript" id="27. Remove Element">
+var removeElement = function(nums, val) {
+  for (let i = 0; i < nums.length; i++) {
+    nums[i] == val ? (nums.splice(i,1),i--):true
+  }
+  return nums
+};
+</script>
+
+
+<script type="application/javascript" id="35. Search Insert Position">
+var searchInsert = function(nums, target) {
+  var index = 0
+  for (let i = 0; i < nums.length; i++) {
+    if (target == nums[i]) {
+      return i
+    }else if (target > nums[i] && target < nums[i+1]) {
+      return i+1
+    }else if(target < nums[i]){
+      if (i == 0) {
+        return 0
+      }
+      index--
+    }else if(nums[i] < target){
+      if(i == nums.length-1){
+        return nums.length
+      }
+      index++
+    }
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="88. Merge Sorted Array">
+var merge = function(nums1, m, nums2, n) {
+  if(m==0){
+    for (let i = 0; i < n; i++) {
+      num1[i] = num2[i]
+    }
+  }
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < m; j++) {
+      if(nums2[i] > nums1[j] && nums2[i] < nums1[j + 1]){
+        nums1.splice(j+1,0,nums2[i])
+        nums1.splice(m+1,1)
+        m++
+        break
+      }else if(nums2[i] == nums1[j]){
+        nums1.splice(j,0,nums2[i])
+        nums1.splice(m+1,1)
+        m++
+        break
+      }else if(nums2[i] < nums1[0]){
+        nums1.unshift(nums2[i])
+        nums1.splice(m+1,1)
+        m++
+        break
+      }else if(nums2[i] > nums1[m-1]){
+        nums1.splice(m,0,nums2[i])
+        nums1.splice(m+1,1)
+        m++
+        break
+      }
+    }
+  }
+  return nums1
+};
+</script>
+
+
+<script>
+var target = []
+function find(startx,starty ,history) {
+if (startx == x && starty == y) {
+  result.push(history)}else if(startx <= x && starty <= y){
+  find(startx + 1 , starty , '1' + '+' + history )
+  find(startx , starty + 1 , history + '+' + '1')
+  }
+}
+</script>
+
+
+<script type="application/javascript" id="26. Remove Duplicates from Sorted Array">
+var removeDuplicates = function(nums) {
+  for (let i = 0; i < nums.length; i++) {
+    var sameNum = 0
+    for (let j = i; j < nums.length; j++) {
+      nums[i] == nums[j] ? (sameNum++,sameNum==2 ? (nums.splice(i,1), sameNum--
+      ,j--) : true ):true
+    }
+  }
+  return nums
+};
+</script>
