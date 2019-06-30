@@ -525,7 +525,7 @@ var target = []
 function find(startx,starty ,history) {
 if (startx == x && starty == y) {
   result.push(history)}else if(startx <= x && starty <= y){
-  find(startx + 1 , starty , '1' + '+' + history )
+  find(startx + 1 , starty , '1' + '+' + history ) 
   find(startx , starty + 1 , history + '+' + '1')
   }
 }
@@ -542,5 +542,46 @@ var removeDuplicates = function(nums) {
     }
   }
   return nums
+};
+</script>
+
+
+<script type="application/javascript" id="167. Two Sum II - Input array is sorted">
+var twoSum = function(numbers, target) {
+  var i1 = 0
+  var i2 = numbers.length - 1
+  while (numbers[i1] + numbers[i2] != target) {
+    if (numbers[i1] + numbers[i2] < target) {
+      i1++
+    }else{
+      i2--
+    }
+  }
+  return([i1+1 , i2+1])
+};
+</script>
+
+
+<script type="application/javascript" id="338. Counting Bits">
+var countBits = function(num) {
+  var count = []
+  for (let i = 0; i <= num; i++) {
+    count.push(count1s(i))
+  }
+  return count
+};
+function count1s(n) {
+    var ones = 0
+    while (n>0) {
+      n % 2 == 1 ? (ones++,n >>= 1): n>>=1
+    }
+    return ones
+  }
+</script>
+
+
+<script type="application/javascript" id="53. Maximum Subarray">
+var maxSubArray = function(nums) {
+  
 };
 </script>
