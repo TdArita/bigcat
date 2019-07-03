@@ -735,99 +735,118 @@ function abcToNum(n) {
 var titleToNumber = function(s) {
   var result = ''
   var digits = 0
-  while(s > 1){
-    digits = s % 26
-    result = result.unshift(numToAbc(digits)) 
-    s = (s-digits) / 26
+  while(s > 0){
+    digits = (s-1) % 26
+    s = (s-1-digits) / 26
+    result = String.fromCharCode(65 + digits) + result
   }
   return result
 };
-function numToAbc(n) {
-  switch (n) {
-    case 1:
-      return 'A'
-      break;
-    case 2:
-      return 'B'
-      break;
-    case 3:
-      return 'C'
-      break;
-    case 4:
-      return 'D'
-      break;
-    case 5:
-      return 'E'
-      break;
-    case 6:
-      return 'F'
-      break;
-    case 7:
-      return 'G'
-      break;
-    case 8:
-      return 'H'
-      break;
-    case 9:
-      return 'I'
-      break;
-    case 10:
-      return 'J' 
-      break;
-    case 11:
-      return 'K' 
-      break;
-    case 12:
-      return 'L' 
-      break;
-    case 13:
-      return 'M' 
-      break;
-    case 14:
-      return 'N' 
-      break;
-    case 15:
-      return 'O' 
-      break;
-    case 16:
-      return 'P' 
-      break;
-    case 17:
-      return 'Q' 
-      break;
-    case 18:
-      return 'R' 
-      break;
-    case 19:
-      return 'S' 
-      break;
-    case 20:
-      return 'T' 
-      break;
-    case 21:
-      return 'U' 
-      break;
-    case 22:
-      return 'V' 
-      break;
-    case 23:
-      return 'W' 
-      break;
-    case 24:
-      return 'X' 
-      break;
-    case 25:
-      return 'Y' 
-      break;
-    case 0:
-      return 'Z' 
-      break;
-  
-    default:
-      return 0
-      break;
-  }
-}
 </script>
+
+
+<script type="application/javascript" id="70. Climbing Stairs">
+var climbStairs = function(n) {
+  var number = 0
+  if (n == 1) {
+    number++
+    return number
+  }else if (n == 2) {
+    number+=2
+    return number
+  }
+  return climbStairs(n-1) + climbStairs(n-2)
+};
+// 性能太差
+</script>
+
+
+<script type="application/javascript" id="70. Climbing Stairs-v2">
+var climbStairs = function(n) {
+  var a = 1
+  var b = 1
+  var i = 0
+  while (i<n) {
+    b = b + a 
+    a = b - a 
+    i++
+  }
+  return b
+};
+</script>
+
+
+<script type="application/javascript" id="153. Find Minimum in Rotated Sorted Array">
+var findMin = function(nums) {
+  for (let i = 0; i < nums.length; i++) {
+    if (nums.length == 1) {
+      return nums[0]
+    }
+    if (nums[i] < num[i-1]) {
+      return nums[i]
+    }else if(num[nums.length - 1] > nums[nums.length - 2]){
+      return nums[0]
+    }
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="33. Search in Rotated Sorted Array">
+var search = function(nums, target) {
+
+
+
+};
+</script>
+
+
+<script type="application/javascript" id="13. Roman to Integer">
+//未完成
+var I = 1
+var V = 5
+var X = 10
+var L = 50
+var C = 100
+var D = 500
+var M = 1000
+var intToRoman = function(num) {
+  var sum = 0
+  for (let i = 0; i < num.length ; i++) {
+    (num[i - 1] == 'I' && num[i] == 'V') ? sum - 1 + 4 : true
+    (num[i - 1] == 'I' && num[i] == 'X') ? sum - 1 + 9 : true
+    (num[i - 1] == 'X' && num[i] == 'L') ? sum - 10 + 40 : true
+    (num[i - 1] == 'X' && num[i] == 'C') ? sum - 10 + 90 : true
+    (num[i - 1] == 'C' && num[i] == 'D') ? sum - 100 + 400 : true
+    (num[i - 1] == 'C' && num[i] == 'M') ? sum - 100 + 900 : true
+    (num[i] == 'I') ? sum + 1 : true
+    (num[i] == 'V') ? sum + 5 : true
+    (num[i] == 'X') ? sum + 10 : true
+    (num[i] == 'L') ? sum + 50 : true
+    (num[i] == 'C') ? sum + 100 : true
+    (num[i] == 'D') ? sum + 500 : true
+    (num[i] == 'M') ? sum + 1000 : true
+  }
+  return sum
+};
+</script>
+
+
+<script type="application/javascript" id="1. 1. Two Sum">
+var twoSum = function(nums, target) {
+  var map = []
+  var result = []
+  for (let i = 0; i < nums.length; i++) {
+    digits = target - nums[i]
+    if (map[digits] >= 0) {
+      return result.push(map[digits],i)
+    }else{
+      map[nums[i]] = i
+    }
+  }
+  return -1
+};
+</script>
+
 
 
