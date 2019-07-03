@@ -849,4 +849,205 @@ var twoSum = function(nums, target) {
 </script>
 
 
+<script type="application/javascript" id="387. First Unique Character in a String">
+var firstUniqChar = function(s) {
+  var map = {}
+  for (let i = 0; i < s.length; i++) {
+    var mapI = s[i]
+    if (map[mapI]) {
+      map[mapI]++
+    }else{
+      map[mapI] = 1
+    }
+  }
+  for (let i = 0; i < s.length; i++) {
+    if (map[s[i]] == 1) {
+      return i
+    }
+  }
+  return -1
+};
+</script>
+
+
+<script type="application/javascript" id="49. Group Anagrams">
+var groupAnagrams = function(strs) {
+  var map = {}
+  var result = []
+  var j = 0
+  for (let i = 0; i < strs.length; i++) {
+    var mapAttri = strs[i]
+    if (map[sumCode(mapAttri)]) {
+      map[sumCode(mapAttri)].push(strs[i])
+    }else{
+      map[sumCode(mapAttri)] = [strs[i]]
+    }
+  }
+  for (const key in map) {
+    result[j] = map[key]
+    j++
+  }
+  return result
+};
+
+
+
+var groupAnagrams = function(strs) {
+  var j = 0
+  var map = {}
+  var result = []
+  for (let i = 0; i < strs.length; i++) {
+    for (let k = i; k < strs.length; k++) {
+      var objI = toObj[strs[i]]
+      var objk = toObj[strs[k]]
+      if (isSame(objI,objk)) {
+        if (result[j]) {
+          result[j].push(strs[k])
+          strs[k] = undefined
+        }else{
+          result[j] = strs[k]
+        }
+      }else {
+        if (strs[k]) {
+          j++
+          result[j] = strs[k]
+        }
+      }
+    }
+  }
+  return result
+}
+
+
+
+// function toArray(str) {
+//   var array = []
+//   for (let i = 0; i < str.length; i++) {
+//     if(array[str.charCodeAt(i)]){
+//       array[str.charCodeAt(i)]++
+//     }else{
+//       array[str.charCodeAt(i)] = 1
+//     }
+//   }
+//   return array
+// }
+
+// function isSame(obj1,obj2) {
+//   for (const key1 in obj1) {
+
+//   }
+// }
+
+
+
+
+
+function isSameStr(str1,str2) {
+  return isSame(toObj(str1), toObj(str2))
+}
+
+
+function toObj(str) {
+  var strObg = {}
+  for (let i = 0; i < str.length; i++) {
+    if(str[strObg[i]]){
+      str[strObg[i]]++
+    }else{
+      str[strObg[i]] = 1
+    }
+  }
+  return strObg
+}
+
+function isSame(obj1,obj2) {
+  for (const key in obj2) {
+    if (!(key in obj1 && (obj1[key] == obj2[key]))) {
+     return false
+    }
+  }
+  return true
+}
+
+// function toOrder(str) {
+//   var strAry = []
+//   for (let i = 0; i < str.length; i++) {
+//     if (strAry[str.charCodeAt(i)]) {
+//       strAry[str.charCodeAt(i)]++
+//     }else{
+//       strAry[str.charCodeAt(i)] = 1
+//     }
+//   }
+// }
+
+</script>
+ 
+<script type="application/javascript" id="500. Keyboard Row">
+var findWords = function(words) {
+  var result = []
+  var map = {
+    q:1,w:1,e:1,r:1,t:1,y:1,u:1,i:1,o:1,p:1,a:2,s:2,d:2,f:2,g:2,h:2,j:2,k:2,l:2,z:3,x:3,c:3,v:3,b:3,n:3,m:3,
+  }
+  for (let i = 0; i < words.length; i++) {
+    var word = words[i].toLowerCase()
+    var flag = true
+    for (let j = 1; j < word.length; j++) {
+      if (map[word[j]] !== map[word[0]]) {
+        flag = false
+      }
+    }
+    if (flag) {
+      result.push(words[i])
+    }
+  }
+  return result
+};
+</script>
+
+
+<script type="application/javascript" id="575. Distribute Candies">
+var distributeCandies = function(candies) {
+  var map = {}
+  var varis = 0
+  var num = candies.length
+  for (let i = 0; i < candies.length; i++) {
+    if (map[candies[i]]) {
+      map[candies[i]]++
+    }else{
+      map[candies[i]] = 1
+    }
+  }
+  for (const key in object) {
+    varis ++
+  }
+  if(varis >= num / 2){
+    return num / 2
+  }else{
+    return varis
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="575. Distribute Candies">
+var distributeCandies = function(candies) {
+  var map = {}
+  var varis = 0
+  var num = candies.length
+  for (let i = 0; i < candies.length; i++) {
+    if (map[candies[i]]) {
+      map[candies[i]]++
+    }else{
+      map[candies[i]] = 1
+    }
+  }
+  for (const key in object) {
+    varis ++
+  }
+  if(varis >= num / 2){
+    return num / 2
+  }else{
+    return varis
+  }
+};
+</script>
 
