@@ -871,6 +871,7 @@ var firstUniqChar = function(s) {
 
 
 <script type="application/javascript" id="49. Group Anagrams">
+//未完成
 var groupAnagrams = function(strs) {
   var map = {}
   var result = []
@@ -980,7 +981,40 @@ function isSame(obj1,obj2) {
 // }
 
 </script>
+
+<script type="application/javascript" id="49. Group Anagrams-v2">
+var groupAnagrams = function(strs) {
+  var map = {}
+  var result = []
+  var j = 0
+  for (let i = 0; i < strs.length; i++) {
+    var mapAttri = strs[i]
+    if (map[sumCode(mapAttri)]) {
+      map[sumCode(mapAttri)].push(strs[i])
+    }else{
+      map[sumCode(mapAttri)] = [strs[i]]
+    }
+  }
+  for (const key in map) {
+    result[j] = map[key]
+    j++
+  }
+  return result
+};
+
+function sumCode(str) {
+  var prime = {
+  0:2,1:3,2:5,3:7,4:11,5:13,6:17,7:19,8:23,9:29,10:31,11:37,12:41,13:43,14:47,15:53,16:59,17:61,18:67,19:71,20:73,21:79,22:83,23:89,24:97,25:101 
+  }
+  var sum = 1
+  for (let i = 0; i < str.length; i++) {
+    sum = sum*prime[(str.charCodeAt(i) - 97)]
+  }
+  return sum
+}
+</script>
  
+
 <script type="application/javascript" id="500. Keyboard Row">
 var findWords = function(words) {
   var result = []
@@ -1028,26 +1062,102 @@ var distributeCandies = function(candies) {
 </script>
 
 
-<script type="application/javascript" id="575. Distribute Candies">
-var distributeCandies = function(candies) {
-  var map = {}
-  var varis = 0
-  var num = candies.length
-  for (let i = 0; i < candies.length; i++) {
-    if (map[candies[i]]) {
-      map[candies[i]]++
+
+
+<script type="application/javascript" id="120. Triangle">
+var minimumTotal = function(data) {
+  var cache = {}
+  return minCollect(0,0)
+  function minCollect(row,col) {
+    if ([row + ',' + col] in cache) {
+      return cache[row+ ',' +col]
+    }
+    if (data[row].length - 1 == data.length - 1) {
+      return data[row][col]
     }else{
-      map[candies[i]] = 1
+      cache[row + ',' + col] = data[row][col] + Math.min(minCollect(row+1,col),minCollect(row+1,col+1)) 
+      return cache[row + ',' + col]
     }
   }
-  for (const key in object) {
-    varis ++
+}
+</script>
+
+
+<script type="application/javascript" id="1002. Find Common Characters">
+var commonChars = function(A) {
+  var mapAll = {}
+  var result = []
+  for (let i = 0; i < A.length; i++) {
+    var map = {}
+    for (let j = 0; j < A[i].length; j++) {
+      var key = A[i][j]
+      if (key in map) {
+        map[key]++
+      }else{
+        map[key] = 1
+      }
+    }
+    for (const keys in map) {
+      if (keys in mapAll) {
+        mapAll[keys].push(map[keys])
+      }else{
+        mapAll[keys] = [map[keys]]
+      }
+    }
   }
-  if(varis >= num / 2){
-    return num / 2
-  }else{
-    return varis
+  for (const key in mapAll) {
+    if(mapAll[key].length == A.length){
+      for (let i = 0; i < isSmallest(mapAll[key]); i++) {
+        result.push(key)
+      }
+    }
   }
+  return result
+  function isSmallest(ary) {
+    var min = Infinity
+    for (let i = 0; i < ary.length; i++) {
+      if(min > ary[i]){
+        min = ary[i]
+      }
+    }
+    return min
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="3. Longest Substring Without Repeating Characters">
+var lengthOfLongestSubstring = function(s) {
+  if (s.length == 0) {
+    return 0
+  }
+  var map = {}
+  var i = -1
+  var j = 0
+  var max = 1
+  var width = 0
+  for (let j = 0; j < s.length; j++) {
+    var key = map[j]
+    if (key in map) {
+      map[key]++
+      if(map[key] == 2){
+        while (true) {
+          i++
+          var ikey = map[i]
+          map[i]--
+          if(map[ikey] == 1){
+            break
+          }
+        }
+      }else{
+        width = j - i + 1
+        max = Math.max(max, width)
+      }
+    }else{
+      map[key] = 1
+    }
+  }
+  return max
 };
 </script>
 
