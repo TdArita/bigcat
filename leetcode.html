@@ -1262,3 +1262,210 @@ var isIsomorphic = function(s, t) {
 
 
 
+<script type="application/javascript" id="20. Valid Parentheses">
+//使用映射 和in判断右括号是否存在在栈中
+var isValid = function(s) {
+  if (s.length % 2 == 1) {
+    return false
+  }
+  var stack = []
+  var left = {'(':'(', '[':'[', '{':'{'}
+  var right = {')':'(', ']':'[', '}':'{'}
+  for (let i = 0; i < s.length; i++) {
+    stack.push(s[i])
+    var j = stack.length - 2
+    if(s[i] in right){
+      if (stack[j] == right[s[i]]) {
+        stack.pop()
+        stack.pop()
+      }
+      else{
+        return false
+      }
+    }
+    if((stack[j] in left) && (i == s.length - 1)){
+      return false
+    }
+  }
+  return true
+};
+</script>
+
+
+
+<script type="application/javascript" id="36. Valid Sudoku">
+var isValidSudoku = function(board) {
+  for (let i = 0; i < 9; i++) {
+    var mapRow = {}
+    for (let j = 0; j < 9; j++) {
+      if (mapRow[board[i][j]] !== '.') {
+        if(mapRow[board[i][j]]){
+          return false
+        }else{
+          mapRow[board[i][j]] = 1
+        }
+      }
+    }
+  }
+  for (let i = 0; i < 9; j++) {
+    var mapCol = {}
+    for (let j = 0; j < 9; i++) {
+      if(mapRow[board[j][i]] !== '.'){
+        if(mapRow[board[j][i]] == 1){
+          return false
+        }else{
+          mapRow[board[j][i]] = 1
+        }
+      }
+    }
+  }
+  for (let i = 0; i < 9; i+=3) {
+    for (let j = 0; j < 9; j+=3) {
+      var mapNine = {}
+      for (let k = i; k < i+3; k++) {
+        for (let l = j; l < j+3; l++) {
+          if (map[[k][l]] !== '.') {
+            if (map[[k][l]]) {
+              return false
+            }else{
+              map[[k][l]] = 1
+            }
+          }
+        }
+      }
+    }
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="random">
+function random() {
+  var twoNum = '' + rand(0.2) + rand(0.2)
+  if(twoNum == '10'){
+    return 1
+  }
+  if(twoNum == '01'){
+    return 0
+  }
+}
+function rand(p){
+  if (Math.random < p) {
+    return 1
+  }else{
+    return false
+  }
+}
+function sumri() {
+  var sum = {1:0,0:0}
+  for (let i = 0; i < 100; i++) {
+    var j = random()
+    sum[j]++
+  }
+}
+// 1 和 0 的概率还是50%
+</script>
+
+
+<script type="application/javascript" id="415. Add Strings">
+var addStrings = function(num1, num2) {
+  var result = ''
+  var carry = 0
+  var num1Index = num1.length - 1
+  var num2Index = num2.length - 1
+  var maxLength = Math.max(num1.length, num2.length)
+  for (let i = maxLength - 1; i >= 0 ; i--) {
+    if (i == 0 && (~~num1[num1Index] + ~~num2[num2Index]) < 10 ) {
+      remain = (~~num1[num1Index] + ~~num2[num2Index] + carry) % 10
+      return '' + remain + result
+    }
+    if (i == 0 && (~~num1[num1Index] + ~~num2[num2Index]) > 9 ) {
+      remain = (~~num1[num1Index] + ~~num2[num2Index] + carry) % 10
+      carry = Math.floor((~~num1[num1Index] + ~~num2[num2Index] + carry) / 10)
+      return '' + carry + remain + result
+    }
+    remain = (~~num1[num1Index] + ~~num2[num2Index] + carry) % 10
+    carry = Math.floor((~~num1[num1Index] + ~~num2[num2Index] + carry) / 10)
+    num1Index--
+    num2Index--
+    if (carry == 0) {
+      result = remain + result
+    }else{
+      result = '' + carry + remain + result
+    }
+  }
+};
+
+
+var addStrings2 = function(num1, num2) {
+  var result = ''
+  var carry = 0
+  var sum,remain
+  var i = num1.length - 1
+  var j = num2.length - 1
+  var maxLength = Math.max(num1.length, num2.length)
+  while(i >= 0 || j >= 0) {
+    sum = ~~num1[i] + ~~num2[j] + carry //关键
+    remain = sum % 10
+    carry = (sum - remain) / 10
+    result = '' + remain + result
+  }
+  if(carry){
+    return '' + carry + result
+  }else{
+    return result
+  }
+};
+</script>
+
+
+
+<script type="application/javascript" id="43. Multiply Strings">
+var multiply = function(num1, num2) {
+  var map = []
+  var result = ''
+  var add = ''
+  var j = ''
+  if (num1.length < num2.length) {
+    var temp
+    temp = num2
+    num2 = num1
+    num1 = temp
+  }
+  var temp = '0'
+  map.push(temp)
+  for (let i = 1; i <= 9; i++) {
+    map.push(addStrings2(temp,num1))
+    temp = addStrings2(temp,num1)
+  }
+  for (let i = num2.length - 1; i >= 0 ; i--) {
+    add = map[+num2[i]] + j
+    result = addStrings2(result, add)
+    j += '0'
+  }
+  return result
+};
+
+
+var addStrings2 = function(num1, num2) {
+  var result = ''
+  var carry = 0
+  var sum,remain
+  var i = num1.length - 1
+  var j = num2.length - 1
+  var maxLength = Math.max(num1.length, num2.length)
+  while(i >= 0 || j >= 0) {
+    sum = ~~num1[i--] + ~~num2[j--] + carry //关键
+    remain = sum % 10
+    carry = (sum - remain) / 10
+    result = '' + remain + result
+  }
+  if(carry){
+    return '' + carry + result
+  }else{
+    return result
+  }
+};
+
+
+</script>
