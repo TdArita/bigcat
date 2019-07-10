@@ -37,7 +37,39 @@ var tdarita = function() {
      return newArray
   }
 
-  
+  function difference(array,...args) {
+    var result = []
+    var mapE = {}
+    var i = -1
+    while(++i < args.length){
+      var j = -1
+      while(++j < args[i].length){
+        if(!mapE[args[i][j]]){
+          mapE[args[i][j]] = 1
+        }else{
+          mapE[args[i][j]]++
+        }
+      }
+    }
+    array.forEach(it => mapE[it] ? true : result.push(it))
+    return result
+  }
+
+  function chunk(array, size) {
+    var newArray = []
+    var i = 0
+    var j = 0
+    while ((j+1) * size < array.length){
+      if (array.length - i < size){
+        newArray[j].push(array[i])
+      }
+    }
+  }
+
+
+
+
+
 
 
   return{
@@ -45,5 +77,6 @@ var tdarita = function() {
     concat,
     max,
     flatten,
+    difference,
   }
 }()
