@@ -119,7 +119,7 @@ function mergeSort(ary) {
   var i = 0
   var newAry = []
   while (x) {
-    if ary1[i] >
+    if ary[i] >
   }
 }
 
@@ -153,3 +153,73 @@ function mergeSort(ary) {
   }
   return ary
 }
+
+function filter(ary, test) {
+  var newAry = []
+  for (let i = 0; i < ary.length; i++) {
+    if(test(ary[i])){
+      newAry.push(ary[i])
+    }
+  }
+}
+function map(ary, mapper) {
+  var newMap = []
+  for (let i = 0; i < ary.length; i++) {
+    newMap.push(ary[i].mapper)
+  }
+  return newMap
+}
+
+function nineteenCenAve(ary) {
+  var sum = 0
+  var average = 0
+  for (let i = 0; i < ary.length; i++) {
+    sum  = sum + ary[i].age
+  }
+  average = sum / (ary.length + 1)
+}
+
+function d(f){
+}
+
+function aveAge(ary) {
+  var sum = 0
+  var nums = 0
+  var average = 0
+  for (let i = 0; i < ary.length; i++) {
+    if(ary[i].sex == 'f' && ary[i].born > 1800){
+      sum = sum + ary[i].died - ary[i].born
+      nums++
+    }
+  }
+  average = sum / nums
+  return average
+}
+function d(f) {
+  return function (x) {
+    return f(x+litte) - f(x) / little
+  }
+}
+
+reduce(ary, 0, (a,b) => a + b)
+
+function reduce(array, combine, start) {
+  var current = start
+  for (let i = 0; i < array.length; i++) {
+    current = combine(current, array[i])
+  }
+  return current
+}
+function reduce(ary, reducer, initialVal) {
+  initialVal = ary[0]
+  for(var i = 1; i < ary.length; i++){
+    initialVal =  reducer(initial, ary[i])
+  } 
+  return initialVal
+}
+
+memo => item[i] > memo ? memo = item[i] : memo
+
+reduce(function max() {
+  return memo > item ? memo = item : memo  
+})

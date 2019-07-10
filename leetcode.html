@@ -1531,32 +1531,18 @@ var removeElements = function(head, val) {
 
 
 <script type="application/javascript" id="24. Swap Nodes in Pairs">
-var removeElements = function(head, val) {
-  while(head && head.val == val){
-    head = head.next
-  } //判断第一个节点是否存在，且第一个节点的值是否为需要删的val
-  var p = head
-  while (p.next) {
-    if (p.next.val == val) {
-      p.next = p.next.next
-    }else{
-      p = p.next
-    }
-  }
-  return head
-};
-
-
-var removeElements = function(head, val) {
-//递归写法
-  if (!head) {
+var swapPairs = function(head) {
+  if(!head || !head.next){
     return head
   }
-  if(head.val == val){
-    return removeElements(head.next, val)
-  }else{
-    head.next = removeElements(head.next, val) //关键 head指向head.next节点的返回结果
-    return head
-  }
+  var a = head
+  var b = a.next
+  var c = b.next
+  b.next = a
+  a.next = swapPairs(c)
+  return b
 };
 </script>
+
+
+
