@@ -1,4 +1,5 @@
 var tdarita = function() {
+
   function compact(ary) {
     return ary.filter(it => it)
   }
@@ -23,13 +24,26 @@ var tdarita = function() {
     return array.reduce((a,b) => Math.max(a,b))
   }
 
+  function flatten(array) {
+    var newArray = []
+     var i = -1
+     while(++i < array.length){
+        if (array[i].length > 0) {
+          array[i].forEach(it => newArray.push(it))
+        }else{
+          newArray.push(array[i])
+        }
+     }
+     return newArray
+  }
 
-
+  
 
 
   return{
     compact,
     concat,
     max,
+    flatten,
   }
 }()
