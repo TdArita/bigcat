@@ -16,7 +16,12 @@ var tdarita = function() {
     return array
   }
 
-
+  function max(array) {
+    if(array.length == 0){
+      return undefined
+    }
+    return array.reduce((a,b) => Math.max(a,b))
+  }
 
 
 
@@ -25,5 +30,6 @@ var tdarita = function() {
   return{
     compact,
     concat,
+    max,
   }
 }()
