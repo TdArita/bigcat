@@ -1545,4 +1545,75 @@ var swapPairs = function(head) {
 </script>
 
 
+<script type="application/javascript" id="21. Merge Two Sorted Lists">
+// 合并两个排序数组
+  var mergeTwoLists = function (l1, l2) {
+    var newNode = new ListNode()
+    var c = newNode
+    while (l1 && l2) {
+      if (l1.val < l2.val) {
+        c.next = l1
+        l1 = l1.next
+      } else {
+        c.next = l2
+        l2 = l2.next
+      }
+      c = c.next
+    }
+    c.next = l1 || l2
+    return newNode.next
+  };
+
+
+
+  // 递归写法
+  var mergeTwoLists = function (l1, l2) {
+    if (!l1) {
+      return l2
+    }
+    if(!l2){
+      return l1
+    }
+    if(l1.val < l2.val){
+      l1.next =  mergeTwoLists(l1.next, l2.next)
+      return l1
+    }
+    if(l2.val < l1.val){
+      l2.next = mergeTwoLists(l1, l2.next)
+      return l2
+    }
+  };
+</script>
+
+
+<script type="application/javascript" id="19. Remove Nth Node From End of List">
+var removeNthFromEnd = function(head, n) {
+  if(!head.next && !n){
+    return head
+  }
+  if(!head.next && n == 1){
+    return null
+  }
+  var length = 0
+  var pos = head
+  while (pos) {
+    pos = pos.next
+    length++
+  }
+  var deleteIndex = 1
+  var deleteMove = head
+  while(deleteIndex < length - n){
+    deleteMove = deleteMove.next
+    deleteIndex++
+  }
+  if(n == length){
+    head = head.next
+  }else{
+    deleteMove.next = deleteMove.next.next
+  }
+  return head
+};
+</script>
+
+
 

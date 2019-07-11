@@ -223,3 +223,57 @@ memo => item[i] > memo ? memo = item[i] : memo
 reduce(function max() {
   return memo > item ? memo = item : memo  
 })
+
+var squared = [1,2,3,4,5].reduce(function (result, item) {
+  result.push(item * item)
+  return result
+},[])
+
+function keyBy(ary, key) {
+  var result = {}
+  ary.forEach()
+  result[ary[key]] = ary
+}
+var result = {}
+ary.reduce(function (result,it) {
+  result[it[key]] = it
+  return result
+}, result)
+
+
+function ary2tree(ary, rootPos) {
+  if(ary[rootPos] >= ary.length){
+    return null
+  }
+  var root = {
+    val = ary[rootPos],
+    left = ary2tree(ary, rootPos * 2 + 1),
+    right = ary2tree(ary, rootPos * 2 + 2)
+  }
+  
+}
+function tree2ary(root, pos = 0, result = [] ) {
+  if (root){
+    return null
+  }
+  tree2ary()
+  return ary
+}
+
+function lcary2tree(ary) {
+
+}
+
+function lctree2ary(root) {
+  var result = []
+  while (root) {
+    while(root.left){
+      result.push(root.left.val)
+      root = root.left
+    }
+    result.push(null)
+    if(root.right){
+      result.push(root.right.val)
+    }
+  }
+}
