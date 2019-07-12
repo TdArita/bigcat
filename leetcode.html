@@ -1616,4 +1616,79 @@ var removeNthFromEnd = function(head, n) {
 </script>
 
 
+<script type="application/javascript" id="2. Add Two Numbers">
+var addTwoNumbers = function(l1, l2) {
+  
+  
+};
+</script>
+
+
+<script type="application/javascript" id="100. Same Tree">
+var isSameTree = function(p, q) {
+  if(!p && !q){
+    return true
+  }
+  if(p && q){
+    if(p.val != q.val){
+      return false
+    }
+  }else{
+    return false
+  }
+  while(p && q){
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="226. Invert Binary Tree">
+var invertTree = function(root) {
+  if(!root){
+    return null
+  }
+  if(!root.left && !root.right){
+    return root
+  }
+  while(root.left || root.right){
+    var temp
+    temp = root.right
+    root.right = root.left
+    root.left = temp
+    var left = invertTree(root.left)
+    var right = invertTree(root.right)
+    return root
+  }
+};
+
+
+var invertTree = function(root) {
+  if (root) {
+    var left = invertTree(root.right)
+    var right = invertTree(root.left)
+    root.left = left
+    root.right = right
+    return root
+  }
+  return root
+};
+</script>
+
+
+<script type="application/javascript" id="104. Maximum Depth of Binary Tree">
+var maxDepth = function(root) {
+  var deepth = 1
+  if(root){
+    maxDepth(root.left)
+    deepth++
+    maxDepth(root.right)
+    deepth++
+    return deepth
+  }
+  return deepth
+};
+</script>
+
+
 

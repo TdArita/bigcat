@@ -276,4 +276,25 @@ function lctree2ary(root) {
       result.push(root.right.val)
     }
   }
+}-
+
+function BST(root, array) {
+  root.left = 
+
+}
+
+function selectSort(ary) {
+  var sorted = 0
+  var move = 0
+  var min = Infinity
+  for (let j = 0; j < array.length - 2; j++) {
+    for (let i = 0; i < ary.length; i++) {
+      if(ary[i]< min)  {
+        min = ary[i]
+      }
+    }
+    temp = ary[i]
+    ary[i] = ary[move]
+    ary[sorted] = temp
+  }
 }
