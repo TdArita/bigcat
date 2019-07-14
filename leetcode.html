@@ -1718,10 +1718,47 @@ var mergeTrees = function(t1, t2) {
   if(!t2){
     return t1
   }
-  var root = new NodeTree(t1.val, t2.val)
+  var root = new NodeTree(t1.val + t2.val)
   root.left = mergeTrees(t1.left, t2.left)
   root.right = mergeTrees(t1.right, t2.right)
   return root
+};
+</script>
+
+
+<script type="application/javascript" id="112. Path Sum">
+var hasPathSum = function(root, sum) {
+  if(!root){
+    return false
+  }
+  if(!root.left && !root.right){
+    return root.val == sum
+  }
+  if (root) {
+    var sum = sum - root.val
+    return hasPathSum(root.left, sum) || hasPathSum(root.right, sum)
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="606. Construct String from Binary Tree">
+var tree2str = function(t) {
+  if (t) {
+    if(!t.left && !t.right){
+      return t.val + ''
+    }
+    if(t.left && !t.right){
+      return t.val + '(' + tree2str(t.left) + ')'
+    }
+    if(!t.left && t.right){
+      return t.val + '()' + '(' + tree2str(t.right) + ')'
+    }
+    if (t.left && t.right) {
+      return t.val + '(' + tree2str(t.left) + ')' + '(' + tree2str(t.right) + ')'
+    }
+  }
+  return ''
 };
 </script>
 
