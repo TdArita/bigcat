@@ -298,3 +298,41 @@ function selectSort(ary) {
     ary[sorted] = temp
   }
 }
+
+var d = 0
+function transform(str) {
+  if (str.length == 1) {
+    return str
+  }
+  transform(str[])
+
+}
+
+function quickSort(ary) {
+  var l = ary.length
+  var midPoint = Math.floor(Math.random(l*10))
+  var left = ary.slice(0,midPoint)
+  var right = ary.slice(midPoint)
+  quickSort(left) 
+  quickSort(right)
+  var k = 0
+  while (left.val > right.val) {
+    if (left.val > right.val) {
+      ary[k++] = right.val
+    }else{
+      ary[k++] = left.val
+    }
+  }
+  return ary
+}
+
+function partition(ary, start = 0, end = ary.length - 1){
+  var pivotIndex = Math.floor(Math.random(ary.length * 10))
+  var left = []
+  var middle = []
+  var right = []
+  swap(ary[random], ary[end])
+  var i = -1
+  var j = 0
+
+}

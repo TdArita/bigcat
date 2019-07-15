@@ -36,3 +36,51 @@ for (let n = 1; n <= 8; n++) {
   }
 }
 </script>
+
+
+<script type="application/javascript" id="flattening">
+function flattening(ary) {
+  for (let i = 0; i < ary.length; i++) {
+    if (ary[i].length > 0) {
+      var left = ary.slice(0,i)
+      var right = ary.slice(i+1)
+      ary =  left.concat(flattening(ary[i]),right)
+    }
+  }
+  return ary
+}
+
+function mothersGiveBorn(ary) {
+  function age(it){return it.died - it.born}
+  function averrage(it){
+    function plus(a,b) {
+      return a + b
+    }
+    return reduce(it, plus) / it.length
+  }
+  return averrage(ANSISTRY.filter(byName(it => it.mother)).map(age) - ANSISTRY.map(age))
+}
+
+function groupBy(ary) {
+  var result = {}
+  function century(it){
+    return Math.ceil(it.died)
+  }
+  ANSISTRY.filter(died).reduce(it =>  result[century(it)] ? result[century(it)]++ : result[century(it)] = 1)
+}
+
+function every(ary, condition) {
+  for (let i = 0; i < ary.length; i++) {
+    condition(ary[i])
+  }
+  return true
+}
+
+function some(ary, condition) {
+  for (let i = 0; i < ary.length; i++) {
+    condition(ary[i])
+  }
+  return false
+}
+
+</script>
