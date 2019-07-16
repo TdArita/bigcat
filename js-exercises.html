@@ -61,7 +61,7 @@ function mothersGiveBorn(ary) {
   return averrage(ANSISTRY.filter(byName(it => it.mother)).map(age) - ANSISTRY.map(age))
 }
 
-function groupBy(ary) {
+function groupBy(ary, predicate) {
   var result = {}
   function century(it){
     return Math.ceil(it.died)

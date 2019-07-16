@@ -37,6 +37,60 @@ var tdarita = function() {
      return newArray
   }
 
+  function flatten(array) {
+    return [].concat(...array)
+  }
+
+
+  function flatten2(array) {
+    var newArray = []
+    for (const item of array) {
+      if (Array.isArray(item)) {
+        newArray.push(...item)
+      }else{
+        newArray.push(item)
+      }
+    }
+    return newArray
+  }
+
+  function flatten3(array) {
+    flattenDepth(array)
+  }
+
+
+
+  function flattenDeep(array) {
+    var newArray = []
+    for (const item of array) {
+      if (Array.isArray(item)) {
+        var flattenItem = flattenDeep(item)
+        newArray.push(...flattenItem)
+      }else{
+        newArray.push(item)
+      }
+    }
+    return newArray
+  }
+  
+  function flattenDepth(array, depth = 1) {
+    if (depth == 0) {
+      return array.slice()
+    }
+    var newArray = []
+    for (const item of array) {
+      if (Array.isArray(item)) {
+        var flattenItem = flattenDepth(item, depth - 1)
+        newArray.push(...flattenItem)
+      }else{
+        newArray.push(item)
+      }
+    }
+    return newArray
+  }
+
+
+
   function difference(array,...args) {
     var result = []
     var mapE = {}
@@ -57,16 +111,89 @@ var tdarita = function() {
 
   function chunk(array, size) {
     var newArray = []
-    var i = 0
-    var j = 0
-    while ((j+1) * size < array.length){
-      if (array.length - i < size){
-        newArray[j].push(array[i])
+    while(array.length > 0){
+      newArray.push(array.slice(0,size))
+      array = array.slice(size)
+    }
+    return newArray
+  }
+
+  function flip(func) {
+    return function (...args) {
+      return func(...args.reverse())
+    }
+  }
+
+  function before(n, func){
+    var lastResult
+    var times = 0
+    return function(...args){
+      times++
+      if (times < n) {
+        return lastResult = func(...args)
+      }else{
+        return lastResult
       }
     }
   }
 
+  function after(n, func){
+    var times = 0
+    return function(...args){
+      times++
+      if (times < n) {
+        return
+      }else{
+        return func(...args)
+      }
+    }
+  }
 
+  function ary(f, n = f.length) {
+    return function (...args) {
+      return f(...args.slice(0,n))
+    }
+  }
+
+  function unary(f) {
+    return ary(f,1))
+  }
+
+  function spread(f) {
+    return function (ary) {
+      return f(...ary)
+    }
+  }
+
+  function memoize(func) {
+    var result = {}
+    return function(arg){
+      if(arg in result){
+        return result[arg]
+      }else{
+        return result[arg] = func(arg)
+      }
+    }
+  }
+
+  function identity(...args) {
+    return args[0]
+  }
+
+  function bind(f,...args){
+    return function(...arg2s){
+      return f(...args,...arg2s)
+    }
+  }
+
+  function negate(predicate) {
+    return function(){
+      
+    }
+    for (const it of array) {
+      return !predicate(it)
+    }
+  }
 
 
 
@@ -77,6 +204,19 @@ var tdarita = function() {
     concat,
     max,
     flatten,
+    flattenDeep,
+    flattenDepth,
     difference,
+    chunk,
+    flip,
+    before,
+    after,
+    ary,
+    unary,
+    spread,
+    memoize,
+    identity,
+    bind,
+
   }
 }()

@@ -336,3 +336,19 @@ function partition(ary, start = 0, end = ary.length - 1){
   var j = 0
 
 }
+
+function bind(f, arg1, arg2, arg3) {
+  return function () {
+    for (let i = 0; i < arguments.length; i++) {
+      f().apply(null,arguments[i])
+      
+    }
+    f(arg1)
+  }
+}
+
+function negate(f) {
+  return function (...args) {
+    return !f(...args)
+  }
+}
