@@ -186,12 +186,9 @@ var tdarita = function() {
     }
   }
 
-  function negate(predicate) {
-    return function(){
-      
-    }
-    for (const it of array) {
-      return !predicate(it)
+  function negate(f) {
+    return function(...args){
+      return !f(...args)
     }
   }
 

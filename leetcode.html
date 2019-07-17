@@ -1779,4 +1779,91 @@ var addTwoNumbers = function(l1, l2) {
 </script>
 
 
+<script type="application/javascript" id="450. Delete Node in a BST">
+var deleteNode = function(root, key) {
+  if(!root){
+    return null
+  }
+  if(root){
+    if(root.val == key){
+      if (root.left) {
+        root = root.left
+      }else if(root.right) {
+        root = root.right
+      }else{
+        root = null
+      }
+    }
+    deleteNode(root.left, key)
+    deleteNode(root.right, key)
+  }
+  return root
+};
+</script>
+
+
+<script type="application/javascript" id="445. Add Two Numbers II">
+var addTwoNumbers = function(l1, l2) {
+  var aryL1 = []
+  var aryL2 = []
+  while (l1) {
+    aryL1.push(l1.val)
+    l1 = l1.next
+  }
+  while(l2){
+    aryL2.push(l2.val)
+    l2 = l2.next
+  }
+  var sum = 0
+  var list = new ListNode(0)
+  while (aryL1.length > 0 || aryL2.length > 0) {
+    if(aryL1.length > 0) {
+      sum += aryL1.pop()
+    }
+    if(aryL2.length > 0){
+      sum += aryL1.pop()
+    }
+    list.val = sum % 10
+    var head = new ListNode(Math.floor(sum / 10))
+    head.next = list
+    list = head
+    sum = Math.floor(sum / 10)
+  }
+  return list.val === 0 ? list.next : list
+};
+
+
+var addTwoNumbers = function(l1, l2) {
+  //错误
+  var aryL1 = [],aryL2 = []
+  while (l1) {
+    aryL1.push(l1.val)
+    l1 = l1.next
+  }
+  while(l2){
+    aryL2.push(l2.val)
+    l2 = l2.next
+  }
+  var carry = 0, digit = 0
+  var rstAry = []
+  var long = Math.max(aryL1.length, aryL2.length)
+  for (let i = 0; i < long ; i++) {
+    var sum = ~~aryL1.pop() + ~~aryL2.pop() + carry
+    carry = Math.floor(sum / 10)
+    rstAry.push(sum % 10)
+  }
+  console.log(rstAry)
+  var root = new ListNode()
+  var head = root
+  while(rstAry[0]){
+    root.next = new ListNode(rstAry.shift())
+  }
+  return head.next
+};
+
+</script>
+
+
+
+
 

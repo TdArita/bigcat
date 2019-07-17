@@ -352,3 +352,24 @@ function negate(f) {
     return !f(...args)
   }
 }
+
+function property(propername) {
+  return function (proper){
+    return proper[propername]
+  }
+}
+/** */
+
+ary.slice1 = function (start, end = this.length) {
+  var result = []
+  for (let i = start; i < end; i++) {
+    result.push(this[i])
+  }
+  return result
+}
+
+function flip(func) {
+  return function(){
+    return func(arguments.reverse())
+  }
+}
