@@ -373,3 +373,12 @@ function flip(func) {
     return func(arguments.reverse())
   }
 }
+
+function forOwn(obj, iterator) {
+  resule = []
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      iterator(obj[key], key, obj)
+      } 
+    }
+}

@@ -1780,6 +1780,7 @@ var addTwoNumbers = function(l1, l2) {
 
 
 <script type="application/javascript" id="450. Delete Node in a BST">
+
 var deleteNode = function(root, key) {
   if(!root){
     return null
@@ -1834,7 +1835,6 @@ var addTwoNumbers = function(l1, l2) {
 
 
 var addTwoNumbers = function(l1, l2) {
-  //错误
   var aryL1 = [],aryL2 = []
   while (l1) {
     aryL1.push(l1.val)
@@ -1847,7 +1847,7 @@ var addTwoNumbers = function(l1, l2) {
   var carry = 0, digit = 0
   var rstAry = []
   var long = Math.max(aryL1.length, aryL2.length)
-  for (let i = 0; i < long ; i++) {
+  for (let i = 0; i <= long ; i++) {
     var sum = ~~aryL1.pop() + ~~aryL2.pop() + carry
     carry = Math.floor(sum / 10)
     rstAry.push(sum % 10)
@@ -1855,14 +1855,49 @@ var addTwoNumbers = function(l1, l2) {
   console.log(rstAry)
   var root = new ListNode()
   var head = root
-  while(rstAry[0]){
-    root.next = new ListNode(rstAry.shift())
+  while(rstAry.length > 0){
+    root.next = new ListNode(rstAry.pop())
+    root = root.next
   }
-  return head.next
+  return head.next.val == 0 ? head.next.next : head.next
 };
-
 </script>
 
+<script type="application/javascript" id="148. Sort List">
+var sortList = function(head) {
+  var root = head
+  var node = head
+  var emptyFirst = new ListNode()
+  emptyFirst.next = head
+  var length = 0
+  while (node) {
+    length++
+    node = node.next
+  }
+  for (let i = 0; i < length; i++) {
+    while(root.next){
+      if (root.val > root.next.val) {
+        root.next = root.next.next
+        root.next.next = root
+        root = root.next
+      }else{
+        root = root.next
+      }
+    }
+    root = emptyFirst.next
+  }
+  return emptyFirst.next
+};
+</script>
+
+<script type="application/javascript" id="867. Transpose Matrix">
+var transpose = function(A) {
+  var result = []
+  return A[0].map((_, i) => {
+    return A.map(row => row[i])
+  })
+};
+</script>
 
 
 
