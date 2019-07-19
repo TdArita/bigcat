@@ -382,3 +382,83 @@ function forOwn(obj, iterator) {
       } 
     }
 }
+function Vector(x,y) {
+  this.x = x
+  this.y = y
+}
+Vector.prototype.plus = function (v) {
+  return new Vector(this.x + v.x, this.y + v.y)
+}
+Vector.prototype.minus = function (v) {
+  return new Vector(this.x - v.x, this.y y v.y)
+}
+Object.defineProperty(Vector.prototype,)
+
+function Complex(real, image) {
+  this.real = real
+  this.image = image
+}
+
+Complex.prototype = {
+  plus:function (c) {
+    var real = this.real + c.real
+    var image = this.image + c.image
+    return new Complex(real, image)
+  },
+  minus:function (c) {
+    var real = this.real - c.real
+    var image = this.image - c.image
+    return new Complex(real, image)
+  },
+  mul:function (c) {
+    var real = this.real * c.real - this.image * c.imege
+    var image = this.real * c.image + this.image * c.real
+    return new Complex(real, image)
+  },
+  division: function (c) {
+    var factor = c.real * c.real + c.image * c.image
+    var real = 
+  },
+  toString: function (c) {
+
+  }
+
+}
+
+function Stack() {
+  this.top = null
+}
+
+Stack.prototype = {
+  pop:function () {
+    
+  }
+
+}
+
+// 队列
+function Queue(val) {
+  this.head = null
+  this.tail = null
+}
+
+Queue.prototype = {
+  add:function(val){
+    this.next = new Queue(val)
+    return root
+  },
+  remove: function (val) {
+    var head = root
+    var point = root
+    while(root){
+      if(root.next.val == val){
+        root.next = root.next.next
+        root
+      }
+    }
+    root
+  }
+
+
+
+}
