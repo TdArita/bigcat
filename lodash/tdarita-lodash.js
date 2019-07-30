@@ -176,6 +176,18 @@ var tdarita = function() {
     }
   }
 
+  function memoize2(func) {
+    var result = new Map()
+    return function(arg){
+      if(result.has(arg)){
+        return result.get(arg)
+      }else{
+        result.set(arg, f(arg))
+        return result.get(arg)
+      }
+    }
+  }
+
   function identity(...args) {
     return args[0]
   }
@@ -191,6 +203,7 @@ var tdarita = function() {
       return !f(...args)
     }
   }
+
 
 
 

@@ -458,7 +458,345 @@ Queue.prototype = {
     }
     root
   }
+}
 
 
+class MyMap {
+  constructor(initialValues) {
+    this.keys = []
+    this.values = []
+    if (initialValues) {
+      for (let i = 0; i < initialValues.length; i++) {
+        this.keys.push(initialValues[i][0])
+        this.values.push(initialValues[i][1])
+      }
+    }
+  }
 
+  _indexOf(key){
+    if(key !== key){
+      for (let i = 0; i < this.keys.length; i++) {
+        if (this.keys[i] !== this.keys[i]) {
+          return i
+        }
+      }
+    }else{
+      return this.keys.indexOf(key)
+    }
+  }
+  set(key, val) {
+    if (this.has(key)){
+      this.values[this._indexOf(key)] = val
+    }else{
+      this.keys.push(key)
+      this.values.push(val)
+    }
+    return this
+  }
+
+  get(key) {
+    var idx = this._indexOf(key)
+    if (idx >= 0) {
+    return this.values[idx]
+    }
+  }
+
+  delete(key) {
+    var idx = this._indexOf(key)
+    if(idx >= 0){
+      this.keys.splice(idx,1)
+      this.values.splice(idx,1)
+    }
+    return this
+  }
+
+  has(key) {
+    return this._indexOf(key) >= 0
+  }
+
+  clear() {
+    this.values.length = 0
+    this.keys.length = 0
+    return this
+  }
+
+  get size() {
+    return this.keys.length
+  }
+}
+
+class MySet {
+  constructor(initialValues) {
+    this.values = []
+    for(let vals of initialValues){
+      this.add(vals)
+    }
+  }
+
+  add(val) { 
+    if (!(this.has(val) >= 0)) {
+      this.values.push(val)
+    }
+    return this
+  }
+
+  delete(val) {
+    if (this.values.indexOf(val) >= 0) {
+      this.values.splice(this.values.indexOf(val), 1)
+    }
+    return this
+  }
+
+  has(val) {
+    return this.values.includes(val) >= 0
+  }
+
+  clear() {
+    this.values.length = 0
+    return this
+  }
+
+  get size() {
+    return this.values.length
+  }
+}
+
+// 堆排序
+class PriorityQueue{
+  constructor(){
+
+  }
+
+// 删除并返回堆中最大元素
+  pop(){
+
+  }
+
+  // 返回堆顶元素
+  peak(){
+
+  }
+
+  // 
+  push(val){
+
+  }
+}
+
+function mergeSort(ary) {
+  if (ary.length < 2) {
+    return ary.splice()
+  }
+  var middle = ary.length >> 1
+  var left = ary.splice(0, middle)
+  var right = ary.splice(middle)
+  mergeSort(left)
+  mergeSort(right)
+
+  var result = []
+  var i = 0
+  var j = 0
+
+  while(i < left.length || j < right.length){
+    if(left[i++] < right[j]){
+      result.push(left[i])
+    }
+    if(left[i] > right[j++]){
+      result.push(right[j])
+    }
+  }
+  while (i < left.length) {
+    result.push(left[i++])
+  }
+  while (j < right.length) {
+    result.push(left[j++])
+  }
+  return result
+}
+
+class PriorityQueue{
+  constructor(initialValues = []){
+    this.elements = initialValues.splice()
+    this.heapify()
+  }
+
+  heapify(){
+    var startIdx = (this.elements.length - 2) >> 1
+    for (let i = startIdx; i >= 0; i--) {
+      this.heapDowm(i)
+    }
+  }
+
+// 从某个位置开始向上
+  heapUp(idx){
+    while (idx > 0) {
+      var pIdx = (idx - 1) >> 1
+      if (this.elements[idx] > this.elements[pIdx]) {
+        this.swap(idx,pIdx)
+        idx = pIdx
+      }else{
+        break
+      }
+    }
+  }
+
+  heapDowm (idx){
+    if(idx < this.elements.length){
+      var maxIdx = idx
+      var cIdxL = idx * 2 + 1
+      var cIdxR = cIdxL + 1
+
+      if (cIdxL < this.elements.length && this.elements[cIdxL] > this.elements[maxIdx]) {
+        maxIdx = cIdxL
+      }
+      if (cIdxR < this.elements.length && this.elements[cIdxR] > this.elements[maxIdx]) {
+        maxIdx = cIdxR
+      }
+      if (idx !== maxIdx) {
+        this.swap(idx, maxIdx)
+        this.heapDowm(maxIdx)
+      }else{
+        break
+      }
+    }
+  }
+
+  pop(){
+    var result = this.elements[0]
+    var last = this.elements.pop()
+    if (this.elements.length == 0) {
+      return result
+    }
+    this.elements[0] = last
+    var cIdx = 0
+    while (cIdx < this.elements.length) {
+      var cIdxL = cIdx * 2 + 1
+      var cIdxR = cIdxL + 1
+      var maxIdx = cIdx
+
+      if (cIdxL < this.elements.length && this.elements[cIdxL] > this.elements[maxIdx]) {
+        maxIdx = cIdxL
+      }
+      if (cIdxR < this.elements.length && this.elements[cIdxR] > this.elements[maxIdx]) {
+        maxIdx = cIdxR
+      }
+      if (cIdx !== maxIdx) {
+        this.swap(cIdx, maxIdx)
+        cIdx = maxIdx
+      }else{
+        break
+      }
+  }
+    return result
+  }
+  
+  swap(i,j){
+    var t = this.elements[i]
+    this.elements[i] = this.elements[j]
+    this.elements[j] = t
+  }
+
+  _push(val){
+    this.elements.push(val)
+    var valIdx = this.elements.length - 1
+    while (valIdx > 0) {
+      var pidx = (valIdx - 1) >> 1
+      if(this.elements[pidx] < val){
+        this.swap(valIdx, pidx)
+        valIdx = pidx
+      }else{
+        break
+      }
+    }
+    return this.elements
+  }
+}
+
+
+function heapDowm (ary, idx, end = ary.length){
+  if(idx < end){
+    var maxIdx = idx
+    var cIdxL = idx * 2 + 1
+    var cIdxR = cIdxL + 1
+
+    if (cIdxL < end && ary[cIdxL] > ary[maxIdx]) {
+      maxIdx = cIdxL
+    }
+    if (cIdxR < ary.length && ary[cIdxR] > ary[maxIdx]) {
+      maxIdx = cIdxR
+    }
+    if (idx !== maxIdx) {
+      swap(ary, idx, maxIdx)
+      heapDowm(ary, maxIdx, end)
+    }
+  }
+}
+
+function swap(ary, i, j) {
+  var t = ary[i]
+  ary[i] = ary[j]
+  ary[j] = t
+}
+
+function heapSort(ary) {
+  heapify(ary)
+  for (let i = ary.length - 1; i > 0; i--) {
+    swap(ary, i, 0)
+    heapDowm(ary, 0, i)
+  }
+  return ary
+}
+
+
+class Heap extends Array{
+  constructor(initialValues = [], compare = (a,b) => a-b){
+    super()
+    this.compare = compare
+  }
+
+  swap(i, j){
+    var t = this[i]
+    this[i] = this[j]
+    this[j] = t
+  }
+  heapUp(currIdx){
+    if(currIdx >= 0){
+      var pIdx = (currIdx - 1) >> 1
+      if(this[currIdx] < this[pIdx]){
+        this.swap(currIdx, pIdx)
+        currIdx = pIdx
+        this.heapUp(currIdx)
+      }
+    }
+  }
+  heapDown(currIdx){
+    if(currIdx < this.length){
+      var minIdx = currIdx
+      var lIdx = currIdx * 2 + 1
+      var rIdx = lIdx + 1
+      if(lIdx < this.length && this.compare(this[lIdx], this[minIdx]) < 0 ) {
+        minIdx = lIdx
+      }
+      if(rIdx < this.length && this.compare(this[rIdx], this[minIdx]) < 0 ) {
+        minIdx = rIdx
+      }
+      if(currIdx !== minIdx){
+        this.swap(currIdx, minIdx)
+        this.heapDown(currIdx)
+      }
+    }
+  }
+  push(val){
+    super.push(val)
+    this.heapUp(this.length - 1)
+  }
+  pop(){
+    var result = this[0]
+    var last = super.pop()
+    if(this.length > 0){
+      this[0] = last
+      this.heapDown(0)
+    }
+    return result
+  }
 }

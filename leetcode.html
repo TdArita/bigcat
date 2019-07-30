@@ -1865,9 +1865,9 @@ var addTwoNumbers = function(l1, l2) {
 
 <script type="application/javascript" id="148. Sort List">
 var sortList = function(head) {
-  var dummy = new ListNode()
+  var dummy = new ListNode(-Infinity)
   dummy.next = head
-  var root = emptyFirst.next
+  var root = dummy.next
   var node = head
   var length = 0
   while (node) {
@@ -1940,6 +1940,42 @@ var transpose = function(A) {
     return A.map(row => row[i])
   })
 };
+</script>
+
+
+<script type="application/javascript" id="703. Kth Largest Element in a Stream">
+var KthLargest = function(k, nums) {
+  this.values = nums
+};
+
+KthLargest.prototype.add = function(val) {
+  
+};
+</script>
+
+
+<script type="application/javascript" id="110. Balanced Binary Tree">
+var isBalanced = function(root) {
+  if(root){
+    if(isBalanced(root.left) && isBalanced(root.right)){
+      if(Math.abs(depth(root.left) - depth(root.right)) <= 1){
+        return true
+      }else{
+        return false
+      }
+    }else{
+      return false
+    }
+  }
+  return true
+
+};
+function depth(root){
+  if(!root){
+    return 0
+  }
+  return Math.max(1 + depth(root.left), 1 + depth(root.right))
+}
 </script>
 
 
