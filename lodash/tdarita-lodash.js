@@ -156,7 +156,7 @@ var tdarita = function() {
   }
 
   function unary(f) {
-    return ary(f,1))
+    return ary(f,1)
   }
 
   function spread(f) {
@@ -227,6 +227,7 @@ var tdarita = function() {
     memoize,
     identity,
     bind,
+    negate,
 
   }
 }()

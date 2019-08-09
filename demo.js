@@ -800,3 +800,100 @@ class Heap extends Array{
     return result
   }
 }
+function RegTest(str) {
+  for (let j = 0; j < this.length; j++) {
+    var i = 0
+    if(this[j] == str[0]){
+      while (i < str.length) {
+        if(this[j] !== str[i]){
+          return false
+        }
+        j++
+        i++
+      }
+      return true
+    }
+  }
+}
+
+function RegMatch(re,str) {
+  var result = []
+  var reg = re
+  while(match = reg.exec(str)){
+    result.push(match[0])
+  }
+  return result
+}
+
+function RegSplit(re,str) {
+  var reg = re
+  var result = []
+  while(matched = reg.exec(str)){
+    match = '.'.repeat(reg.lastIndex) + reg
+    result.push(matched)
+  }
+  
+  
+}
+
+function compose(funcs) {
+  return function(...args){
+    value = funcs[0](...args)
+    for(let i = 0; i< funcs.length; i++){
+      value = func[i](value)
+    }
+  }
+}
+
+function spreadGenerator(generator){
+  var result = []
+  var generated = generator.next
+  yield result.push(generator(fibb(20)))
+  return result
+}
+
+function forof(generator, action){
+  var nums = generator.next()
+}
+
+var weekday = function (){
+  var days = ["mon", "tues", "wes", "thus", "fri", "sat", "sun"]
+  return {
+    day: function(number){return days[number]},
+    number: function(day){return days.indexOf(day)}
+  }
+}()
+
+function require(name){
+  var code = new Function('export', readFile(name))
+  var exports = {}
+  code(exports)
+  return exports
+}
+
+var range5 = {
+  from:1,
+  to:5
+}
+
+range5[Symbol.iterator] = function(){
+  return{
+    begin: this.from,
+    end: this.to,
+    next(){
+      if(this.begin <= this.end){
+        return{
+          done: false,
+          value: this.begin++
+        }
+      }
+      else{
+        return{
+          done:true
+        }
+      }
+    }
+  }
+}
+
+
