@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .todoapp{
+    width: 300px;
+    margin: auto;
+  }
+
+
+  </style>
+</head>
+<body>
+  <section class="todoapp">
+    <header class="header">
+      <h1>todos</h1>
+      <input type="text" id="input">
+    </header>
+    <section class="main">
+
+    </section>
+    <footer class="footer"></footer>
+  </section>
+  <script>
+  var input = document.getElementById('input')
+  var todos = JSON.parse(localStorage.getItem('todos')) || {}
+  var main = document.querySelector('.main')
+  
+  if(Object.getOwnPropertyNames(todos).length > 0){
+    for (const key in todos) {
+      if (todos.hasOwnProperty(key)) {
+        const element = todos[key];
+        var pasttodo = document.createElement('h1')
+        pasttodo.innerText = element
+        main.appendChild(pasttodo)
+      }
+    }
+  }
+
+  function addToLocalStorage(currentTodo){
+    var ls = JSON.parse(localStorage.getItem('todos')) || {}
+    for(var time in ls){
+      if(ls[time] == currentTodo){
+        return
+      }
+    }
+    var currentTime = Date.now()
+    ls[currentTime] = currentTodo
+    localStorage.setItem('todos', JSON.stringify(ls))
+  }
+  input.addEventListener('keyup', (e) => {
+    var value = input.value
+    addToLocalStorage(value)
+  })
+  
+  // setInterval(() => {
+  //   var ls = JSON.parse(localStorage.getItem('todos'))
+  //   if(Object.getOwnPropertyNames(ls).length > 0){
+  //     for (const key in ls) {
+  //       if (ls.hasOwnProperty(key)) {
+  //         const element = ls[key];
+  //         var pasttodo = document.createElement('h1')
+  //         pasttodo.innerText = element
+  //         main.appendChild(pasttodo)
+  //       }
+  //     }
+  //   }
+  // },10000)
+  
+  
+  </script>
+</body>
+</html>

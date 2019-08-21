@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    p{
+      position: relative;
+      margin-top: 200px;
+      margin-left: 400px;
+      width: 300px;
+      height: 300px;
+      /* text-align: center; */
+    }
+    .cat-img{
+      position: absolute;
+      animation: rotate 8.33s infinite linear;
+    }
+    .cat-hat{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      animation: rotate 8.3333s infinite linear;
+    }
+    @keyframes rotate {
+      0%{
+        transform: rotate(0deg);
+      }
+      100%{
+        transform: rotate(360deg);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <p>
+    <img src="./img/cat.jpg"  class="cat-img">
+    <img src="./img/cat-hat.jpg" class="cat-hat">
+  </p>
+  <script>
+    wrap()
+    wrapHat()
+    function wrap(cat = document.querySelector('.cat-img')){
+      var angle = 0, lastTime = null
+      function animate(time){
+        if(lastTime != null){
+          angle += (time - lastTime) * 0.001
+        }
+        lastTime = time
+        cat.style.top = (Math.sin(angle) * 200) + 'px'
+        cat.style.left = (Math.cos(angle) * 200) + 'px'
+        requestAnimationFrame(animate)
+      }
+      requestAnimationFrame(animate)
+    }
+    function wrapHat(cat = document.querySelector('.cat-hat')){
+      var angle = 0, lastTime = null
+      function animate(time){
+        if(lastTime != null){
+          angle += (time - lastTime) * 0.001
+        }
+        lastTime = time
+        cat.style.top = -(Math.sin(angle) * 200) + 'px'
+        cat.style.left = -(Math.cos(angle) * 200) + 'px'
+        requestAnimationFrame(animate)
+      }
+      requestAnimationFrame(animate)
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="buildTable()">生成表格</button>
+
+  <script>
+  var MOUNTAINS = [{
+      name: "Kilimanjaro",
+      height: 5895,
+      country: "Tanzania"
+  }, {
+      name: "Everest",
+      height: 8848,
+      country: "Nepal"
+  }, {
+      name: "Mount Fuji",
+      height: 3776,
+      country: "Japan"
+  }, {
+      name: "Mont Blanc",
+      height: 4808,
+      country: "Italy/France"
+  }, {
+      name: "Vaalserberg",
+      height: 323,
+      country: "Netherlands"
+  }, {
+      name: "Denali",
+      height: 6168,
+      country: "United States"
+  }, {
+      name: "Popocatepetl",
+      height: 5465,
+      country: "Mexico"
+  }];
+
+  function buildTable(){
+    document.body.appendChild(document.createElement('table'))
+    var Table = document.getElementsByTagName('table')[0]
+    var Tr =  Table.appendChild(document.createElement('tr'))
+    Tr.innerHTML = '<th>name</th><th>height</th><th>country</th>'
+    for (let i = 0; i < MOUNTAINS.length; i++) {
+      Table.appendChild(document.createElement('tr')).innerHTML =
+       '<td>' + MOUNTAINS[i].name + '</td>' +
+       '<td>' + MOUNTAINS[i].height + '</td>' +
+       '<td>' + MOUNTAINS[i].country + '</td>' 
+    }
+    document.body.removeChild(document.getElementsByTagName('button')[0])
+  }
+  </script>
+</body>
+</html>

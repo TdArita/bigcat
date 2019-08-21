@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .rect{
+    position: absolute;
+    width: 300px;
+    height: 300px;
+  }
+  #rect1{
+    background-color: red;
+  }
+  #rect2{
+    background-color: blue;
+  }
+  
+  </style>
+</head>
+<body>
+  <div class="rect" id="rect1"></div>
+  <div class="rect" id="rect2"></div>
+
+  <script>
+    var rect1 = document.querySelector('#rect1')
+    var rect2 = document.querySelector('#rect2')
+    // rect1.addEventListener('click',function(e){
+    //   console.log(e)
+    // })
+    function a(e){
+      rect2.style.left = e.clientX - 150 +  'px'
+      rect2.style.top = e.clientY -150 + 'px'
+    }
+    rect2.addEventListener('mousedown',function(e){
+      if(e.buttons == 1){
+        rect2.addEventListener('mousemove', a)
+      }
+      console.log(rect2.offsetLeft, rect2.offsetTop)
+    })
+    rect2.addEventListener('mouseup', function(){
+      rect2.removeEventListener('mousemove', a)
+    })
+  </script>
+</body>
+</html>

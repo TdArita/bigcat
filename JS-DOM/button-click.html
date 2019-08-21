@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <div>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+  </div> -->
+
+  <a href="http://www.baidu.com">百度</a>
+
+  <script>
+  window.addEventListener("beforeunload", function (e) {
+  var confirmationMessage = "\o/";
+
+    (e || window.event).returnValue = confirmationMessage;     // Gecko and Trident
+    return confirmationMessage;                                // Gecko and WebKit
+  });
+  var a = document.querySelector('a')
+  a.addEventListener('click', e => {
+    e.preventDefault()
+  })
+  window.onbeforeunload
+  </script>
+  <script>
+  // var buttons = document.querySelectorAll('button')
+  // for (let i = 0; i < buttons.length; i++) {
+  //   buttons[i].addEventListener('click', function(){
+  //     console.log(i)
+  //   })
+  // }
+
+
+    // var div = document.querySelector('div')
+    // div.addEventListener('click', function(event){
+    //   if(event.target.matches('div button')){
+    //     var btns = Array.from(div.children)
+    //     console.log(btns.indexOf(event.target))
+    //   }
+    // })
+  </script>
+</body>
+</html>

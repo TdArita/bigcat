@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  
+  </style>
+</head>
+<body>
+  <select id="list"></select>
+  <textarea id="currentnote" cols="30" rows="10"></textarea>
+  <button onclick="addnotes()">add notes</button>
+  <script>
+  var list = document.querySelector('#list')
+
+  function addToList(name){
+    var option = document.createElement('option')
+    option.textContent = name
+    list.appendChild(option)
+  }
+  var notes = JSON.parse(localStorage.getItem('notes')) || {'first': ''}
+  function saveToStorage(){
+    localStorage.setItem('notes',JSON.stringify(notes))
+  }
+  for(var name in notes){
+    if(notes.hasOwnProperty(name)){
+      addToList(name)
+    }
+  }
+
+  var current = document.querySelector('#currentnote')
+  current.value = notes[list.value]
+
+  list.addEventListener('change',function(){
+    current.value = notes[list.value]
+  })
+  current.addEventListener('change', function(){
+    notes[list.value] = current.value
+    saveToStorage()
+  })
+
+  function addnotes(){
+    var name = prompt('请输入新日记名', '')
+    if(!name) return
+    if(!notes.hasOwnProperty(name)){
+      notes[name] = ''
+      addToList(name)
+      saveToStorage()
+    }
+    list.value = name
+    current.value = notes[name]
+  }
+  </script>
+</body>
+</html>

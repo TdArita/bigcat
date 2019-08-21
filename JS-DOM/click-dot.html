@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .dots{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border: 2px solid red;
+    border-radius: 1px;
+  }
+  </style>
+</head>
+<body>
+  <script>
+  function addDot(event){
+    var e = event || window.event
+    var dot = document.createElement('div')
+    document.body.appendChild(dot)
+    dot.classList.add('dots')
+    dot.style.left = e.clientX + 'px'
+    dot.style.top = e.clientY + 'px'
+  }
+  window.addEventListener('click', function(e){
+    console.log(e)
+    addDot(e)
+  })
+  window.addEventListener('mousemove', function(e){
+    if(e.which == 1){
+      addDot(e)
+    }
+  })
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  td{
+    display: block;
+    border: 1px solid;
+  }
+  </style>
+</head>
+<body>
+  <input type="text" id="input">
+  <table>
+  </table>
+
+  <script>
+    function getSuggestion(str, callback) {
+      var suggestions = new Array(10).fill(0).map((_, idx) => idx).map(it => str + it)
+
+      setTimeout(() => {
+        callback(suggestions)
+      }, 500 + 500 * Math.random())
+    }
+
+    var input = document.querySelector('#input')
+    var table = document.querySelector('table')
+    
+    input.addEventListener('keyup',(e) => {
+      getSuggestion(input.value, function (suggestions) {
+        var tds = document.getElementsByTagName('td')
+        console.log(tds)
+        if (tds.length > 0) {
+          for(var i = tds.length - 1; i >= 0; i--){
+            table.removeChild(tds[i])
+          }
+        }
+        // do sth with suggestions
+        suggestions.forEach(element => {
+          var sgst = document.createElement('td')
+          sgst.innerText = element
+          table.appendChild(sgst)
+        });
+        console.log(suggestions)
+      })
+    })
+    
+  </script>
+</body>
+</html>

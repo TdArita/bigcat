@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  img{
+    display: none;
+    width: 400px;
+    height: 200px;
+  }
+  </style>
+</head>
+<body>
+  <div>
+    <img src="./img/cat.jpg" alt="" >
+    <img src="./img/cat2.jpg" alt="">
+    <img src="./img/cat3.jpg" alt="">
+    <img src="./img/cat4.jpg" alt="">
+    <button onclick="display(this)">1</button>
+    <button onclick="display(this)">2</button>
+    <button onclick="display(this)">3</button>
+    <button onclick="display(this)">4</button>
+  </div>
+  <script>
+    var imgs = document.getElementsByTagName('img')
+    var bts = document.getElementsByTagName('button')
+    
+    imgs[0].style.display = 'block'
+    function display(e){
+      for (let i = 0; i < bts.length; i++) {
+        imgs[i].style.display = 'none'
+      }
+      var imgIdx = Array.from(bts).indexOf(e)
+      imgs[imgIdx].style.display = 'block'
+    }
+  </script>
+</body>
+</html>

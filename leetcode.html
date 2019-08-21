@@ -2049,12 +2049,12 @@ var restoreIpAddresses = function(s) {
 </script>
 
 
-<script type="application/javascriptx" id="93. Restore IP Addresses2">
+<script type="application/javascript" id="93. Restore IP Addresses2">
 var restoreIpAddresses = function(s, temp = [], result = []) {
   if(temp.length == 4 && s.length == 0){
     result.push(temp.join('.'))
   }
-  for (let i = 1; i < 4 ; i++) {
+  for (var i = 1; i < 4 ; i++) {
     if(isIpPart(s.slice(0,i))){
       temp.push(s.slice(0,i))
       s = s.slice(i)
@@ -2068,9 +2068,92 @@ function isIpPart(s){
   if(s[0] == 0){
     return s.length == 0
   }else{
-    return s.length && s < 257
+    return s.length && s < 256
   }
 }
+</script>
+
+<script type="application/javascript" id="22. Generate Parentheses">
+var generateParenthesis = function(n) {
+  var result = []
+  bt()
+  return result
+  function bt(left = 0, right = 0, p = ''){
+    if(right == n){
+      result.push(p)
+      return
+    }
+    if(left < n){
+      bt(left+1, right, p + '(')
+    }
+    if(right < left){
+      bt(left, right+1, p + ')')
+    }
+  }
+};
+</script>
+
+
+<script type="application/javascript" id="1106. Parsing A Boolean Expression">
+var parseBoolExpr = function(expression) {
+  var i = 0
+  return parse()
+  function parse() {
+    if(expression[i] == 't'){
+      i++
+      return true
+    }
+    if(expression[i] == 'f'){
+      i++
+      return false
+    }
+    if(expression[i] == '!'){
+      return parseNot()
+    }
+    if(expression[i] == '&'){
+      return parseAnd()
+    }
+    if(expression[i] == '|'){
+      return parseOr()
+    }
+  }
+  function parseNot(){
+    i += 2
+    var value = parse()
+    i++
+    return !value
+  }
+  function parseAnd(){
+    i += 2
+    var result = true
+    while(true){
+      var value = parse()
+      result = result && value
+      if(expression[i] == ')'){
+        break
+      }
+      if(expression[i] == ','){
+        i++
+      }
+    }
+    return result
+  }
+  function parseOr(){
+    i += 2
+    var result = false
+    while(true){
+      var value = parse()
+      result = result || value
+      if(expression[i] == ')'){
+        break
+      }
+      if(expression[i] == ','){
+        i++
+      }
+    }
+    return result
+  }
+};
 </script>
 
 

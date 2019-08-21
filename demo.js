@@ -896,4 +896,75 @@ range5[Symbol.iterator] = function(){
   }
 }
 
+function getText(node){
+  return '' + node.textValue + getText(node.nextNodes)
+}
 
+function cloneNode(node, deep = false){
+  if(node){
+    if(node.nodeType == document.TEXT_NODE){
+
+    }
+  }
+}
+
+Array.prototype.slice2 = function(start = 0, end = this.length){
+  var result = []
+  for(var i = start; i < end; i++){
+    result.push(this[i])
+  }
+  return result
+}
+
+function elt(type, ...children){
+  var 
+}
+
+function dlt2(tagName, attrs){
+  var node = document.createElement(tagName)
+  var children = attrs.children
+  for(var attr in attrs){
+    if(attr )
+  }
+}
+
+
+Number.prototype.digits = function(){
+  this.gen()
+  function* gen(){
+    for(i = this.length - 1; i >=0; i--){
+      yield this[i]
+    }
+  }
+}
+
+
+for(var digit of 3219..digits()){
+  console.log(digit)
+}
+
+Number.prototype.digits = function *(){
+  var num = this
+  while(num > 0){
+    var digit = num % 10
+    yield digit
+    num = num / 10 | 0
+  }
+}
+
+
+window.addEventListener('scroll', e => {
+  if(add.y <= 0){
+
+  }
+})
+
+window.addEventListener('mousemove', e => {
+
+  setTimeout(console.log(), 300)
+})
+
+function getFileContent(file){
+  var result = ''
+  
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <img src="./img/cat.jpg" style="position: relative">
+  <script>
+  // addEventListener('keydown',function(e){
+  //   console.log(e)
+  // })
+  // addEventListener('mousemove',function(e){
+  //   console.log(e.which, e.button, e.buttons)
+  // })
+  window.oncontextmenu = function(e){
+    var removeEls = document.querySelectorAll('.cprt')
+    for (let i = 0; i < removeEls.length; i++) {
+      removeEls[i].remove()
+    }
+    var img = document.getElementsByTagName('img')[0]
+    e.preventDefault()
+    console.log(e.clientX,e.clientY)
+    var x = e.clientX
+    var y = e.clientY
+    var tableElement = document.createElement('div')
+    tableElement.setAttribute('class', 'cprt')
+    if(y > img.offsetTop && y < (img.offsetHeight + img.offsetTop) && x > img.offsetLeft &&  x < (img.offsetWidth + img.offsetLeft)){
+      tableElement.style.cssText = `position:absolute;left:${x}px;top:${y}px;color:red;width:100px;height:100px;`
+      tableElement.innerText = '版权所有'
+      console.log(tableElement)
+      document.body.appendChild(tableElement)
+    }
+  }
+  </script>
+</body>
+</html>
