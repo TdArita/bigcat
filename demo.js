@@ -966,5 +966,11 @@ window.addEventListener('mousemove', e => {
 
 function getFileContent(file){
   var result = ''
-  
+
 }
+
+function delegate(div, 'click', 'p a img', function(e){
+  var els = 
+
+
+})

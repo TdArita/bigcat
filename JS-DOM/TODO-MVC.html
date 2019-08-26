@@ -5,11 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <style>
   .todoapp{
-    width: 300px;
+    width: 500px;
     margin: auto;
+    position: relative;
   }
+  .main div button{
+    content: '-';
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    position: absolute;
+    right: 0;
+    transition: all 0.5s;
+    width: 2em;
+    text-align: center;
+  }
+  .input-group-text{
+    display: inline-block;
+  }
+  .btn-sm{
+    position: absolute;
+    display: inline;
+    margin-top: 3px;
+    margin-left: 10px;
+    /* right: 0; */
+  }
+  h1{
+    /* margin-left: 50%;
+    transform: translateX(-50%) */
+  }
+
 
 
   </style>
@@ -18,7 +44,8 @@
   <section class="todoapp">
     <header class="header">
       <h1>todos</h1>
-      <input type="text" id="input">
+      <input type="text" id="input" class="input-group-text">
+      <button class="btn btn-primary btn-sm" onclick="clearAll()">清除缓存</button>
     </header>
     <section class="main">
 
@@ -27,21 +54,39 @@
   </section>
   <script>
   var input = document.getElementById('input')
-  var todos = JSON.parse(localStorage.getItem('todos')) || {}
+  // var todos = JSON.parse(localStorage.getItem('todos')) || {}
   var main = document.querySelector('.main')
-  
-  if(Object.getOwnPropertyNames(todos).length > 0){
-    for (const key in todos) {
-      if (todos.hasOwnProperty(key)) {
-        const element = todos[key];
-        var pasttodo = document.createElement('h1')
-        pasttodo.innerText = element
-        main.appendChild(pasttodo)
+
+  init()
+  function init() {
+    let todos = JSON.parse(localStorage.getItem('todos')) || {}
+    if(Object.getOwnPropertyNames(todos).length > 0){
+      for (var key in todos) {
+        if (todos.hasOwnProperty(key)) {
+          const element = todos[key];
+          let pasttodo = document.createElement('div')
+          let removeTodo = document.createElement('button')
+          removeTodo.id = key
+          removeTodo.textContent = 'x'
+          removeTodo.classList.add('btn')
+          removeTodo.classList.add('btn-danger')
+          removeTodo.addEventListener('click', () => {
+            let todos = JSON.parse(localStorage.getItem('todos')) || {}
+            main.removeChild(pasttodo);
+            delete todos[removeTodo.id]
+            localStorage.setItem('todos',JSON.stringify(todos))
+            console.log(localStorage)
+          })
+          pasttodo.innerText = element
+          pasttodo.appendChild(removeTodo)
+          main.appendChild(pasttodo)
+        }
       }
     }
   }
 
   function addToLocalStorage(currentTodo){
+    console.log(currentTodo)
     var ls = JSON.parse(localStorage.getItem('todos')) || {}
     for(var time in ls){
       if(ls[time] == currentTodo){
@@ -52,26 +97,25 @@
     ls[currentTime] = currentTodo
     localStorage.setItem('todos', JSON.stringify(ls))
   }
-  input.addEventListener('keyup', (e) => {
-    var value = input.value
-    addToLocalStorage(value)
+  input.addEventListener('blur', (e) => {
+    if (input.value.length > 0) {
+      document.querySelectorAll('.main div').forEach(it => document.querySelector('.main').removeChild(it))
+      console.log(e)
+      var value = input.value
+      addToLocalStorage(value)
+      init()
+    }
   })
   
-  // setInterval(() => {
-  //   var ls = JSON.parse(localStorage.getItem('todos'))
-  //   if(Object.getOwnPropertyNames(ls).length > 0){
-  //     for (const key in ls) {
-  //       if (ls.hasOwnProperty(key)) {
-  //         const element = ls[key];
-  //         var pasttodo = document.createElement('h1')
-  //         pasttodo.innerText = element
-  //         main.appendChild(pasttodo)
-  //       }
-  //     }
-  //   }
-  // },10000)
-  
-  
+  function clearAll(){
+    console.log(1)
+    input.value = ''
+    localStorage.clear()
+    document.querySelectorAll('.main div').forEach(it => document.querySelector('.main').removeChild(it))
+  }
+
+
+
   </script>
 </body>
 </html>
