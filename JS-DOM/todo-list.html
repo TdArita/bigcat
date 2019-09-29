@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .completed span {
+      text-decoration: line-through;
+    }
+    /* body {
+      counter-reset: count;
+    }
+    ul > li:not(.completed) {
+      counter-increment: count;
+    }
+
+    #count::before {
+      content: counter(count);
+    } */
+    ul[data-show="all"] {
+
+    }
+    ul[data-show="active"] li.completed {
+      display: none;
+    }
+    ul[data-show="completed"] li:not(.completed) {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="todo-app"></div>
+  <script>
+    
+    var todos = [{
+      done: true,
+      content: 'eat',
+    }, {
+      done: false,
+      content: 'drink',
+    }, {
+      done: false,
+      content: 'sleep',
+    }]
+    
+    
+    
+    var todoAppEl = document.querySelector('#todo-app')
+    
+    function render() {
+      todoAppEl.innerHTML = ''
+      var input = document.createElement('input')
+      input.classList.add('todo-input')
+      todoAppEl.appendChild(input)
+      var showDiv = document.createElement('div')
+      showDiv.classList.add('showDiv')
+      for (let i = 0; i < todos.length; i++) {
+        var todoDiv = document.createElement('div')
+        // todoDiv.setAttribute('data-idx', i)
+        var todoSpan = document.createElement('span')
+        todoSpan.innerText = todos[i].content.trim()
+        var checkbox = document.createElement('input')
+        checkbox.setAttribute('type', 'checkbox')
+        if(todos[i.done]){
+          checkbox.setAttribute('checked', 'checked')
+        }
+        var liInput = document.createElement('input')
+        liInput.classList.add('liInput')
+        liInput.style.display = 'none'
+        console.log(liInput)
+        liInput.value = todos[i].content.trim()
+        var deleteTodo = document.createElement('button')
+        deleteTodo.classList.add('delete-todo')
+        deleteTodo.setAttribute('data-idx', i)
+        deleteTodo.innerText = 'X'
+        todoDiv.appendChild(checkbox)
+        todoDiv.appendChild(todoSpan)
+        todoDiv.appendChild(liInput)
+        todoDiv.appendChild(deleteTodo)
+        showDiv.appendChild(todoDiv)
+        todoAppEl.appendChild(todoDiv)
+      }
+      // var html = xxxxx
+      // todoAppEl.innerHTML = html
+    }
+
+    todoAppEl.addEventListener('dblclick', e => {
+      if(e.target.matches('span')){
+        var todo = e.target
+        todo.style.display = 'none'
+        var todoInput = todo.nextSibling
+        todoInput.style.display = 'inline-block'
+        todoInput.addEventListener('blur', e => {
+          todo.innerText = todoInput.value
+          todo.style.display = 'inline-block'
+          todoInput.style.display = 'none'
+        })
+      }
+    })
+
+    
+
+    todoAppEl.addEventListener('keyup', e => {
+      if (e.target.matches('input.todo-input')) {
+        if (e.keyCode == 13) {
+
+          var todoText = e.target.value
+          todos.push({
+            content: todoText,
+            done: false,
+          })
+          render()
+        }
+      }
+    })
+
+
+    
+    todoAppEl.addEventListener('click', e => {
+      if (e.target.matches('button.delete-todo')) {
+          var nums = document.querySelectorAll('#todo-app > div').length
+          var idx = e.target.dataset.idx | 0
+          console.log(idx)
+
+          todos.splice(idx, 1)
+
+          render()
+      }
+    })
+
+    render()
+
+
+  </script>
+</body>
+</html>

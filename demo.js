@@ -974,3 +974,94 @@ function delegate(div, 'click', 'p a img', function(e){
 
 
 })
+
+
+
+function asyncMap(ary, asyncMapper, callback){
+  for(var i = 0; i< ary.length; i++){
+
+    asyncMapper(ary[i], )
+  }
+}
+
+
+function asyncFilter(ary, filterFunc, done){
+  var result = []
+  var count = 0
+  for (let i = 0; i < ary.length; i++) {
+    filterFunc(ary[i], (isRetain) => {
+      if(isRetain){
+        result[i] = ary[i]
+      }
+      count++
+      if(count = ary.length){
+        var realResult = []
+        for(var idx in result){
+          realResult.push(result[idx])
+        }
+        done(realResult)
+      }
+    })
+  }
+}
+
+
+Promise.resolve = function(val){
+  return new Promise(resolve =>{
+    resolve(val)
+  })
+}
+
+Promise.prototype.catch = function(onRejected){
+  return this.then(null, onRejected)
+}
+
+Promise.all = function(promises) {
+  return new Promises((resolve, reject) => {
+    var result = []
+    for (let i = 0; i < promises.length; i++) {
+      promises[i].then(val => {
+        results[i] = val
+      })
+
+    }
+  })
+}
+
+
+Promise.race = function(values) {
+  return new Promise((resolve, reject) => {
+    for (let i = 0; i < values.length; i++) {
+      Promise.resolve(values[i]).then(resolve, reject)
+    }
+  })
+}
+
+p = new Promise(resolve => {
+  resolve('done')
+})
+p.then(alert)
+alert('asd')
+
+ReadableStream.prototype.pipe = function(writable){
+  var rs = this
+}
+
+
+
+
+
+
+function forAwait(asyncInterrable, body){
+  var generated = asyncInterable.next()
+
+}
+
+forAwait(asyncInterable, val => {
+
+})
+
+Array.prototype.asyncForEach = async function(f){
+  var queue = f
+  
+}
