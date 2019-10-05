@@ -17,11 +17,11 @@ app.use(express.urlencoded({extended: true}))
 var changePasswordToken = {}
 
 app.get('/', (req, res, next) => {
-  console.log(req.signedCookies)
-  if(req.signedCookies.user){
+  // console.log(req.signedCookies)
+  if(req.signedCookies.userid){
     res.send(`
       <div>
-        欢迎${req.signedCookies.user}<br>
+        欢迎${req.signedCookies.userid}<br>
         <a href="/create.html"><button>发起投票</button></a>
         <a href="/vote-history"><button>我的投票</button></a>
         <a href="/logout"><button onclick="clearCoocie">登出</button></a>
@@ -44,8 +44,20 @@ app.get('/', (req, res, next) => {
 })
 
 
-app.get('/create', (req, res, next) => {
 
+app.post('/create-vote', async (req, res, next) => {
+  var voteInfo = req.body
+  var userid = req.signedCookies.userid
+  console.log(req.body)
+  console.log(req.signedCookies.userid)
+  await db.run('INSERT INTO votes (title, desc, userid, singleSelection, deadline, anonymous) VALUES (?,?,?,?,?,?)', 
+    voteInfo.title, voteInfo.desc, userid, voteInfo.singleSelection, voteInfo.deadline, voteInfo.anonymous
+  )
+  var vote = await db.get('SELECT * FROM votes ORDER BY id DESC LIMIT 1')
+  await Promise.all(voteInfo.options.forEach(option => {
+    return db.run('INSERT INTO options (content, voteid) VALUES (?,?)', option, voteid)
+  }))
+  res.end('投票以创建，编号为' + vote.id)
 })
 
 app.get('/vote/:id', (req, res, next) => {
@@ -90,7 +102,7 @@ app.route('/login')
     var userInfo = req.body
     var user = await db.get('SELECT * FROM users WHERE name=?', userInfo.name)
     if(user && req.body.password == user.password){
-      res.cookie('user', req.body.name, {
+      res.cookie('userid', user.id, {
         signed: true
       })
       res.redirect('/')

@@ -1065,3 +1065,16 @@ Array.prototype.asyncForEach = async function(f){
   var queue = f
   
 }
+
+function observe(obj){
+  for(item in obj){
+    class obj{
+      get item(){
+        return obj.item
+      }
+      set item(num){
+        this.obj.item = num
+      }
+    }
+  }
+}

@@ -14,8 +14,8 @@
   <form id="form" action="/create-vote" method="post">
     <div><input type="text" placeholder="标题" name="title" required></div>
     <div><input type="text" placeholder="问题描述" name="desc"></div>
-    <div><input type="text" placeholder="选项" name="option"><button type="button" class="remove-option">-</button></div>
-    <div><input type="text" placeholder="选项" name="option"><button type="button" class="remove-option">-</button></div>
+    <div><input type="text" placeholder="选项" name="options"><button type="button" class="remove-option">-</button></div>
+    <div><input type="text" placeholder="选项" name="options"><button type="button" class="remove-option">-</button></div>
     <div id="add-option-wrap"><button type="button" id="add-option">添加选项</button></div>
     <div><input type="date" id="deadline" placeholder="截止日期" name="deadline"></div>
     <div>
@@ -42,7 +42,7 @@
 
     addOptionBtn.addEventListener('click', e => {
       var wrap  = document.createElement('div')
-      wrap.innerHTML = '<div><input type="text" placeholder="选项" name="option"><button type="button" class="remove-option">-</button></div>'
+      wrap.innerHTML = '<div><input type="text" placeholder="选项" name="options"><button type="button" class="remove-option">-</button></div>'
       form.insertBefore(wrap.firstChild, addOptionBtnWrap)
     })
   
