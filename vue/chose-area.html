@@ -23,7 +23,8 @@
   </div>
 
   <script type="text/javascript" src="./china-city-area-zip.js"></script>
-  <script type="application/javascript" src="./vue.js"></script>
+  <!-- <script type="application/javascript" src="./vue.js"></script> -->
+  <script type="application/javascript" src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
   <script>
   var province =  new Vue({
     el: '#select-area',
@@ -37,11 +38,9 @@
         let provinceName = document.querySelector('#select-province').value
         let province = this.allCities.find(it => it.name == provinceName)
         this.cities = province.child
-        console.log(this.cities)
       },
       changecities: function(){ 
         let cityName = document.querySelector('#select-province-city').value
-        console.log(cityName)
         let city = this.cities.find(it => it.name == cityName)
         this.areas = city.child
       }

@@ -13,6 +13,10 @@ app.use(express.static(__dirname + '/static'))
 app.use(cookieParser('my secret parse'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.route('/', (req, res, next) => {
+  res.set('Content-Type', 'text/html; charset:UTF-8')
+  next()
+})
 
 var changePasswordToken = {}
 
@@ -51,16 +55,22 @@ app.post('/create-vote', async (req, res, next) => {
   console.log(req.body)
   console.log(req.signedCookies.userid)
   await db.run('INSERT INTO votes (title, desc, userid, singleSelection, deadline, anonymous) VALUES (?,?,?,?,?,?)', 
-    voteInfo.title, voteInfo.desc, userid, voteInfo.singleSelection, voteInfo.deadline, voteInfo.anonymous
+    voteInfo.title, voteInfo.desc, userid, voteInfo.singleSelection, new Date(voteInfo.deadline).getTime(), voteInfo.anonymous
   )
   var vote = await db.get('SELECT * FROM votes ORDER BY id DESC LIMIT 1')
-  await Promise.all(voteInfo.options.forEach(option => {
-    return db.run('INSERT INTO options (content, voteid) VALUES (?,?)', option, voteid)
+  await Promise.all(voteInfo.options.map(option => {
+    return db.run('INSERT INTO options (content, voteid) VALUES (?,?)', option, vote.id)
   }))
+  res.set('Content-Type', 'text/html; charset:UTF-8')
   res.end('投票以创建，编号为' + vote.id)
 })
 
-app.get('/vote/:id', (req, res, next) => {
+app.get('/vote/:id', async (req, res, next) => {
+  var votePromise = db.get('SELECT * FROM votes WHERE id=?', req.params.id)
+  var optionsPromise = db.all('SELECT * FROM options WHERE voteid=?', )
+
+  var vote = await votePromise
+  var options = await optionsPromise
 
 })
 
