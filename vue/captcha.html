@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="captcha-demo">
+    <captcha></captcha>
+  </div>
+
+  <script src="vue.js"></script>
+
+  <script>
+  Vue.component('captcha', {
+    data(){
+      return{
+        lengthArray:[
+          {value:null,focus:true,idx:0},
+          {value:null,focus:false,idx:1},
+          {value:null,focus:false,idx:2},
+          {value:null,focus:false,idx:3},
+          {value:null,focus:false,idx:4},
+          {value:null,focus:false,idx:5},
+          ],
+        spanStyle: 'display:inline-block;width:50px;height:50px;border:1px solid;',
+        inputStyle:'width:50px;height:50px;border:1px solid;',
+        focusnum: 0,
+      }
+    },
+    props:{
+      inputnum:Number,
+    },
+    computed:{
+      // currvalue: function(){
+      //   this.lengthArray.forEach(function(it){
+      //     if(it.value){
+      //       if(it.value === ''){
+      //         it.value = null
+      //       }else{
+      //         it.value = it.value | 0
+      //       }
+      //     }
+      //   })
+      // },
+      changefocus: function(){
+        let currfocus = this.lengthArray.find(it => it.focus == true)
+        if(currfocus.value){
+          if(currfocus.value == ''){
+            it.value = null
+          }else{
+            currfocus.value = currfocus.value | 0
+            currfocus.focus = false
+            console.log(currfocus)
+            this.lengthArray[currfocus.idx + 1].focus = true
+          }
+        }
+      }
+    },
+    watch: {
+      lengthArray: function() {
+        if(typeof(item.value) == 'number'){
+          item.focus = false
+          console.log(item)
+          this.lengthArray[item.idx + 1].focus = true
+        }
+      }
+    },
+    template: `
+      <div>
+        <span :style="spanStyle" v-for="item in lengthArray">
+          <input type="text" :style="inputStyle" v-model="item.value" maxlength="1" oninput="value=value.replace(\/[^\\d]\/g,'')">
+        </span>
+        <span>未输入完成</span>
+      </div>
+    `
+  })
+
+  var app = new Vue({
+    el: '#captcha-demo'
+  })
+
+  
+  </script>
+</body>
+</html>

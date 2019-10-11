@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: consolas;
+    }
+    .string {
+      color: red;
+    }
+    .number {
+      color: blue;
+    }
+    .boolean {
+      color: blue;
+    }
+    .null {
+      color: grey;
+    }
+    .toggle {
+      cursor: pointer;
+    }
+    .key {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <json :value="data"></json>
+  </div>
+
+  <script src="vue.js"></script>
+  <script type="text/x-template" id="json-template">
+
+    <span class="string" v-if=" typeof value == 'string' ">"{{ value }}"</span>
+      <span class="number" v-else-if=" typeof value == 'number' ">{{ value }}</span>
+      <span class="boolean" v-else-if=" typeof value == 'boolean' ">{{ value }}</span>
+      <span class="null" v-else-if=" value === null ">null</span>
+
+      <span v-else-if=" Array.isArray(value) "><span class="toggle" @click="show = !show">{{ show ? '-' : '+' }}</span> [
+        <div v-show="show" style="margin-left: 1em;">
+          <div v-for="(val, idx) of value">
+            <json :value="val"></json><span v-if="idx < length - 1">,</span>
+          </div>
+        </div>
+        <span v-show="!show">...</span>
+      ]</span>
+
+      <span v-else-if=" typeof value == 'object' "><span class="toggle" @click="show = !show">{{ show ? '-' : '+' }}</span> {
+        <div v-show="show" style="margin-left: 1em;">
+          <div v-for="(val, key, idx) in value">
+            <span class="key">{{key}}</span>: <json :value="val"></json><span v-if="idx < length - 1">,</span>
+          </div>
+        </div>
+        <span v-show="!show">...</span>
+      }</span>
+
+  </script>
+  <script>
+  
+    var common = {
+      created() {
+        console.log('created')
+      },
+      methods: {
+        hello() {
+          console.log('hello')
+        }
+      },
+      destroyed() {
+        console.log('destroyed')
+      }
+    }
+
+    Vue.component('json', {
+      created(){
+
+      },
+      mixins: [common],
+      props: ['value'],
+      template: '#json-template',
+      watch: {
+        value() {
+          this.length = this.value && Object.keys(this.value).length
+        }
+      },
+      data() {
+        return {
+          length: this.value && Object.keys(this.value).length,
+          show: true
+        }
+      }
+    })
+
+    var app = new Vue({
+      el: '#app',
+      watch: {
+        data4() {
+          console.log(1)
+        }
+      },
+      data() {
+        return {
+          data4: {
+            a: 1,
+            b: {c:2}
+          },
+          data3: 2,
+          data2: [1,2,3,4,5,[6]],
+          data: {
+            a: 1,
+            b: {
+              c: 2,d: 3
+            },
+            d: "foobar",
+            e: true,
+            f: null,
+            c: [
+              1,2,{
+                x:3,
+                y:4,
+              }
+            ]
+          }
+        }
+      }
+    })
+    
+
+  </script>
+</body>
+</html>

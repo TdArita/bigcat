@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    *{
+      margin:0;
+      text-decoration: none;
+    }
+    a{
+      color:aliceblue;
+    }
+    main{
+      display: block;
+      width: 400px;
+      height: 600px;
+      border: 1px solid;
+    }
+    footer{
+      width: 400px;
+      display: flex;
+      justify-content: space-between;
+    }
+    footer a{
+      text-align: center;
+      background-color: rgb(23, 175, 99);
+      border-radius: 3px;
+      width: 90px;
+    }
+  
+  </style>
+</head>
+<body>
+  <div id="app">
+    <main>
+      <router-view></router-view>
+    </main>
+    <footer>
+      <router-link to="/home">微信</router-link>
+      <router-link to="/directory">通讯录</router-link>
+      <router-link to="/discover">发现</router-link>
+      <router-link to="/myself">我</router-link>
+    </footer>
+  </div>
+
+
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+  <script src="vue-router.js"></script>
+  <script src="lodash.min.js"></script>
+  
+  <script>
+    const Home = {
+      template: `
+        <div>微信主界面</div>
+      `
+    }
+    const Directory = {
+      template: `
+        <div>通讯录页面</div>
+      `
+    }
+    const Discover = {
+      template: `
+        <div>
+          <div>
+            <router-link to="/discover/friendsarea">朋友圈</router-link>
+          </div>
+          <div>
+            <router-view name="Friendsareatop"></router-view>
+            <router-view name="Friendsarea"></router-view>
+          </div>
+        </div>
+      `
+    }
+    const Myself = {
+      template: `
+        <div>我的页面</div>
+      `
+    }
+    const router = new VueRouter({
+      routes: [
+        {path:'',redirect:'/home'},
+        {path: '/home', component: Home},
+        {path: '/directory', component: Directory},
+        {
+          path: '/discover',
+          component: Discover,
+          children: [{
+            path: 'friendsarea',
+            components:{
+              Friendsareatop: {
+                template: `
+                  <div style="width:400px;height:20px;border:1px solid red;position:absolute;top:0;z-index:100;background:white;">
+                    <router-link to="/discover">返回</router-link>
+                  </div>
+                `
+              },
+              Friendsarea: {
+                template:`
+                  <div style="width:400px;height:600px;border:1px solid red;">
+                    朋友圈
+                    <div style="width:400px;height:23px;position:absolute;top:600px;z-index:100;background:white;"></div>
+                  </div>
+              `
+              },
+            }
+          }]
+      },
+        {path: '/myself', component: Myself}
+      ]
+    })
+
+    const app = new Vue({
+      router
+    }).$mount('#app')
+  
+  </script>
+</body>
+</html>

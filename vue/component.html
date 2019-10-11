@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="el">
+    <button-counter></button-counter>
+  </div>
+  
+  
+  
+  <script src="./vue.js"></script>
+  <script>
+    Vue.component('button-counter', {
+      template:`
+        <span>
+          <button @click="dec">-</button>
+          <span>{{ count }}</span>
+          <button @click="inc">+</button>
+        </span>
+      `,
+      data() {
+        return {
+          count: 0,
+        }
+      },
+      methods: {
+        dec() {
+          this.count--
+        },
+        inc() {
+          this.count++ 
+        }
+      }
+    })
+
+    var app = new Vue({
+      el: "#el",
+    })
+    
+  </script>
+</body>
+</html>

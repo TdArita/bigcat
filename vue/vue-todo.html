@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <todoapp @clearcompleted="clearcompleted" :items="todoitems"></todoapp>
+  </div>
+
+  <script src="vue.js"></script>
+  <script>
+    Vue.component('todoapp', {
+      props:['items'],
+      data(){
+        return {
+          data: this.items
+        }
+      },
+      methods: {
+        clearcompleted(){
+          this.$emit('clearcompleted')
+        }
+      },
+      template: `
+      <div>
+        <h1>Todos</h1>
+        <todoinput :items="items"></todoinput>
+        <todolist :items="items"></todolist>
+        <todofooter @clearcompleted="clearcompleted" :items="items"></todofooter>
+      </div>
+      `,
+      components: {
+        'todoinput': {
+          props: ['items'],
+          data() {
+            return {
+              data: this.items
+            }
+          },
+          methods: {
+            alldone(e){
+              if(this.data.every(it => it.done)){
+                this.data.forEach(it => it.done = false)
+              }else{
+                this.data.forEach(it => it.done = true)
+              }
+            },
+            add(e){
+              if(e.target.value != ''){
+                this.data.push({
+                  name: e.target.value, done: false, show: true
+                })
+                e.target.value = ''
+              }
+            }
+          },
+          template: `
+          <div>
+            <input type="checkbox" @click="alldone" :checked="items ? items.every(it => it.done == true) : false">
+            <input @keyup.enter="add" type="text">  
+            </div>
+            `
+        },
+        'todolist': {
+          props:['items'],
+          data() {
+            return {
+              data: this.items
+            }
+          },
+          template: `
+          <div>
+            <todoitem :items="items"></todoitem>
+            </div>
+            `,
+            components: {
+              'todoitem': {
+              props:['items'],
+              data() {
+                return {
+                  data: this.items
+                }
+              },
+              // computed: {
+              //   itemstyle(){
+              //     if(item.done){
+              //       return 'text-decoration: overline'
+              //     }
+              //   }
+              // },
+              methods: {
+                deleteitem: function(e){
+                  let idx = e.target.getAttribute('index') | 0
+                  this.data.splice(idx,1)
+                }
+              },
+              template: `
+              <div>
+                <li v-for="(item, idx) of items.filter(it => it.show == true)">
+                  <input type="checkbox" :checked="item.done" @click="item.done = !item.done">
+                  <span :style="item.done ? 'text-decoration-line: line-through' : '' ">{{item.name}}</span>
+                  <input v-show="false">  
+                  <button @click="deleteitem" :index="idx">delete</button>
+                </li>  
+              </div>
+              `
+            }
+          }
+        },
+        'todofooter': {
+          props:['items'],
+          data(){
+            return {
+              data: this.items
+            }
+          },
+          methods: {
+            clearcompleted(){
+              this.$emit('clearcompleted')
+            }
+          },
+          template: `
+            <div>
+              <todocount :items="items"></todocount>
+              <todocateswitch :items="items"></todocateswitch>
+              <todoclear @clearcompleted="clearcompleted" :items="items"></todoclear>
+            </div>
+          `,
+          components: {
+            'todocount': {
+              props: ['items'],
+              data(){
+                return {
+                  data: this.items,
+                }
+              },
+              computed:{
+                left(){
+                  var leftfilter = this.data.filter(it => !it.done)
+                  return leftfilter.length
+                }
+              },
+
+              template: `
+                <span>{{left}} item{{left > 1 ? 's' : ''}} left</span>
+              `
+            },
+            'todocateswitch': {
+              props:['items'],
+              data(){
+                return {
+                  data: this.items,
+                  btnswitch: [{
+                    btnon: true
+                  },{
+                    btnon: false
+                  },{
+                    btnon: false
+                  }
+                ]}
+              },
+              methods:{
+                switchbtn(e){
+                  var tagNum = e.target.getAttribute('tag') | 0
+                  if(tagNum == 0){
+                    this.data.forEach(it => it.show = true)
+                  }else if(tagNum == 1){
+                    this.data.forEach(it => it.show = false)
+                    this.data.filter(it => !it.done).forEach(it => it.show = true)
+                  }else if(tagNum == 2){
+                    this.data.forEach(it => it.show = false)
+                    this.data.filter(it => it.done).forEach(it => it.show = true)
+                  }
+                  console.log(this.btnswitch)
+                  this.btnswitch.map(it => it.btnon = false)
+                  this.btnswitch[tagNum].btnon = true
+                },
+              },
+              watch: {
+
+              },
+              template: `
+                <span>
+                  <label><input type="radio" tag="0" @click="switchbtn" :checked="btnswitch[0].btnon">ALL</label>  
+                  <label><input type="radio" tag="1" @click="switchbtn" :checked="btnswitch[1].btnon">Active</label>  
+                  <label><input type="radio" tag="2"  @click="switchbtn" :checked="btnswitch[2].btnon">Completed</label>  
+                </span>
+              `
+            },
+            'todoclear': {
+              props: ['items'],
+              data(){
+                return{
+                  data: this.items
+                }
+              },
+              methods: {
+                clearcompleted(){
+                  this.$emit('clearcompleted')
+                }
+              },
+              template: `
+                <button @click="clearcompleted">clear completed</button>
+              `
+            }
+          }
+        }
+      }
+    })
+  
+    var app = new Vue({
+      el: '#app',
+      methods: {
+        clearcompleted(){
+          this.todoitems = this.todoitems.filter(it => !it.done)
+        }
+      },
+      data(){
+        return {
+          todoitems: [{
+            name: 'eat', done: false, show: true
+          }, {
+            name: 'drink', done: true, show: true
+          }, {
+            name: 'sleep', done: false, show: true
+        }]
+      }
+    }
+  })
+  </script>
+</body>
+</html>
