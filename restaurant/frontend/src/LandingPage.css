@@ -1,0 +1,23 @@
+
+.LandingPage{
+  
+}
+
+.LandingPage .active{
+  color: red;
+}
+
+.LandingPage .custom-count {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.LandingPage .custom-count li{
+  float: left;
+  padding: 10px 20px;
+  border: 2px solid;
+  list-style: none;
+  cursor: pointer;
+  margin: 5px 10px;
+}
