@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="react-router-dom.min.js"></script>
+    <!-- Don't use this in production: -->
+    <script src="babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      var {
+        BrowserRouter as Router,
+        Switch,
+        Route,
+        Link
+      } = react-router-dom
+      ReactDOM.render(
+        <ul>{listItems}</ul>,
+        document.getElementById('root')
+      )
+    </script>
+  </body>
+</html>

@@ -1,13 +1,104 @@
 const express = require('express')
 const multer = require('multer')
 const path = require('path')
+const io = require('./io-server')
+
+io.restaurant.on('connection', socket => {
+  console.log('restaurant client in', socket.handshake.query)
+  var restaurant = socket.handshake.query.restaurant
+  socket.join(restaurant)
+})
+
+var deskCartMap = new Map()
+io.desk.on('connection', socket => {
+  console.log('desk client in', socket.handshake.query)
+  var desk = socket.handshake.query.desk
+  if(!desk){
+    socket.close()
+    return
+  }
+  socket.join(desk)
+  
+  socket.on('join desk', desk => {
+    console.log('join desk', desk)
+    socket.join(desk)
+
+    var cartFood = deskCartMap.get(desk)
+    if(!cartFood) {
+      deskCartMap.set(desk, [])
+    }
+    socket.emit('cart food', cartFood || [])
+  })
+
+  socket.on('new food', info => {
+    var foodAry = deskCartMap.get(info.desk)
+    console.log(info)
+
+    var idx = foodAry.findIndex(it => it.food.id === info.food.id)
+    if(idx >= 0) {
+      if(info.amount === 0){
+        foodAry.splice(idx, 1)
+      }else {
+        foodAry[idx].amount = info.amount
+      }
+    } else {
+      foodAry.push({
+        food: info.food,
+        amount: info.amount
+      })
+    }
+  
+    io.desk.in(info.desk).emit('new food', info)
+  })
+})
+
+/*
+ioServer.on('connection', socket => {
+  console.log('socket connect')
+
+  socket.on('join restaurant', restaurant => {
+    socket.join(restaurant)
+  })
+
+  socket.on('join desk', desk => {
+    console.log('join desk', desk)
+    socket.join(desk)
+
+    var cartFood = deskCartMap.get(desk)
+    if(!cartFood) {
+      deskCartMap.set(desk, [])
+    }
+    socket.emit('cart food', cartFood || [])
+  })
+
+  socket.on('new food', info => {
+    var foodAry = deskCartMap.get(info.desk)
+    console.log(info)
+
+    var idx = foodAry.findIndex(it => it.food.id === info.food.id)
+    if(idx >= 0) {
+      if(info.amount === 0){
+        foodAry.splice(idx, 1)
+      }else {
+        foodAry[idx].amount = info.amount
+      }
+    } else {
+      foodAry.push({
+        food: info.food,
+        amount: info.amount
+      })
+    }
+  
+    ioServer.in(info.desk).emit('new food', info)
+  })
+})
+*/
 
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './upload/')
   },
   filename: function(req, file, cb) {
-    console.log(file)
     cb(null, Date.now() + path.extname(file.originalname))
   }
 })
@@ -88,6 +179,13 @@ app.post('/restaurant/:rid/desk/:did/order', async (req, res, next) => {
   var order = await db.get('SELECT * FROM orders ORDER BY id DESC LIMIT 1')
   order.details = JSON.parse(order.details)
   res.json(order)
+
+  var desk = 'desk:' + did
+
+  deskCartMap.set(desk, [])
+
+  io.desk.in(desk).emit('placeorder success', order)
+  io.restaurant.in('restaurant:' + rid).emit('new order', order)
 })
 
 //商户侧api
@@ -96,19 +194,19 @@ app.post('/restaurant/:rid/desk/:did/order', async (req, res, next) => {
 app.route('/restaurant/:rid/order')
   //获取订单
   .get(async (req, res, next) => {
-    var orders = await db.all('SELECT * FROM orders WHERE rid=?', req.cookies.userid)
+    var orders = await db.all('SELECT * FROM orders WHERE rid=? ORDER BY timestamp DESC', req.signedCookies.userid)
     orders.forEach(order => {
       order.details = JSON.parse(order.details)
     })
     res.json(orders)
   })
-
+  
 app.route('/restaurant/:rid/order/:oid')
   //删除订单
   .delete(async (req, res, next) => {
-    var order = await db.get('SELECT * FROM orders WHERE rid=? AND id=?', req.cookies.userid, req.params.oid)
+    var order = await db.get('SELECT * FROM orders WHERE rid=? AND id=?', req.signedCookies.userid, req.params.oid)
     if (order) {
-      await db.run('DELETE FROM orders WHERE rid=? AND id=?', req.cookies.userid, req.params.oid)
+      await db.run('DELETE FROM orders WHERE rid=? AND id=?', req.signedCookies.userid, req.params.oid)
       delete order.id
       res.json(order)
     } else {
@@ -117,11 +215,32 @@ app.route('/restaurant/:rid/order/:oid')
         msg: '没有此订单或您无权限操作此订单'
       })
     }
+    var orders = await db.all('SELECT * FROM orders WHERE rid=? ORDER BY timestamp DESC', req.signedCookies.userid)
     orders.forEach(order => {
       order.details = JSON.parse(order.details)
     })
     res.json(orders)
   })
+  .put(async (req, res, next) => {
+    console.log('change status', req.body)
+    await db.run(`
+      UPDATE orders SET status=?
+      WHERE id=? AND rid=?
+    `, req.body.status, req.params.oid, req.signedCookies.userid)
+    res.json(await db.get(`SELECT * FROM orders WHERE id=?`, req.params.oid))
+  })
+
+
+  // app.route('/restaurant/:rid/order/:oid')
+  // // 删除订单
+  // .delete(async (req, res, next) => {
+  //   await db.run('DELETE FROM orders WHERE id=? AND rid=?', req.params.oid, req.signedCookies.userid)
+  //   res.end()
+  // })
+  
+  app.route('restaurant/:rid/order/:oid/status')
+  // 修改订单状态
+  
 
 
 
@@ -136,17 +255,31 @@ app.route('/restaurant/:rid/order/:oid')
 //   img string,
 //   category string,
 //   status string not null);
+
+//先发一个post请求监测桌面和餐厅是否匹配
+app.post('/restaurant/:rid/food/test', async (req, res, next) => {
+  if(req.body.msg === 'test'){
+    console.log('req.body.did',req.body, req.params.rid)
+    var desk = await db.get(`SELECT * FROM desks WHERE id=?`, req.body.did)
+    if(desk.rid !== (req.params.rid | 0)) {
+      res.json({msg:'桌面错误'})
+      res.end()
+    }
+    res.end()
+  }
+  next()
+})
+
 app.route('/restaurant/:rid/food')
   .get(async (req, res, next) => {
   //获取菜品
-  
+    
     var foodList = await db.all('SELECT * FROM foods WHERE rid=?', req.signedCookies.userid)
     res.json(foodList)
 
   })
   .post(uploader.single('img'), async (req, res, next) => {
   //增加菜品
-    console.log(req.file)
     await db.run(`
       INSERT INTO foods (rid, name, desc, price, status, category, img) VALUES (?,?,?,?,?,?,?)
     `, 
@@ -183,7 +316,6 @@ app.route('/restaurant/:rid/food/:fid')
   })
   //修改菜品
   .put(uploader.single('img'), async (req, res, next) => {
-    console.log(req.body)
     var fid = req.params.fid
     var userid = req.signedCookies.userid
     var food = await db.get('SELECT * FROM foods WHERE id=? AND rid=?', fid, userid)
@@ -229,7 +361,7 @@ app.route('/restaurant/:rid/desk')
   .get(async (req, res, next) => {
   //获取桌面
   
-    var deskList = await db.all('SELECT * FROM desks WHERE rid=?', req.cookies.userid)
+    var deskList = await db.all('SELECT * FROM desks WHERE rid=?', req.signedCookies.userid)
     res.json(deskList)
 
   })
@@ -237,7 +369,7 @@ app.route('/restaurant/:rid/desk')
   //增加桌面
     await db.run(`
       INSERT INTO desks (rid, name, capacity) VALUES (?,?,?)
-    `, req.cookies.userid, req.body.name, req.body.capacity)
+    `, req.signedCookies.userid, req.body.name, req.body.capacity)
 
     var desk = await db.get('SELECT * FROM desks ORDER BY id DESC LIMIT 1')
 
@@ -247,11 +379,11 @@ app.route('/restaurant/:rid/desk')
 app.route('/restaurant/:rid/desk/:did')
   //删除桌面
   .delete(async (req, res, next) => {
-    var desk = await db.get('SELECT * FROM desks WHERE id=? AND rid=?', req.params.did, req.cookies.userid)
+    var desk = await db.get('SELECT * FROM desks WHERE id=? AND rid=?', req.params.did, req.signedCookies.userid)
     if (desk) {
       await db.run(
         'DELETE FROM desks WHERE id=? AND rid=?',
-        req.params.did, req.cookies.userid)
+        req.params.did, req.signedCookies.userid)
       delete desk.id 
       res.json(desk)
     } else {
@@ -263,8 +395,9 @@ app.route('/restaurant/:rid/desk/:did')
   })
   //修改桌面
   .put(async (req, res, next) => {
+    console.log(req.body)
     var did = req.params.did
-    var userid = req.cookies.userid
+    var userid = req.signedCookies.userid
     var desk = await db.get('SELECT * FROM desks WHERE id=? AND rid=?', did, userid)
     if (desk) {
       await db.run(

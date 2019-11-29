@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import api from './api'
+import { Button, Card, Form, Input, Icon, Upload } from 'antd'
 
 
 var imgStyle = {
   float: 'left',
-  border: '1px solid red',
+  border: '1px solid',
   width: '100px',
   height: '100px',
   objectFit: 'cover'
@@ -16,7 +17,6 @@ var foodInfoStyle = {
 }
 
 var cardStyle = {
-  border: '2px solid',
   padding: '5px',
   margin: '5px'
 }
@@ -31,12 +31,13 @@ function FoodItem({food, onDelete}) {
     })
     console.log(foodInfo)
   }
-  function imgChange(e) {
-    setFoodInfo({
-      ...foodInfo,
-      img: e.target.files[0]
-    })
-  }
+  // function imgChange(e) {
+  //   console.log(e.fileList)
+  //   setFoodInfo({
+  //     ...foodInfo,
+  //     img: e.target.files[0]
+  //   })
+  // }
   function save(){
     setIsModify(false)
     var fd = new FormData()
@@ -53,35 +54,55 @@ function FoodItem({food, onDelete}) {
     foodInfo.status === 'on' ? foodInfo.status = 'off' : foodInfo.status = 'on'
     api.put('/restaurant/1/food/' + food.id, foodInfo).then(foodRes => setFoodInfo(foodRes.data)).catch(e => {console.log('修改发生错误')})
   }
+
+  const props = {
+    beforeUpload: file => {
+    setFoodInfo({
+      ...foodInfo,
+      img: file
+    })
+      return false;
+    },
+  };
+
   if(foodInfo){
     return (
-      <div style={cardStyle}>
+      <Card style={cardStyle}>
          <h3>{foodInfo.name}</h3>
          <div style={foodInfoStyle}>
-           <img src={'http://localhost:5000/upload/' + foodInfo.img} alt={foodInfo.name} style={imgStyle}/>
+           <img src={'/upload/' + foodInfo.img} alt={foodInfo.name} style={imgStyle}/>
+           {/* <img src={'http://10.62.39.224:5000/upload/' + foodInfo.img} alt={foodInfo.name} style={imgStyle}/> */}
            <p>介绍：{foodInfo.desc}</p>
            <p>价格：{foodInfo.price}元</p>
+           <p>上架状态：{foodInfo.status === 'on' ? '已上架' : '已下架'}</p>
            <p>分类：{foodInfo.category ? foodInfo.category : '[暂未分类]'}</p>
          </div>
          {
            isModify ?
            <div>
-             <form>
-               名称：<input type="text" onChange={onFoodChange} defaultValue={foodInfo.name} name="name"/><br/>
-               介绍：<input type="text" onChange={onFoodChange} defaultValue={foodInfo.desc} name="desc"/><br/>
-               价格：<input type="text" onChange={onFoodChange} defaultValue={foodInfo.price} name="price"/><br/>
-               分类：<input type="text" onChange={onFoodChange} defaultValue={foodInfo.category} name="category"/><br/>
-               图片：<input type="file" onChange={imgChange} name="img"/><br/>
-             </form>
+             <Form>
+               名称：<Input type="text" onChange={onFoodChange} defaultValue={foodInfo.name} name="name"/><br/>
+               介绍：<Input type="text" onChange={onFoodChange} defaultValue={foodInfo.desc} name="desc"/><br/>
+               价格：<Input type="text" onChange={onFoodChange} defaultValue={foodInfo.price} name="price"/><br/>
+               分类：<Input type="text" onChange={onFoodChange} defaultValue={foodInfo.category} name="category"/><br/>
+               <Form.Item label="Upload" extra="图片上传">
+                <Upload  {...props}>
+                  <Button>
+                    <Icon type="upload" /> Click to Upload
+                  </Button>
+                </Upload>
+               </Form.Item>
+               {/* 图片：<Input type="file" onChange={imgChange} name="img"/><br/> */}
+             </Form>
            </div> : ''
          }
          <div>
-           <button onClick={() => setIsModify(true)}>修改</button>
-           <button onClick={save}>保存</button>
-           <button onClick={toggleStatus}>{foodInfo.status === 'off' ? '上架' : '下架'}</button>
-           <button onClick={deleteFood}>删除</button>
+           <Button onClick={() => setIsModify(true)}>修改</Button>
+           <Button onClick={save}>保存</Button>
+           <Button onClick={toggleStatus}>{foodInfo.status === 'off' ? '上架' : '下架'}</Button>
+           <Button onClick={deleteFood}>删除</Button>
          </div>
-      </div>
+      </Card>
     )
   } else {
     return 
@@ -90,18 +111,22 @@ function FoodItem({food, onDelete}) {
 
 
 
-export default function(){
+export default function(props){
   var [foods, setFoods] = useState([])
   useEffect(() => {
-    api.get('/restaurant/1/food').then(res => setFoods(res.data))
-  }, [])
+    api.get(`/restaurant/${props.match.params.rid}/food`).then(res => setFoods(res.data))
+  }, [props.match.params.rid])
   function onDelete(id){
     setFoods(foods.filter(food => food.id !== id))
   }
   console.log(foods)
   return (
     <div>
-      <Link to="/manage/add-food">添加菜品</Link>
+      <div style={{marginTop:'10px'}}>
+        <Button>
+          <Link to="add-food">添加菜品</Link>
+        </Button>
+      </div>
       <div>
         {
           foods.map(food => {

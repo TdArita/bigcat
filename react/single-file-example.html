@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="react-router-dom.min.js"></script>
+    <!-- Don't use this in production: -->
+    <script src="babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function format(user) {
+        return user.firstname + '' + user.lastname
+      }
+      function greet(user) {
+        if(user){
+          return <h1>Hello, {format(user)}</h1>;
+        }else {
+        return <h1>Hello, anonymous</h1>;
+        }
+      }
+      const users = {
+        a: {
+          firstname: 'td',
+          lastname: 'arita'
+        },
+        b: {
+          firstname: 'dt',
+          lastname: 'atira'
+        }
+      };
+      function Welcome(props) {
+        var lastname = props.user.lastname
+        props.user.lastname = lastname 
+        return <h3>welcome, {props.user.lastname}</h3>
+      }
+
+      function App() {
+        return(
+          <div>
+            <Welcome user={users.a} />
+            <Welcome user={users.b} />
+          </div>
+        )
+      }
+
+      class Clock extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = {date: new Date()}
+          this.count = 0
+        }
+
+        componentDidMount() {
+          console.log(this.props)
+          console.log(1)
+          this.timerID = setInterval(() => this.tick(), 1000)
+        }
+
+        componentWillUnmount() {
+          console.log(2)
+          clearInterval(this.timerID)
+        }
+
+        tick() {
+          this.setState({date: new Date()})
+        }
+
+        render() {
+          return (
+            <div>
+              <button onClick={() => {this.count += 1}}>{this.count}</button>
+              <h2>hello{this.props.name}</h2>
+              <h2>it is {this.state.date.toLocaleTimeString()}</h2>  
+            </div>
+          )
+        }
+      }
+
+      class Toggle extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {isToggleOn: true};
+          this.handleClick = this.handleClick.bind(this)
+        }
+
+        handleClick() {
+          this.setState(state => ({
+            isToggleOn: !state.isToggleOn
+          }))
+        }
+
+        render() {
+          return (
+            <button onClick={this.handleClick}>
+              {this.state.isToggleOn ? 'On' : 'Off'}  
+            </button>
+          )
+        }
+      }
+
+      const list = [1,2,3,4,5]
+      const listItems = list.map(it => <li key={it.toString()}>{it}</li>)
+      ReactDOM.render(
+        <ul>{listItems}</ul>,
+        document.getElementById('root')
+      )
+    </script>
+  </body>
+</html>

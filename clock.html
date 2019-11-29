@@ -9,7 +9,7 @@
     *{margin: 0;}
     .container{
       margin: auto;
-      margin-top: 100px;
+      margin-top: 200px;
       width: 300px;
       height: 300px;
       border-radius: 150px;
@@ -20,22 +20,52 @@
       background-repeat: no-repeat;
       background-size:contain;
     }
+    .container::after{
+      content: '';
+      position: absolute;
+      display: block;
+      width: 15px;
+      height: 15px;
+      background-color:black;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      border-radius: 50%;
+    }
+    .hourContainer, .minuteContainer, .secondContainer, .pointContainer{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform-origin: center;
+    }
     span{display: inline-block;}
     .second{
       position: absolute;
+      left: 147px;
       width:6px;
       height: 150px;
       bottom: calc(50% - 20px);
       background-color: wheat;
       transform-origin: 3px 130px;
       animation: secondRotate 60s infinite linear;
-      animation-timing-function: steps(60,end)
+      animation-timing-function: steps(60,end);
+    }
+    .secondContainer{
+      animation: secondAni 1s linear infinite;
+    }
+    @keyframes secondAni {
+      0%{transform: rotate(1deg);}
+      10%{transform: rotate(-1deg);}
+      100%{transform: rotate(0deg);}
     }
     @keyframes secondRotate{
       100%{transform: rotate(360deg);}
     }
     .minute{
       position: absolute;
+      left: 147px;
       bottom: 50%;
       width:5px;
       height: 120px;
@@ -48,12 +78,13 @@
     }
     .hour{
       position: absolute;
+      left: 147px;
       bottom: 50%;
       width:5px;
       height: 80px;
       background-color: sienna;
       transform-origin: bottom;
-      animation: houreRotate 3600s infinite linear;
+      animation: hourRotate 43200s infinite linear;
     }
     @keyframes hourRotate{
       100%{transform: rotate(360deg);}
@@ -62,9 +93,33 @@
 </head>
 <body>
   <div class="container">
-    <span class="second"></span>
-    <span class="minute"></span>
-    <span class="hour"></span>
+    <div class="secondContainer">
+      <div class="pointContainer">
+        <span class="second"></span>
+      </div>
+    </div>
+    <div class="minuteContainer">
+      <span class="minute"></span>
+    </div>
+    <div class="hourContainer">
+      <span class="hour"></span>
+    </div>
   </div>
+  <script>
+    var date = new Date()
+    var hour = date.getHours() > 12 ? date.getHours() - 12 : date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+    var hourDeg = hour * 30
+    console.log(hourDeg)
+    var minuteDeg = minute * 6
+    var secondDeg = second * 6
+    var hourPoint = document.querySelector('.hourContainer')
+    hourPoint.style.transform = `rotate(${hourDeg}deg)`
+    var minutePoint = document.querySelector('.minuteContainer')
+    minutePoint.style.transform = `rotate(${minuteDeg}deg)`
+    var secondPoint = document.querySelector('.pointContainer')
+    secondPoint.style.transform = `rotate(${secondDeg}deg)`
+  </script>
 </body>
 </html>

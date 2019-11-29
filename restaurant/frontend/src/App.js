@@ -6,6 +6,8 @@ import FoodCart from './FoodCart';
 import RestaurantManage from './RestaurantManage';
 import Login from './Login';
 import HomePage from './HomePage';
+import OrderSuccess from './OrderSuccess'
+import Register from './Register'
 import history from './history'
 
 // 用户侧
@@ -28,8 +30,10 @@ function App() {
         <Route path="/" exact component={HomePage} />
         <Route path="/landing/r/:rid/d/:did" component={LandingPage} />
         <Route path="/r/:rid/d/:did/c/:count" component={FoodCart} />
-        <Route path="/manage" component={RestaurantManage} />
+        <Route path="/r/:rid/d/:did/order-success" component={OrderSuccess} />
+        <Route path="/restaurant/:rid/manage" component={RestaurantManage} />
         <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </Switch>
     </Router>
   );

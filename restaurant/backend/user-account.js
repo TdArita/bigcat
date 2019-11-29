@@ -21,10 +21,13 @@ const mailer = require('./mailer')
 
 const app = express.Router()
 
+
+
 app.route('/register')
   .post(uploader.single('avatar'), async (req, res, next) => {
     var regInfo = req.body
 
+    console.log(regInfo)
     var user = await db.get('SELECT * FROM users WHERE name=?', regInfo.name)
 
     if (user) {
@@ -40,7 +43,6 @@ app.route('/register')
 
     } else {
 
-
       await db.run('INSERT INTO users (name, email, password, title) VALUES (?,?,?,?)',
         regInfo.name, regInfo.email, regInfo.password, regInfo.title
       )
@@ -52,16 +54,16 @@ app.route('/register')
     }
   })
 
-// app.get('/captcha', (req, res, next) => {
-//   var captcha = svgCaptcha.create({
-//     ignoreChars: '0o1il'
-//   })
-//   res.type('svg')
-//   console.log(captcha.text)
-//   req.session.captcha = captcha.text
+app.get('/captcha', (req, res, next) => {
+  var captcha = svgCaptcha.create({
+    ignoreChars: '0o1il'
+  })
+  res.type('svg')
+  req.session.captcha = captcha.text
+  console.log(req.session)
 
-//   res.end(captcha.data)
-// })
+  res.end(captcha.data)
+})
 
 app.get('/userinfo', async (req, res, next) => {
   var userid = req.signedCookies.userid
@@ -80,10 +82,10 @@ app.route('/login')
   .post(async (req, res, next) => {
     var tryLoginInfo = req.body
     console.log(tryLoginInfo)
-    // if (tryLoginInfo.captcha != req.session.captcha) {
-    //   res.json({code: -1, msg: '验证码错误'})
-    //   return
-    // }
+    if (tryLoginInfo.captcha != req.session.captcha) {
+      res.json({code: -1, msg: '验证码错误'})
+      return
+    }
     var user = await db.get('SELECT id, name, title FROM users WHERE name=? AND password=?',
       tryLoginInfo.name, tryLoginInfo.password
     )

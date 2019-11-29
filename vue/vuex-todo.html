@@ -10,24 +10,126 @@
   <div id="app">
 
   </div>
-
-
-
   <script src="vue.js"></script>
   <script src="vuex.js"></script>
   <script>
   const store = new Vuex.Store({
     state: {
-
+      todoitems: [{
+          name: 'eat', done: false, show: true
+        }, {
+          name: 'drink', done: true, show: true
+        }, {
+          name: 'sleep', done: false, show: true
+      }],
+      category: 'All'
+    },
+    getters: {
+      leftCount: state => {
+        return state.todoitems.filter(todo => !todo.done).length
+      }
     },
     mutations: {
-      
+      choseAll(state) {
+        state.category = 'All'
+      },
+      choseActive(state) {
+        state.category = 'Active'
+      },
+      choseCompleted(state) {
+        state.category = 'Completed'
+      },
+      logIt(){
+        console.log('It')
+      }
+    }
+  })
+
+  const todoapp = {
+    template: `
+      <div>
+        <h1>Todos</h1>
+        <div>
+          <input type="checkbox" :checked="isAllDone" @click="toggleAll"/>
+          <input type="text" @keyup.enter="add" />
+        </div>
+        <ul>
+          <li v-for="item in activeItems">
+            <input type="checkbox" :checked="item.done" @click="item.done = !item.done">
+            <span>{{item.name}}</span>
+            <input type="text">
+          </li>
+        </ul>
+        <div>
+          <span>{{leftCount}}left{{leftCount > 0 ? 's' : ''}}</span>
+          <span><input type="radio" :checked="this.$store.state.category === 'All'" @click="choseAll">ALL</span>
+          <span><input type="radio" :checked="this.$store.state.category === 'Active'" @click="choseActive">Active</span>
+          <span><input type="radio" :checked="this.$store.state.category === 'Completed'" @click="choseCompleted">Completed</span>
+          <span><button @click="clearCompleted">clear completed</button></span>
+        </div>
+      </div>
+    `,
+    computed: {
+      todoitems() {
+        return this.$store.state.todoitems
+      },
+      activeItems() {
+        if(store.state.category === 'All'){
+          return store.state.todoitems
+        } else if(store.state.category === 'Active'){
+          return store.state.todoitems.filter(it => !it.done)
+        } else if(store.state.category === 'Completed'){
+          return store.state.todoitems.filter(it => it.done)
+        }
+      },
+      leftCount() {
+        return this.$store.getters.leftCount
+      },
+      isAllDone() {
+        return this.$store.state.todoitems.every(it => it.done)
+      }
+    },
+    methods: {
+      toggleAll(){
+        if(this.$store.state.todoitems.every(it => it.done)){
+          this.$store.state.todoitems.map(it => it.done = false)
+        }else{
+          this.$store.state.todoitems.map(it => it.done = true)
+        }
+      },
+      choseAll(){
+        store.commit('choseAll')
+      },
+      choseActive(){
+        store.commit('choseActive')
+      },
+      choseCompleted(){
+        store.commit('choseCompleted')
+      },
+      add(e){
+        if(e.target.value !== ''){
+          store.state.todoitems.push({name:e.target.value, done:false})
+          e.target.value = ''
+        }
+      },
+      clearCompleted() {
+        store.state.todoitems = store.state.todoitems.filter(it => !it.done)
+        store.commit('logIt')
+      }
     }
 
+  }
 
+  const app = new Vue({
+    el: "#app",
+    store,
+    components:{ todoapp },
+    template:`
+      <div>
+        <todoapp></todoapp>
+      </div>
+    `
   })
-  
-  
   
   </script>
 </body>

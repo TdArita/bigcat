@@ -1078,3 +1078,13 @@ function observe(obj){
     }
   }
 }
+
+function mapGetters(getterFields){
+  getterFields.forEach(function(it){
+    return this.$store.getters[it]
+  })
+}
+
+function mapState(obj) {
+  return obj.ca
+}
