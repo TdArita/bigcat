@@ -1250,7 +1250,7 @@ var isIsomorphic = function(s, t) {
 </script>
 
 
-<script type="application/javascript" id="205. Isomorphic Strings-v2">
+<script type="application/javascript" id="205.Isomorphic Strings-v2">
 /*
 使用对象map映射,用一个循环，给t和s字符串每个字符都各自映射
 遍历时，发现t和s中有一个字符对应不上第一次的记录时，返回false
@@ -2153,6 +2153,21 @@ var parseBoolExpr = function(expression) {
     }
     return result
   }
+};
+</script>
+
+<script type="application/javascript" id="9.Palindrome Number">
+var isPalindrome = function(x) {
+    if(x < 0){return false}
+    else{
+        let arrayX = x.toString().split('')
+        for(let i = 0; i<arrayX.length / 2; i++){
+            if(arrayX[i] !== arrayX[arrayX.length -1 -i]){
+                return false
+            }
+        }
+        return true
+    }
 };
 </script>
 
