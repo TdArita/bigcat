@@ -89,8 +89,11 @@ export default class OrderManage extends Component{
 
   componentDidMount() {
     console.log(this.props)
-    this.socket = io({
-    // this.socket = io('ws://10.62.39.224:5000', {
+    // this.socket = io({
+    this.socket = io('https://www.tdarita.com:5443', {
+      secure: true, 
+      reconnect: true, 
+      rejectUnauthorized : false,
       path: '/restaurant',
       query: {
         restaurant: 'restaurant:' + this.props.match.params.rid

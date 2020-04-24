@@ -217,8 +217,11 @@ export default class FoodCart extends Component {
     //   })
     // })
 
-    this.socket = io({
-    // this.socket = io('ws://10.62.39.224:5000',{
+    // this.socket = io({
+    this.socket = io('https://www.tdarita.com:5443',{
+      secure: true, 
+      reconnect: true, 
+      rejectUnauthorized : false,
       path: '/desk',
       query: {
         desk: 'desk:' + params.did

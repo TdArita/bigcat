@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const userAccountMiddleware = require('./user-account')
 const restaurantMiddleware = require('./restaurant')
+const compression = require('compression')
 
 const app = express()
 // const http = require('http')
@@ -15,6 +16,7 @@ const app = express()
 // const ioServer = io(server)
 // global.ioServer = ioServer
 
+app.use(compression())
 
 app.use((req, res, next) => {
   console.log(req.method, req.url)

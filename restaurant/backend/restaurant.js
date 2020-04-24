@@ -2,8 +2,15 @@ const express = require('express')
 const multer = require('multer')
 const path = require('path')
 const io = require('./io-server')
+const sio = require('./sio-server')
 
 io.restaurant.on('connection', socket => {
+  console.log('restaurant client in', socket.handshake.query)
+  var restaurant = socket.handshake.query.restaurant
+  socket.join(restaurant)
+})
+
+sio.srestaurant.on('connection', socket => {
   console.log('restaurant client in', socket.handshake.query)
   var restaurant = socket.handshake.query.restaurant
   socket.join(restaurant)
@@ -49,6 +56,48 @@ io.desk.on('connection', socket => {
     }
   
     io.desk.in(info.desk).emit('new food', info)
+  })
+})
+
+sio.sdesk.on('connection', socket => {
+  console.log('desk client in', socket.handshake.query)
+  var desk = socket.handshake.query.desk
+  if(!desk){
+    socket.close()
+    return
+  }
+  socket.join(desk)
+  
+  socket.on('join desk', desk => {
+    console.log('join desk', desk)
+    socket.join(desk)
+
+    var cartFood = deskCartMap.get(desk)
+    if(!cartFood) {
+      deskCartMap.set(desk, [])
+    }
+    socket.emit('cart food', cartFood || [])
+  })
+
+  socket.on('new food', info => {
+    var foodAry = deskCartMap.get(info.desk)
+    console.log(info)
+
+    var idx = foodAry.findIndex(it => it.food.id === info.food.id)
+    if(idx >= 0) {
+      if(info.amount === 0){
+        foodAry.splice(idx, 1)
+      }else {
+        foodAry[idx].amount = info.amount
+      }
+    } else {
+      foodAry.push({
+        food: info.food,
+        amount: info.amount
+      })
+    }
+  
+    sio.sdesk.in(info.desk).emit('new food', info)
   })
 })
 
@@ -186,6 +235,9 @@ app.post('/restaurant/:rid/desk/:did/order', async (req, res, next) => {
 
   io.desk.in(desk).emit('placeorder success', order)
   io.restaurant.in('restaurant:' + rid).emit('new order', order)
+
+  sio.sdesk.in(desk).emit('placeorder success', order)
+  sio.srestaurant.in('restaurant:' + rid).emit('new order', order)
 })
 
 //商户侧api
