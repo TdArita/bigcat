@@ -13,15 +13,17 @@
   <script src="vue.js"></script>
   <script src="vuex.js"></script>
   <script>
+  
+  const initStore = [{
+          name: 'eat', done: false,
+        }, {
+          name: 'drink', done: true,
+        }, {
+          name: 'sleep', done: false,
+      }]
   const store = new Vuex.Store({
     state: {
-      todoitems: [{
-          name: 'eat', done: false, show: true
-        }, {
-          name: 'drink', done: true, show: true
-        }, {
-          name: 'sleep', done: false, show: true
-      }],
+      todoitems: [],
       category: 'All'
     },
     getters: {
@@ -30,6 +32,13 @@
       }
     },
     mutations: {
+      toggleAll(state) {
+        if(state.todoitems.every(it => it.done)){
+          state.todoitems.map(it => it.done = false)
+        }else{
+          state.todoitems.map(it => it.done = true)
+        }
+      },
       choseAll(state) {
         state.category = 'All'
       },
@@ -38,6 +47,9 @@
       },
       choseCompleted(state) {
         state.category = 'Completed'
+      },
+      init(state, list){
+        state.todoitems = list
       },
       logIt(){
         console.log('It')
@@ -90,12 +102,14 @@
       }
     },
     methods: {
+      save(){
+        let storage = window.localStorage
+        let vuexList = this.$store.state.todoitems
+        storage.todolist = JSON.stringify(vuexList)
+      },
       toggleAll(){
-        if(this.$store.state.todoitems.every(it => it.done)){
-          this.$store.state.todoitems.map(it => it.done = false)
-        }else{
-          this.$store.state.todoitems.map(it => it.done = true)
-        }
+        this.$store.commit('toggleAll')
+        this.save()
       },
       choseAll(){
         store.commit('choseAll')
@@ -110,11 +124,21 @@
         if(e.target.value !== ''){
           store.state.todoitems.push({name:e.target.value, done:false})
           e.target.value = ''
+          this.save()
         }
       },
       clearCompleted() {
         store.state.todoitems = store.state.todoitems.filter(it => !it.done)
         store.commit('logIt')
+        this.save()
+      }
+    },
+    mounted: function(){
+      let localList = window.localStorage.todolist
+      if(localList){
+        store.commit('init', JSON.parse(localList))
+      }else{
+        window.localStorage['todolist'] = []
       }
     }
 

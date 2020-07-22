@@ -123,7 +123,7 @@ app.route('/forgot')
     console.log(link)
 
     mailer.sendMail({
-      from: '285696737@qq.com',
+      from: '601619508@qq.com',
       to: email,
       subject: '密码修改',
       text: link
