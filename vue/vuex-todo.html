@@ -12,6 +12,7 @@
   </div>
   <script src="vue.js"></script>
   <script src="vuex.js"></script>
+  <script src="vuex-persistedstate.js"></script>
   <script>
   
   const initStore = [{
@@ -22,6 +23,7 @@
           name: 'sleep', done: false,
       }]
   const store = new Vuex.Store({
+    plugins: [window.createPersistedState()],
     state: {
       todoitems: [],
       category: 'All'
@@ -29,9 +31,30 @@
     getters: {
       leftCount: state => {
         return state.todoitems.filter(todo => !todo.done).length
+      },
+      activeItems: (state) => {
+        if(state.category === 'All'){
+          return state.todoitems
+        } else if(state.category === 'Active'){
+          return state.todoitems.filter(it => !it.done)
+        } else if(state.category === 'Completed'){
+          return state.todoitems.filter(it => it.done)
+        }
       }
     },
     mutations: {
+      addItem(state,item) {
+        state.todoitems.push(item)
+      },
+      clearCompleted(state) {
+        state.todoitems = state.todoitems.filter(it => !it.done)
+      },
+      deleteItem(state, idx) {
+        state.todoitems.splice(idx,1)
+      },
+      toggleComplete(state,idx) {
+        state.todoitems[idx].done = !state.todoitems[idx].done
+      },
       toggleAll(state) {
         if(state.todoitems.every(it => it.done)){
           state.todoitems.map(it => it.done = false)
@@ -58,6 +81,7 @@
   })
 
   const todoapp = {
+    data: ,
     template: `
       <div>
         <h1>Todos</h1>
@@ -66,10 +90,11 @@
           <input type="text" @keyup.enter="add" />
         </div>
         <ul>
-          <li v-for="item in activeItems">
-            <input type="checkbox" :checked="item.done" @click="item.done = !item.done">
-            <span>{{item.name}}</span>
-            <input type="text">
+          <li v-for="(item, index) in activeItems">
+            <input type="checkbox" :checked="item.done" @click="toggleComplete(index)">
+            <span @dbclick="showEdit">{{item.name}}</span>
+            <input type="text" >
+            <button @click="deleteItem(index)">X</button>
           </li>
         </ul>
         <div>
@@ -86,13 +111,7 @@
         return this.$store.state.todoitems
       },
       activeItems() {
-        if(store.state.category === 'All'){
-          return store.state.todoitems
-        } else if(store.state.category === 'Active'){
-          return store.state.todoitems.filter(it => !it.done)
-        } else if(store.state.category === 'Completed'){
-          return store.state.todoitems.filter(it => it.done)
-        }
+        return this.$store.getters.activeItems
       },
       leftCount() {
         return this.$store.getters.leftCount
@@ -102,43 +121,44 @@
       }
     },
     methods: {
-      save(){
-        let storage = window.localStorage
-        let vuexList = this.$store.state.todoitems
-        storage.todolist = JSON.stringify(vuexList)
+      showEdit(){
+
+      },
+      deleteItem(idx){
+        this.$store.commit('deleteItem', idx)
+      },
+      toggleComplete(idx){
+        this.$store.commit('toggleComplete', idx)
       },
       toggleAll(){
         this.$store.commit('toggleAll')
-        this.save()
       },
       choseAll(){
-        store.commit('choseAll')
+        this.$store.commit('choseAll')
       },
       choseActive(){
-        store.commit('choseActive')
+        this.$store.commit('choseActive')
       },
       choseCompleted(){
-        store.commit('choseCompleted')
+        this.$store.commit('choseCompleted')
       },
       add(e){
         if(e.target.value !== ''){
-          store.state.todoitems.push({name:e.target.value, done:false})
+          this.$store.commit('addItem',{name:e.target.value, done:false})
           e.target.value = ''
-          this.save()
         }
       },
       clearCompleted() {
-        store.state.todoitems = store.state.todoitems.filter(it => !it.done)
+        this.$store.commit('clearCompleted')
         store.commit('logIt')
-        this.save()
       }
     },
     mounted: function(){
-      let localList = window.localStorage.todolist
-      if(localList){
-        store.commit('init', JSON.parse(localList))
+      let localVuex = window.localStorage.vuex
+      if(localVuex){
+        store.commit('init', JSON.parse(localVuex).todoitems)
       }else{
-        window.localStorage['todolist'] = []
+        store.commit('init', [])
       }
     }
 
