@@ -34,7 +34,7 @@ export default {
   //   }
   //   const increment = () => {
   //     count.value++
-  //     title.name = '学习Vue3.0+' + count.value
+  //     title.name = '学习Vue3.0' + count.value
   //   }
   //   const computedCount = computed(() => {return count.value*10})
   //   return {title, user, updateUser, count, increment, computedCount}
