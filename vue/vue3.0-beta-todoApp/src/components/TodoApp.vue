@@ -1,7 +1,7 @@
 <template>
   <section class="todoapp">
     <header class="header">
-      <h1>todos</h1>
+      <h1>vue3-todos</h1>
       <input
         autocomplete="false"
         class="new-todo"
